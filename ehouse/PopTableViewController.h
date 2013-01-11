@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PopTableViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>{
-    NSArray *items;
-    NSArray *titleItems;
-    NSArray *img;
+@interface PopTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet NSArray *items;
-@property (strong, nonatomic) IBOutlet NSArray *titleItems;
-@property (strong, nonatomic) IBOutlet NSArray *img;
+@property (strong, nonatomic)  NSArray *items;
+@property (strong, nonatomic)  NSArray *titleItems;
+@property (strong, nonatomic)  NSArray *img;
 
 @end

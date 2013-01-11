@@ -77,6 +77,12 @@
 		969E6CAE16A024C000F485E3 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969E6CA116A024C000F485E3 /* ScheduleViewController.m */; };
 		969E6CAF16A024C000F485E3 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969E6CA316A024C000F485E3 /* SecondViewController.m */; };
 		969E6CB116A024DB00F485E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969E6CB016A024DB00F485E3 /* QuartzCore.framework */; };
+		969E6CB916A0381B00F485E3 /* EHouseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 969E6CB816A0381B00F485E3 /* EHouseManager.m */; };
+		969E6CC016A0389200F485E3 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969E6CBF16A0389200F485E3 /* BaseViewController.m */; };
+		969E6CC416A03ABF00F485E3 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969E6CC216A03ABF00F485E3 /* SideMenuViewController.m */; };
+		969E6CC516A03ABF00F485E3 /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 969E6CC316A03ABF00F485E3 /* SideMenuViewController.xib */; };
+		969E6CD916A043CA00F485E3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 969E6CD816A043CA00F485E3 /* Icon.png */; };
+		969E6CDB16A043CD00F485E3 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969E6CDA16A043CD00F485E3 /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,6 +169,15 @@
 		969E6CA416A024C000F485E3 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		969E6CA516A024C000F485E3 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		969E6CB016A024DB00F485E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		969E6CB716A0381B00F485E3 /* EHouseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EHouseManager.h; path = Manager/EHouseManager.h; sourceTree = "<group>"; };
+		969E6CB816A0381B00F485E3 /* EHouseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EHouseManager.m; path = Manager/EHouseManager.m; sourceTree = "<group>"; };
+		969E6CBE16A0389200F485E3 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		969E6CBF16A0389200F485E3 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		969E6CC116A03ABF00F485E3 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
+		969E6CC216A03ABF00F485E3 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
+		969E6CC316A03ABF00F485E3 /* SideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuViewController.xib; sourceTree = "<group>"; };
+		969E6CD816A043CA00F485E3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		969E6CDA16A043CD00F485E3 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,8 +199,11 @@
 		9665BB16169F1C9F00CE1448 = {
 			isa = PBXGroup;
 			children = (
+				969E6CDA16A043CD00F485E3 /* Icon@2x.png */,
+				969E6CD816A043CA00F485E3 /* Icon.png */,
 				969E6C3916A024AE00F485E3 /* Asset */,
 				969E6C2F16A024AE00F485E3 /* Library */,
+				969E6CB616A037EA00F485E3 /* Manager */,
 				9665BB2D169F1CA000CE1448 /* ehouse */,
 				9665BB24169F1CA000CE1448 /* Frameworks */,
 				9665BB22169F1CA000CE1448 /* Products */,
@@ -217,6 +235,8 @@
 			children = (
 				9665BB36169F1CA000CE1448 /* AppDelegate.h */,
 				9665BB37169F1CA000CE1448 /* AppDelegate.m */,
+				969E6CBE16A0389200F485E3 /* BaseViewController.h */,
+				969E6CBF16A0389200F485E3 /* BaseViewController.m */,
 				9665BB3F169F1CA000CE1448 /* ehouse.xcdatamodeld */,
 				969E6C9D16A024C000F485E3 /* LogInViewController.h */,
 				969E6C9C16A024C000F485E3 /* LogInViewController.m */,
@@ -234,6 +254,9 @@
 				969E6CA316A024C000F485E3 /* SecondViewController.m */,
 				969E6C9B16A024C000F485E3 /* SecondViewController.xib */,
 				9665BB2E169F1CA000CE1448 /* Supporting Files */,
+				969E6CC116A03ABF00F485E3 /* SideMenuViewController.h */,
+				969E6CC216A03ABF00F485E3 /* SideMenuViewController.m */,
+				969E6CC316A03ABF00F485E3 /* SideMenuViewController.xib */,
 			);
 			path = ehouse;
 			sourceTree = "<group>";
@@ -324,6 +347,15 @@
 				969E6C6516A024AE00F485E3 /* weather_service_icon.png */,
 			);
 			path = Asset;
+			sourceTree = "<group>";
+		};
+		969E6CB616A037EA00F485E3 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				969E6CB716A0381B00F485E3 /* EHouseManager.h */,
+				969E6CB816A0381B00F485E3 /* EHouseManager.m */,
+			);
+			name = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +462,9 @@
 				969E6CA916A024C000F485E3 /* SecondViewController.xib in Resources */,
 				969E6CAB16A024C000F485E3 /* LogInViewController.xib in Resources */,
 				969E6CAC16A024C000F485E3 /* ScheduleViewController.xib in Resources */,
+				969E6CC516A03ABF00F485E3 /* SideMenuViewController.xib in Resources */,
+				969E6CD916A043CA00F485E3 /* Icon.png in Resources */,
+				969E6CDB16A043CD00F485E3 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +487,9 @@
 				969E6CAD16A024C000F485E3 /* RootViewController.m in Sources */,
 				969E6CAE16A024C000F485E3 /* ScheduleViewController.m in Sources */,
 				969E6CAF16A024C000F485E3 /* SecondViewController.m in Sources */,
+				969E6CB916A0381B00F485E3 /* EHouseManager.m in Sources */,
+				969E6CC016A0389200F485E3 /* BaseViewController.m in Sources */,
+				969E6CC416A03ABF00F485E3 /* SideMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

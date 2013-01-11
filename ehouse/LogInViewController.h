@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface LogInViewController : UIViewController
+@interface LogInViewController : BaseViewController
+{
+    
+}
+
 @property (strong, nonatomic) IBOutlet UIButton *b1;
 @property (strong, nonatomic) IBOutlet UIButton *b2;
 @property (strong, nonatomic) IBOutlet UIButton *b3;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+
 - (IBAction)backHome:(id)sender;
 - (IBAction)itemMenu:(id)sender;
 - (IBAction)btn1:(id)sender;

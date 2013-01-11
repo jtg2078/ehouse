@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RootViewController.h"
-#import "PopTableViewController.h"
+#import "SideMenuViewController.h"
 #import "IIViewDeckController.h"
 
 @implementation AppDelegate
@@ -31,19 +31,19 @@
     // center view
     RootViewController *rvc = [[RootViewController alloc] init];
     UINavigationController *nav_rvc=[[UINavigationController alloc] initWithRootViewController:rvc];
-    nav_rvc.navigationBar.barStyle = UIStatusBarStyleBlackTranslucent;
+    nav_rvc.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
     nav_rvc.navigationBarHidden = YES;
     
     // left view
-    PopTableViewController *ptvc = [[PopTableViewController alloc] init];
-    UINavigationController *nav_ptvc = [[UINavigationController alloc ] initWithRootViewController:ptvc];
-    nav_ptvc.navigationBarHidden=YES;
+    SideMenuViewController *smvc = [[SideMenuViewController alloc] init];
+    UINavigationController *nav_smvc = [[UINavigationController alloc ] initWithRootViewController:smvc];
+    nav_smvc.navigationBar.barStyle = UIBarStyleBlackOpaque;
     
     // view deck (root view)
     IIViewDeckController *ivdc = [[IIViewDeckController alloc] initWithCenterViewController:nav_rvc
-                                                                         leftViewController:nav_ptvc];
+                                                                         leftViewController:nav_smvc];
     
-    self.window.rootViewController=ivdc;
+    self.window.rootViewController = ivdc;
     
     // ---------------------------------------------------------
     self.window.backgroundColor = [UIColor whiteColor];

@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ScheduleViewController : UIViewController
+@interface ScheduleViewController : BaseViewController
+{
+    
+}
+
 @property (strong, nonatomic) IBOutlet UIScrollView *scrillView;
+
 - (IBAction)itemMenu:(id)sender;
 - (IBAction)backHome:(id)sender;
 - (IBAction)check1:(id)sender;

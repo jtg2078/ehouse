@@ -18,6 +18,16 @@
 
 @implementation RootViewController
 
+#pragma mark - memory management
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - init
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,17 +37,19 @@
     return self;
 }
 
+#pragma mark - view lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    
-    
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://emsgmobile.test.demo2.miniasp.com.tw"]]];
-   
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://emsgmobile.test.demo2.miniasp.com.tw"]]];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+#pragma mark - UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
     
     NSString *urlStr=[[request URL] description];
     NSLog(@"%@",urlStr);
@@ -47,7 +59,7 @@
         [self.navigationController pushViewController:docView animated:YES];
         return NO;
     }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/Account/login"]) {
+    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/Account/login"]) {
         LogInViewController *logInView=[[LogInViewController alloc] init];
         [self.navigationController pushViewController:logInView animated:YES];
         return NO;
@@ -76,22 +88,21 @@
     return YES;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - user interaction
 
--(void) homeButton:(id)sender{
+- (void)homeButton:(id)sender
+{
     [self.navigationController popToRootViewControllerAnimated:YES];
     NSLog(@"yes");
 }
 
-- (IBAction)homeBack:(id)sender {
+- (IBAction)homeBack:(id)sender
+{
+    
 }
 
-- (IBAction)UrlItem:(id)sender {
-    
+- (IBAction)UrlItem:(id)sender
+{
     if([self.viewDeckController isSideClosed:IIViewDeckLeftSide] == YES)
     {
         [self.viewDeckController openLeftViewAnimated:YES];
@@ -100,7 +111,6 @@
     {
         [self.viewDeckController closeLeftViewAnimated:YES];
     }
-    
 }
 
 

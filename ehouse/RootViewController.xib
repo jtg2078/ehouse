@@ -37,22 +37,6 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIWebView" id="858970924">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 44}, {320, 416}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDEAA</bytes>
-						</object>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<bool key="IBUIScalesPageToFit">YES</bool>
-						<int key="IBUIDataDetectorTypes">1</int>
-						<bool key="IBUIDetectsPhoneNumbers">YES</bool>
-					</object>
 					<object class="IBUIToolbar" id="985528340">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
@@ -80,12 +64,12 @@
 								<reference key="IBUIToolbar" ref="985528340"/>
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="422600460">
+							<object class="IBUIBarButtonItem" id="767546884">
 								<string key="IBUITitle">我的e管家</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="985528340"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="804245947">
+							<object class="IBUIBarButtonItem" id="329036715">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="985528340"/>
 								<int key="IBUISystemItemIdentifier">5</int>
@@ -100,6 +84,22 @@
 								<reference key="IBUIToolbar" ref="985528340"/>
 							</object>
 						</array>
+					</object>
+					<object class="IBUIWebView" id="858970924">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{0, 44}, {320, 416}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MSAxIDEAA</bytes>
+						</object>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIScalesPageToFit">YES</bool>
+						<int key="IBUIDataDetectorTypes">1</int>
+						<bool key="IBUIDetectsPhoneNumbers">YES</bool>
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
@@ -149,7 +149,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">navTopText</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="422600460"/>
+						<reference key="destination" ref="767546884"/>
 					</object>
 					<int key="connectionID">22</int>
 				</object>
@@ -218,8 +218,8 @@
 							<reference ref="544402636"/>
 							<reference ref="1031680808"/>
 							<reference ref="74027459"/>
-							<reference ref="422600460"/>
-							<reference ref="804245947"/>
+							<reference ref="767546884"/>
+							<reference ref="329036715"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -240,12 +240,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">20</int>
-						<reference key="object" ref="422600460"/>
+						<reference key="object" ref="767546884"/>
 						<reference key="parent" ref="985528340"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">21</int>
-						<reference key="object" ref="804245947"/>
+						<reference key="object" ref="329036715"/>
 						<reference key="parent" ref="985528340"/>
 					</object>
 				</array>

@@ -68,52 +68,52 @@
    
     NSLog(@"%@",[request URL]);
     if ([[[request URL] lastPathComponent] isEqualToString:@"login"]) {
-        _navTopText2.text=@"我的e管家";
+        self.navTopText2.title=@"我的e管家";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"PubMSG"]) {
-        _navTopText2.text=@"公眾訊息";
+        self.navTopText2.title=@"公眾訊息";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"Collection"]) {
-        _navTopText2.text=@"排行榜";
+        self.navTopText2.title=@"排行榜";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"Constellation"]) {
-        _navTopText2.text=@"星座";
+        self.navTopText2.title=@"星座";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"Weather"]) {
-        _navTopText2.text=@"天氣服務";
+        self.navTopText2.title=@"天氣服務";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"Help"]) {
-        _navTopText2.text=@"新手上路";
+        self.navTopText2.title=@"新手上路";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"MyPubMSGRead"]) {
-        _navTopText2.text=@"我的公眾訊息";
+        self.navTopText2.title=@"我的公眾訊息";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"MyMSGSet"]) {
-        _navTopText2.text=@"我的訊息";
+        self.navTopText2.title=@"我的訊息";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"Manage"]) {
-        _navTopText2.text=@"訊息管理";
+        self.navTopText2.title=@"訊息管理";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"SubscribeSet"]) {
-        _navTopText2.text=@"訊息訂閱";
+        self.navTopText2.title=@"訊息訂閱";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"SubscribeMgt"]) {
-        _navTopText2.text=@"訂閱管理";
+        self.navTopText2.title=@"訂閱管理";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"favorite"]) {
-        _navTopText2.text=@"我的收藏";
+        self.navTopText2.title=@"我的收藏";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"Label"]) {
-        _navTopText2.text=@"標簽管理";
+        self.navTopText2.title=@"標簽管理";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"Set"]) {
-        _navTopText2.text=@"設定";
+        self.navTopText2.title=@"設定";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"Expense"]) {
-        _navTopText2.text=@"費用統計";
+        self.navTopText2.title=@"費用統計";
     }
     if ([[[request URL] lastPathComponent] isEqualToString:@"Schedule"]) {
-        _navTopText2.text=@"匯入行事曆";
+        self.navTopText2.title=@"匯入行事曆";
     }
 
     return YES;

@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIImage *bgImage = [[UIImage imageNamed:@"back-image.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(416, 0, 0, 0)];
+    self.bgImageView.image = bgImage;
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,5 +74,9 @@
 }
 
 - (IBAction)cancel:(id)sender {
+}
+- (void)viewDidUnload {
+    [self setBgImageView:nil];
+    [super viewDidUnload];
 }
 @end

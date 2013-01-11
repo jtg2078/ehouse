@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface RootViewController : UIViewController<UIWebViewDelegate>{
+@interface RootViewController : BaseViewController<UIWebViewDelegate>
+{
 }
+
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *navTopText;
+
 - (IBAction)homeBack:(id)sender;
 - (IBAction)UrlItem:(id)sender;
-
 
 @end
