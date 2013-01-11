@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "RootViewController.h"
+#import "PopTableViewController.h"
+#import "IIViewDeckController.h"
 
 @implementation AppDelegate
 
@@ -18,6 +21,31 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    // -------------------- push notification --------------------
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    
+    // -------------------- root view controller --------------------
+    
+    // center view
+    RootViewController *rvc = [[RootViewController alloc] init];
+    UINavigationController *nav_rvc=[[UINavigationController alloc] initWithRootViewController:rvc];
+    nav_rvc.navigationBar.barStyle = UIStatusBarStyleBlackTranslucent;
+    nav_rvc.navigationBarHidden = YES;
+    
+    // left view
+    PopTableViewController *ptvc = [[PopTableViewController alloc] init];
+    UINavigationController *nav_ptvc = [[UINavigationController alloc ] initWithRootViewController:ptvc];
+    nav_ptvc.navigationBarHidden=YES;
+    
+    // view deck (root view)
+    IIViewDeckController *ivdc = [[IIViewDeckController alloc] initWithCenterViewController:nav_rvc
+                                                                         leftViewController:nav_ptvc];
+    
+    self.window.rootViewController=ivdc;
+    
+    // ---------------------------------------------------------
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -144,6 +172,50 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - push notification related
+
+- (NSString *)hexString:(NSData *)from
+{
+    if(!from)
+        return nil;
+	NSMutableString *str = [NSMutableString stringWithCapacity:64];
+	int length = [from length];
+	char *bytes = malloc(sizeof(char) * length);
+	[from getBytes:bytes length:length];
+	int i = 0;
+	for (; i < length; i++) {
+		[str appendFormat:@"%02.2hhx", bytes[i]];
+	}
+	free(bytes);
+	return str;
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken
+{
+    //const void *devTokenBytes = [devToken bytes];
+    //self.registered = YES;
+    //[self sendProviderDeviceToken:devTokenBytes]; // custom method
+    
+    NSString *pushToken = [self hexString:devToken];
+    //NSLog(@"xxx");
+    NSLog(@"%@",pushToken);
+    
+    if(pushToken)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            
+            //NSString *urlString = [NSString stringWithFormat:@"http://mobile.smelearning.org.tw/admin/app/MngSys/AddToken.aspx?OS=ios&Token=%@", pushToken];
+            //[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+        });
+        //推播功能
+    }
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
+{
+    NSLog(@"Error in registration. Error: %@", err);
 }
 
 @end
