@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Constant.h"
+#import "AFNetworking.h"
+
+#import "DDXMLDocument.h"
+#import "DDXMLElement.h"
+#import "DDXMLElementAdditions.h"
 
 typedef enum{
     LinkTypeUnknown = 0,
@@ -29,6 +34,18 @@ typedef enum{
     LinkTypeForgetPwd,
 }LinkType;
 
+@interface UserInfo : DDXMLDocument
+{
+    
+}
+
+@property (readonly, nonatomic, strong) NSString *token;
+@property (readonly, nonatomic, strong) NSNumber *displayNickname;
+
+- (NSString *)valueForKey:(NSString *)key;
+
+@end
+
 @interface EHouseManager : NSObject
 {
     
@@ -40,6 +57,10 @@ typedef enum{
 @property (nonatomic, strong) NSString *accoutPwd;
 @property (nonatomic, strong) NSNumber *autoLogin;
 
+@property (nonatomic, strong) AFHTTPClient *myClient;
+
+@property (nonatomic, strong) UserInfo *userInfo;
+
 + (EHouseManager *)sharedInstance;
 
 - (NSString *)getFullURLforLinkType:(NSNumber *)linkType;
@@ -49,5 +70,12 @@ typedef enum{
              needLogIn:(void (^)())login
               callback:(void (^)(BOOL canLoad, BOOL callSecondVC, NSString *title))callback
                  error:(void (^)(NSString *errorMsg, NSError *error))error;
+
+- (void)loginWithAccountName:(NSString *)name
+                         pwd:(NSString *)pwd
+                     success:(void (^)(NSString *token))success
+                     failure:(void (^)(NSString *errorMsg, NSError *error))failure;
+
+- (NSString *)createURLWithToken:(NSString *)token;
 
 @end

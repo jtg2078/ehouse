@@ -18,6 +18,10 @@
 
 - (IBAction)returnButtonPressed:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
+@property (strong, nonatomic) IBOutlet UIView *myContentView;
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;

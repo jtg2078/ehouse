@@ -94,6 +94,12 @@
 		96B9ABD016A42924001DAF24 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABC716A42924001DAF24 /* UIImageView+AFNetworking.m */; };
 		96B9ABD216A42950001DAF24 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B9ABD116A42950001DAF24 /* SystemConfiguration.framework */; };
 		96B9ABD416A42957001DAF24 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B9ABD316A42957001DAF24 /* MobileCoreServices.framework */; };
+		96B9ABE816A46304001DAF24 /* DismissKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABE716A46304001DAF24 /* DismissKeyboardView.m */; };
+		96B9ABFE16A4682B001DAF24 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABF116A4682B001DAF24 /* DDXMLElementAdditions.m */; };
+		96B9ABFF16A4682B001DAF24 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABF416A4682B001DAF24 /* NSString+DDXML.m */; };
+		96B9AC0016A4682B001DAF24 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABF716A4682B001DAF24 /* DDXMLDocument.m */; };
+		96B9AC0116A4682B001DAF24 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABF916A4682B001DAF24 /* DDXMLElement.m */; };
+		96B9AC0216A4682B001DAF24 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABFB16A4682B001DAF24 /* DDXMLNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -210,6 +216,20 @@
 		96B9ABC716A42924001DAF24 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		96B9ABD116A42950001DAF24 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		96B9ABD316A42957001DAF24 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		96B9ABE616A46304001DAF24 /* DismissKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissKeyboardView.h; sourceTree = "<group>"; };
+		96B9ABE716A46304001DAF24 /* DismissKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissKeyboardView.m; sourceTree = "<group>"; };
+		96B9ABF016A4682B001DAF24 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
+		96B9ABF116A4682B001DAF24 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
+		96B9ABF316A4682B001DAF24 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
+		96B9ABF416A4682B001DAF24 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
+		96B9ABF516A4682B001DAF24 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		96B9ABF616A4682B001DAF24 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		96B9ABF716A4682B001DAF24 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		96B9ABF816A4682B001DAF24 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		96B9ABF916A4682B001DAF24 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		96B9ABFA16A4682B001DAF24 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		96B9ABFB16A4682B001DAF24 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		96B9ABFD16A4682B001DAF24 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +331,8 @@
 		969E6C2F16A024AE00F485E3 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				96B9ABEE16A4682B001DAF24 /* KissXML */,
+				96B9ABE516A46304001DAF24 /* DismissKeyboard */,
 				96B9ABB416A42924001DAF24 /* AFNetworking */,
 				96B9ABA616A42396001DAF24 /* SVProgressHUD */,
 				969E6C3016A024AE00F485E3 /* ViewDeck */,
@@ -427,6 +449,58 @@
 				96B9ABC716A42924001DAF24 /* UIImageView+AFNetworking.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		96B9ABE516A46304001DAF24 /* DismissKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				96B9ABE616A46304001DAF24 /* DismissKeyboardView.h */,
+				96B9ABE716A46304001DAF24 /* DismissKeyboardView.m */,
+			);
+			path = DismissKeyboard;
+			sourceTree = "<group>";
+		};
+		96B9ABEE16A4682B001DAF24 /* KissXML */ = {
+			isa = PBXGroup;
+			children = (
+				96B9ABEF16A4682B001DAF24 /* Additions */,
+				96B9ABF216A4682B001DAF24 /* Categories */,
+				96B9ABF516A4682B001DAF24 /* DDXML.h */,
+				96B9ABF616A4682B001DAF24 /* DDXMLDocument.h */,
+				96B9ABF716A4682B001DAF24 /* DDXMLDocument.m */,
+				96B9ABF816A4682B001DAF24 /* DDXMLElement.h */,
+				96B9ABF916A4682B001DAF24 /* DDXMLElement.m */,
+				96B9ABFA16A4682B001DAF24 /* DDXMLNode.h */,
+				96B9ABFB16A4682B001DAF24 /* DDXMLNode.m */,
+				96B9ABFC16A4682B001DAF24 /* Private */,
+			);
+			path = KissXML;
+			sourceTree = "<group>";
+		};
+		96B9ABEF16A4682B001DAF24 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				96B9ABF016A4682B001DAF24 /* DDXMLElementAdditions.h */,
+				96B9ABF116A4682B001DAF24 /* DDXMLElementAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		96B9ABF216A4682B001DAF24 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				96B9ABF316A4682B001DAF24 /* NSString+DDXML.h */,
+				96B9ABF416A4682B001DAF24 /* NSString+DDXML.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		96B9ABFC16A4682B001DAF24 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				96B9ABFD16A4682B001DAF24 /* DDXMLPrivate.h */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -570,6 +644,12 @@
 				96B9ABCE16A42924001DAF24 /* AFURLConnectionOperation.m in Sources */,
 				96B9ABCF16A42924001DAF24 /* AFXMLRequestOperation.m in Sources */,
 				96B9ABD016A42924001DAF24 /* UIImageView+AFNetworking.m in Sources */,
+				96B9ABE816A46304001DAF24 /* DismissKeyboardView.m in Sources */,
+				96B9ABFE16A4682B001DAF24 /* DDXMLElementAdditions.m in Sources */,
+				96B9ABFF16A4682B001DAF24 /* NSString+DDXML.m in Sources */,
+				96B9AC0016A4682B001DAF24 /* DDXMLDocument.m in Sources */,
+				96B9AC0116A4682B001DAF24 /* DDXMLElement.m in Sources */,
+				96B9AC0216A4682B001DAF24 /* DDXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,8 +689,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -630,8 +712,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -642,8 +726,10 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ehouse/ehouse-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "ehouse/ehouse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -654,8 +740,10 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ehouse/ehouse-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "ehouse/ehouse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

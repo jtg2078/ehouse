@@ -11,6 +11,47 @@
 #import "SecondViewController.h"
 
 
+@implementation UserInfo
+
+- (id)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error
+{
+    self = [super initWithData:data options:mask error:error];
+    if (self) {
+        
+    }
+    return self;
+}
+
+@synthesize token = _token;
+@synthesize displayNickname = _displayNickname;
+
+- (NSString *)token
+{
+    if(_token == nil)
+    {
+        _token = [[[self rootElement] elementForName:KEY_Token] stringValue];
+    }
+    
+    return _token;
+}
+
+- (NSNumber *)displayNickname
+{
+    if (_displayNickname == nil) {
+        NSString *value = [[[self rootElement] elementForName:KEY_Token] stringValue];
+        if(value)
+            _displayNickname = @([value boolValue]);
+    }
+    return _displayNickname;
+}
+
+- (NSString *)valueForKey:(NSString *)key
+{
+    return [[[self rootElement] elementForName:KEY_Token] stringValue];
+}
+
+@end
+
 @interface EHouseManager()
 @property (nonatomic, weak) NSUserDefaults *userDefault;
 @property (nonatomic, strong) NSDictionary *linkInfoLookupType;
@@ -33,9 +74,12 @@
 {
     self.userDefault = [NSUserDefaults standardUserDefaults];
     
-    self.accoutName = [self.userDefault stringForKey:KEY_username];
-    self.accoutPwd = [self.userDefault stringForKey:KEY_userpwd];
+    self.accoutName = [self.userDefault stringForKey:KEY_accountname];
+    self.accoutPwd = [self.userDefault stringForKey:KEY_accountpwd];
     self.autoLogin = [self.userDefault objectForKey:KEY_autoLogin];
+    
+    NSString *api = DEVELOPMENT_MODE ? API_DEVLOPMENT_URL : API_PRODUCTION_URL;
+    self.myClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api]];
     
     self.linkInfo = @[
         @{
@@ -155,11 +199,11 @@
     
     if(_accoutName == nil)
     {
-        [self.userDefault removeObjectForKey:KEY_username];
+        [self.userDefault removeObjectForKey:KEY_accountname];
     }
     else
     {
-        [self.userDefault setObject:_accoutName forKey:KEY_username];
+        [self.userDefault setObject:_accoutName forKey:KEY_accountname];
     }
     
     [self.userDefault synchronize];
@@ -171,11 +215,11 @@
     
     if(_accoutPwd == nil)
     {
-        [self.userDefault removeObjectForKey:KEY_userpwd];
+        [self.userDefault removeObjectForKey:KEY_accountpwd];
     }
     else
     {
-        [self.userDefault setObject:_accoutPwd forKey:KEY_userpwd];
+        [self.userDefault setObject:_accoutPwd forKey:KEY_accountpwd];
     }
     
     [self.userDefault synchronize];
@@ -282,6 +326,63 @@
     }
     
     return YES;
+}
+
+- (void)loginWithAccountName:(NSString *)name
+                         pwd:(NSString *)pwd
+                     success:(void (^)(NSString *token))success
+                     failure:(void (^)(NSString *errorMsg, NSError *error))failure
+{
+    NSDictionary *param = @{
+        @"account": name,
+        @"password": pwd,
+        @"client": @"wa",
+    };
+    
+    [self.myClient getPath:@"UserLoginMobile"
+                parameters:param
+                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                       
+                       NSError *error = nil;
+                       
+                       self.userInfo = [[UserInfo alloc] initWithData:responseObject
+                                                              options:0
+                                                                error:&error];
+                       if(error)
+                       {
+                           if(failure)
+                               failure(@"XML 解析失敗", error);
+                           
+                           return;
+                       }
+                       
+                       if(self.userInfo.token.length == 0)
+                       {
+                           if(failure)
+                               failure([self.userInfo valueForKey:KEY_ErrorMessage], nil);
+                           
+                           return;
+                       }
+                       
+                       if(success)
+                           success(self.userInfo.token);
+                       
+                   }
+                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                       
+                       if(failure)
+                           failure(@"連線失敗", error);
+        
+                   }];
+}
+
+- (NSString *)createURLWithToken:(NSString *)token
+{
+    NSString *url = [NSString stringWithFormat:@"%@/Account/loginByToken?token=%@",
+                     DEVELOPMENT_MODE ? DEVLOPMENT_URL : PRODUCTION_URL,
+                     token];
+    
+    return url;
 }
 
 #pragma mark - singleton implementation code
