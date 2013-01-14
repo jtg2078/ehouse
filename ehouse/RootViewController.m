@@ -54,7 +54,7 @@
     NSString *urlStr=[[request URL] description];
     NSLog(@"%@",urlStr);
     
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/PubMSG"]) {
+    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/PubMSG"]) {
         SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
         [self.navigationController pushViewController:docView animated:YES];
         return NO;
@@ -64,22 +64,22 @@
         [self.navigationController pushViewController:logInView animated:YES];
         return NO;
     }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/RankStat/Collection"]) {
+    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/RankStat/Collection"]) {
         SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
         [self.navigationController pushViewController:docView animated:YES];
         return NO;
     }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/Constellation"]) {
+    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/Constellation"]) {
         SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
         [self.navigationController pushViewController:docView animated:YES];
         return NO;
     }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/Weather"]) {
+    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/Weather"]) {
         SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
         [self.navigationController pushViewController:docView animated:YES];
         return NO;
     }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/Help"]) {
+    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/Help"]) {
         SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
         [self.navigationController pushViewController:docView animated:YES];
         return NO;

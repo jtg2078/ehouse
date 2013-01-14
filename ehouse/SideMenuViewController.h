@@ -16,8 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
-@property (strong, nonatomic)  NSArray *items;
-@property (strong, nonatomic)  NSArray *titleItems;
-@property (strong, nonatomic)  NSArray *img;
+@property (strong, nonatomic) NSArray *items;
+@property (strong, nonatomic) NSArray *titleItems;
+@property (strong, nonatomic) NSArray *img;
 
 @end

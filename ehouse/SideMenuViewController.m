@@ -150,11 +150,129 @@
     if (indexPath.row==0) {
         
         [self.viewDeckController closeLeftViewAnimated:YES];
-        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw"];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/MyMSG/MyMSGSet"];
         
         [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
     }
-}
+    if (indexPath.row==1) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/Subscribe/SubscribeSet"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==2) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/favorite"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==3) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/Label"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==4) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/Set"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==5) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/Expense"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==6) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/PubMSG"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==7) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/Schedule"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==8) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/Schedule"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==9) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/PubMSG"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==10) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/RankStat/Collection"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==11) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/Constellation"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==12) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/Weather"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==13) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile.test.demo2.miniasp.com.tw/Help"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==14) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }
+    
+    if (indexPath.row==15) {
+        
+        [self.viewDeckController closeLeftViewAnimated:YES];
+        SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw"];
+        
+        [self.viewDeckController rightViewPushViewControllerOverCenterController:sec];
+    }}
 
 
 
