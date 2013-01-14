@@ -7,8 +7,282 @@
 //
 
 #import "EHouseManager.h"
+#import "RootViewController.h"
+#import "SecondViewController.h"
+
+
+@interface EHouseManager()
+@property (nonatomic, weak) NSUserDefaults *userDefault;
+@property (nonatomic, strong) NSDictionary *linkInfoLookupType;
+@end
 
 @implementation EHouseManager
+
+#pragma mark - init and setup
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup
+{
+    self.userDefault = [NSUserDefaults standardUserDefaults];
+    
+    self.accoutName = [self.userDefault stringForKey:KEY_username];
+    self.accoutPwd = [self.userDefault stringForKey:KEY_userpwd];
+    self.autoLogin = [self.userDefault objectForKey:KEY_autoLogin];
+    
+    self.linkInfo = @[
+        @{
+            KEY_id: @(LinkTypeMyMsg),
+            KEY_name:@"我的訊息",
+            KEY_image:@"my_msg_icon.png",
+            KEY_url:@"MyMSG/MyMSGSet",
+        },
+        @{
+            KEY_id: @(LinkTypeSubscribeMsg),
+            KEY_name:@"訊息訂閱",
+            KEY_image:@"order_msg_icon.png",
+            KEY_url:@"Subscribe/SubscribeSet",
+        },
+        @{
+            KEY_id: @(LinkTypeMyBookmark),
+            KEY_name:@"我的收藏",
+            KEY_image:@"my_favorite_icon.png",
+            KEY_url:@"favorite",
+        },
+        @{
+            KEY_id: @(LinkTypeManageLabel),
+            KEY_name:@"標簽管理",
+            KEY_image:@"tag_setting_icon.png",
+            KEY_url:@"Label",
+        },
+        @{
+            KEY_id: @(LinkTypeSetting),
+            KEY_name:@"設定",
+            KEY_image:@"setting_icon.png",
+            KEY_url:@"Set",
+        },
+        @{
+            KEY_id: @(LinkTypeExpense),
+            KEY_name:@"費用統計",
+            KEY_image:@"cost_statistics_icon.png",
+            KEY_url:@"Expense",
+        },
+        @{
+            KEY_id: @(LinkTypeMemeberPublicMsg),
+            KEY_name:@"公眾訊息",
+            KEY_image:@"public_msg_icon.png",
+            KEY_url:@"PubMSG",
+        },
+        @{
+            KEY_id: @(LinkTypeImportSchedule),
+            KEY_name:@"匯入行事曆",
+            KEY_image:@"import_schedule_icon.png",
+            KEY_url:@"Schedule",
+        },
+        @{
+            KEY_id: @(LinkTypeFacebook),
+            KEY_name:@"粉絲團",
+            KEY_image:@"fb_fans_icon.png",
+            KEY_url:@"Schedule",
+        },
+        @{
+            KEY_id: @(LinkTypePublicMsg),
+            KEY_name:@"公眾訊息",
+            KEY_image:@"public_msg_icon.png",
+            KEY_url:@"PubMSG",
+        },
+        @{
+            KEY_id: @(LinkTypeRanking),
+            KEY_name:@"排行榜",
+            KEY_image:@"ranking_icon.png",
+            KEY_url:@"RankStat/Collection",
+        },
+        @{
+            KEY_id: @(LinkTypeConstellation),
+            KEY_name:@"星座服務",
+            KEY_image:@"constellation_service_icon.png",
+            KEY_url:@"Constellation",
+        },
+        @{
+            KEY_id: @(LinkTypeWeather),
+            KEY_name:@"天氣服務",
+            KEY_image:@"weather_service_icon.png",
+            KEY_url:@"Weather",
+        },
+        @{
+            KEY_id: @(LinkTypeHelp),
+            KEY_name:@"新手上路",
+            KEY_image:@"helper_icon.png",
+            KEY_url:@"Help",
+        },
+        @{
+            KEY_id: @(LinkTypeRegister),
+            KEY_name:@"註冊會員",
+            KEY_image:@"register_icon.png",
+            KEY_url:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw",
+            KEY_urlFixed: @(YES),
+        },
+        @{
+            KEY_id: @(LinkTypeForgetPwd),
+            KEY_name:@"忘記密碼",
+            KEY_image:@"forget_password_icon.png",
+            KEY_url:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw",
+            KEY_urlFixed: @(YES),
+        },
+    ];
+    
+    NSMutableDictionary *typeInfo = [NSMutableDictionary dictionary];
+    for(NSDictionary *info in self.linkInfo)
+    {
+        [typeInfo setObject:info forKey:info[KEY_id]];
+    }
+    self.linkInfoLookupType = typeInfo;
+    
+}
+
+#pragma mark - member related
+
+- (void)setAccoutName:(NSString *)accoutName
+{
+    _accoutName = accoutName;
+    
+    if(_accoutName == nil)
+    {
+        [self.userDefault removeObjectForKey:KEY_username];
+    }
+    else
+    {
+        [self.userDefault setObject:_accoutName forKey:KEY_username];
+    }
+    
+    [self.userDefault synchronize];
+}
+
+- (void)setAccoutPwd:(NSString *)accoutPwd
+{
+    _accoutPwd = accoutPwd;
+    
+    if(_accoutPwd == nil)
+    {
+        [self.userDefault removeObjectForKey:KEY_userpwd];
+    }
+    else
+    {
+        [self.userDefault setObject:_accoutPwd forKey:KEY_userpwd];
+    }
+    
+    [self.userDefault synchronize];
+}
+
+- (void)setAutoLogin:(NSNumber *)autoLogin
+{
+    _autoLogin = autoLogin;
+    
+    if(_autoLogin == nil)
+    {
+        [self.userDefault removeObjectForKey:KEY_autoLogin];
+    }
+    else
+    {
+      [self.userDefault setObject:_autoLogin forKey:KEY_autoLogin];
+    }
+    
+    [self.userDefault synchronize];
+}
+
+#pragma mark - info related
+
+- (NSDictionary *)getLinkInfoWithLastComponent:(NSString *)component
+{
+    for(NSDictionary *info in self.linkInfo)
+    {
+        NSString *last = [[info[KEY_url] componentsSeparatedByString:@"/"] lastObject];
+        if([last isEqualToString:component] == YES)
+            return info;
+    }
+    
+    return nil;
+}
+
+- (NSString *)getFullURLforLinkType:(NSNumber *)linkType
+{
+    NSString *url = nil;
+    
+    NSDictionary *info = self.linkInfoLookupType[linkType];
+    
+    if(info)
+    {
+        if(info[KEY_urlFixed] && [info[KEY_urlFixed] boolValue] == YES)
+        {
+            url = info[KEY_url];
+        }
+        else
+        {
+            if(DEVELOPMENT_MODE == YES)
+            {
+                url = [NSString stringWithFormat:@"%@/%@", DEVLOPMENT_URL, info[KEY_url]];
+            }
+            else
+            {
+                url = [NSString stringWithFormat:@"%@/%@", PRODUCTION_URL, info[KEY_url]];
+            }
+        }
+    }
+    
+    return url;
+}
+
+#pragma mark - main methods
+
+- (BOOL)processRequest:(NSURLRequest *)request
+         forController:(id)controller
+             needLogIn:(void (^)())login
+              callback:(void (^)(BOOL canLoad, BOOL callSecondVC, NSString *title))callback
+                 error:(void (^)(NSString *errorMsg, NSError *error))error
+{
+    if([controller isKindOfClass:[SecondViewController class]])
+    {
+        NSString *last = [[request URL] lastPathComponent];
+        
+        if([[last lowercaseString] isEqualToString:@"login"] == YES)
+        {
+            if(login)
+                login();
+            
+            return NO;
+        }
+        else
+        {
+            NSDictionary *link = [self getLinkInfoWithLastComponent:last];
+            
+            if(link)
+            {
+                if(callback)
+                    callback(YES, NO, link[KEY_name]);
+            }
+            else
+            {
+                if(error)
+                   error(@"找不到此URL", nil);
+            }
+            
+            return YES;
+        }
+    }
+    else if([controller isKindOfClass:[RootViewController class]])
+    {
+        
+    }
+    
+    return YES;
+}
 
 #pragma mark - singleton implementation code
 

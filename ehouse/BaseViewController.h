@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SVProgressHUD.h"
 #import "AppDelegate.h"
 #import "EHouseManager.h"
 

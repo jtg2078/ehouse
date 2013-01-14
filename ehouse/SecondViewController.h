@@ -22,7 +22,10 @@
 @property (strong, nonatomic) NSString *page;
 
 - (id)initWithUrl:(NSString *)url;
+
 - (IBAction)homeBack2:(id)sender;
 - (IBAction)UrlItem:(id)sender;
+
+- (void)loadURL:(NSString *)url;
 
 @end

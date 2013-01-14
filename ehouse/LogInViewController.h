@@ -9,22 +9,30 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface LogInViewController : BaseViewController
+@interface LogInViewController : BaseViewController <UITextFieldDelegate>
 {
     
 }
 
-@property (strong, nonatomic) IBOutlet UIButton *b1;
-@property (strong, nonatomic) IBOutlet UIButton *b2;
-@property (strong, nonatomic) IBOutlet UIButton *b3;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *returnBarButton;
+
+- (IBAction)returnButtonPressed:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
-- (IBAction)backHome:(id)sender;
-- (IBAction)itemMenu:(id)sender;
-- (IBAction)btn1:(id)sender;
-- (IBAction)btn2:(id)sender;
-- (IBAction)btn3:(id)sender;
-- (IBAction)logIN:(id)sender;
-- (IBAction)cancel:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
+
+@property (weak, nonatomic) IBOutlet UIButton *rememberNameButton;
+@property (weak, nonatomic) IBOutlet UIButton *rememberPwdButton;
+@property (weak, nonatomic) IBOutlet UIButton *autoLogInButton;
+
+- (IBAction)optionButtonPressed:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *logInButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+
+- (IBAction)logInButtonPressed:(id)sender;
+- (IBAction)cancelButtonPressed:(id)sender;
 
 @end

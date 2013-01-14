@@ -9,6 +9,8 @@
 #import "SecondViewController.h"
 #import "IIViewDeckController.h"
 #import "ScheduleViewController.h"
+#import "LogInViewController.h"
+#import "SVProgressHUD.h"
 
 @interface SecondViewController ()
 
@@ -67,6 +69,32 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
    
     NSLog(@"%@",[request URL]);
+    
+    BOOL ret = [self.appManager processRequest:request
+                                 forController:self
+                                     needLogIn:^{
+                                         [self showLogInViewController]; }
+                                      callback:^(BOOL canLoad, BOOL callSecondVC, NSString *title) {}
+                                         error:^(NSString *errorMsg, NSError *error) {}];
+    
+    return ret;
+    
+    /*
+    [self.appManager processRequest:request forController:self
+                          needLogIn:^{
+        [SVProgressHUD showErrorWithStatus:@"need login!"];
+    } callback:^(BOOL canLoad, BOOL callSecondVC, NSString *title) {
+        [SVProgressHUD showSuccessWithStatus:title];
+    } error:^(NSString *errorMsg, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:errorMsg];
+    }];
+     
+         return YES;
+     */
+    
+
+    
+    /*
     if ([[[request URL] lastPathComponent] isEqualToString:@"login"]) {
         self.navTopText2.title=@"我的e管家";
     }
@@ -115,14 +143,29 @@
     if ([[[request URL] lastPathComponent] isEqualToString:@"Schedule"]) {
         self.navTopText2.title=@"匯入行事曆";
     }
+     
 
     return YES;
+     */
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadURL:(NSString *)url
+{
+    [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+}
+
+#pragma mark - helper
+
+- (void)showLogInViewController
+{
+    LogInViewController *lvc = [[LogInViewController alloc] init];
+    [self presentModalViewController:lvc animated:YES];
 }
 
 @end
