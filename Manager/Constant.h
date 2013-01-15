@@ -14,6 +14,8 @@ extern NSString * const KEY_image;
 extern NSString * const KEY_url;
 extern NSString * const KEY_urlSpecial;
 extern NSString * const KEY_urlFull;
+extern NSString * const KEY_urlType;
+extern NSString * const KEY_inSideMenu;
 
 extern NSString * const KEY_accountname;
 extern NSString * const KEY_accountpwd;
@@ -34,9 +36,11 @@ extern NSString * const KEY_PanelSetting;
 extern NSString * const KEY_IsDisplayNickname;
 extern NSString * const KEY_IsGetG2E;
 
+extern NSString * const KEY_pushToken;
+
 extern BOOL const DEVELOPMENT_MODE;
 
-extern NSString * const DEVLOPMENT_URL;
+extern NSString * const DEVELOPMENT_URL;
 extern NSString * const PRODUCTION_URL;
 
 extern NSString * const API_DEVLOPMENT_URL;

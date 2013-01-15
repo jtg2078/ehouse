@@ -48,7 +48,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.appManager.linkInfo.count;
+    return self.appManager.sideMenuLinks.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,7 +62,7 @@
     }
     
     // Configure the cell...
-    NSDictionary *info = self.appManager.linkInfo[indexPath.row];
+    NSDictionary *info = self.appManager.sideMenuLinks[indexPath.row];
     cell.textLabel.text = info[KEY_name];
     cell.imageView.image = [UIImage imageNamed:info[KEY_image]];
     
@@ -73,7 +73,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *info = self.appManager.linkInfo[indexPath.row];
+    NSDictionary *info = self.appManager.sideMenuLinks[indexPath.row];
     NSString *url = [self.appManager getFullURLforLinkType:info[KEY_id]];
     
     SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];

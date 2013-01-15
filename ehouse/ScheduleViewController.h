@@ -55,6 +55,8 @@
 @property (nonatomic, strong) UINavigationController *nav_ccvc;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrillView;
+@property (weak, nonatomic) IBOutlet UIView *myContentView;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (weak, nonatomic) IBOutlet UIButton *allMsgBtn;
 @property (weak, nonatomic) IBOutlet UIButton *partialMsgBtn;
 @property (weak, nonatomic) IBOutlet UIButton *paymentMsgBtn;

@@ -194,23 +194,14 @@
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken
-{
-    //const void *devTokenBytes = [devToken bytes];
-    //self.registered = YES;
-    //[self sendProviderDeviceToken:devTokenBytes]; // custom method
-    
+{    
     NSString *pushToken = [self hexString:devToken];
-    //NSLog(@"xxx");
-    NSLog(@"%@",pushToken);
+    NSLog(@"push notif token: %@",pushToken);
     
     if(pushToken)
     {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            
-            //NSString *urlString = [NSString stringWithFormat:@"http://mobile.smelearning.org.tw/admin/app/MngSys/AddToken.aspx?OS=ios&Token=%@", pushToken];
-            //[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-        });
-        //推播功能
+        [[NSUserDefaults standardUserDefaults] setObject:pushToken forKey:KEY_pushToken];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

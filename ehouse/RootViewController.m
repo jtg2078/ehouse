@@ -46,26 +46,77 @@
     [self reload];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if(self.appManager.autoLogin.boolValue == YES)
+        {
+            if(self.appManager.accoutName.length && self.appManager.accoutPwd.length)
+            {
+                [SVProgressHUD showWithStatus:@"登入中"];
+                [self.appManager loginWithAccountName:self.appManager.accoutName
+                                                  pwd:self.appManager.accoutPwd
+                                              success:^(NSString *token) {
+                                                  [SVProgressHUD showSuccessWithStatus:@"登入成功"];
+                                                  NSString *pushToken = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_pushToken];
+                                                  if(pushToken)
+                                                  {
+                                                      [self.appManager registerForPushAccount:self.appManager.userInfo.token
+                                                                                       device:@"iphone"
+                                                                                        token:pushToken
+                                                                                      success:^{
+                                                                                          NSLog(@"推播的api 註冊成功");
+                                                                                      }
+                                                                                      failure:^(NSString *errorMsg, NSError *error) {
+                                                                                          NSLog(@"推播的api 註冊失敗: %@", errorMsg);
+                                                                                      }];
+                                                  }
+                                              }
+                                              failure:^(NSString *errorMsg, NSError *error) {
+                                                  [SVProgressHUD showErrorWithStatus:@"登入失敗"];
+                                              }];
+            }
+        }
+    });
+}
+
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    
     NSString *urlStr=[[request URL] description];
     NSLog(@"%@",urlStr);
     
-    BOOL ret = [self.appManager processRequestFor1stVC:request
-                                             needLogIn:^{
-                                                 // hack to get around this weird page
-                                                 [self reload];
-                                                 [self showLogInViewController];}
-                                              callback:^(NSString *url){
-                                                  // hack to get around this weird page
-                                                  [self reload];
+    BOOL ret = [self.appManager processRequest:request
+                                      callback:^BOOL(LinkID linkID, NSString *url) {
+                                          
+                                          BOOL shouldLoad = NO;
+                                          
+                                          switch (linkID) {
+                                              case LinkIDHome:
+                                              {
+                                                  shouldLoad = YES;
+                                                  break;
+                                              }
+                                              case LinkIDMemberArea:
+                                              case LinkIDLogin:
+                                              {
+                                                  [self showLogInViewController];
+                                                  break;
+                                              }
+                                              default:
+                                              {
                                                   SecondViewController *docView=[[SecondViewController alloc] initWithUrl:url];
-                                                  [self.navigationController pushViewController:docView animated:YES];}
-                                                 error:nil];
-    
+                                                  [self.navigationController pushViewController:docView animated:YES];
+                                                  break;
+                                              }
+                                          }
+                                          
+                                          return shouldLoad;
+                                      }];
     return ret;
 }
 

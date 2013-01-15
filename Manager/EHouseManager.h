@@ -15,24 +15,32 @@
 #import "DDXMLElementAdditions.h"
 
 typedef enum{
-    LinkTypeUnknown = 0,
-    LinkTypeMyMsg,
-    LinkTypeSubscribeMsg,
-    LinkTypeMyBookmark,
-    LinkTypeManageLabel,
-    LinkTypeSetting,
-    LinkTypeExpense,
-    LinkTypeMemeberPublicMsg,
-    LinkTypeImportSchedule,
-    LinkTypeFacebook,
-    LinkTypePublicMsg,
-    LinkTypeRanking,
-    LinkTypeConstellation,
-    LinkTypeWeather,
-    LinkTypeHelp,
-    LinkTypeRegister,
-    LinkTypeForgetPwd,
-}LinkType;
+    LinkIDUnknown = 0,
+    LinkIDHome,
+    LinkIDMemberArea,
+    LinkIDLogin,
+    LinkIDMyMsg,
+    LinkIDSubscribeMsg,
+    LinkIDMyBookmark,
+    LinkIDManageLabel,
+    LinkIDSetting,
+    LinkIDExpense,
+    LinkIDMemeberPublicMsg,
+    LinkIDImportSchedule,
+    LinkIDFacebook,
+    LinkIDPublicMsg,
+    LinkIDRanking,
+    LinkIDConstellation,
+    LinkIDWeather,
+    LinkIDHelp,
+    LinkIDRegister,
+    LinkIDForgetPwd,
+}LinkID;
+
+typedef enum{
+    URLTypeRelative = 0,
+    URLTypeFull,
+}URLType;
 
 @interface UserInfo : DDXMLDocument
 {
@@ -52,12 +60,14 @@ typedef enum{
 }
 
 @property (nonatomic, strong) NSArray *linkInfo;
+@property (nonatomic, strong) NSArray *sideMenuLinks;
 
 @property (nonatomic, strong) NSString *accoutName;
 @property (nonatomic, strong) NSString *accoutPwd;
 @property (nonatomic, strong) NSNumber *autoLogin;
 
 @property (nonatomic, strong) AFHTTPClient *myClient;
+@property (nonatomic, strong) AFHTTPClient *myClient2;
 
 @property (nonatomic, strong) UserInfo *userInfo;
 
@@ -65,20 +75,20 @@ typedef enum{
 
 - (NSString *)getFullURLforLinkType:(NSNumber *)linkType;
 
-- (BOOL)processRequestFor1stVC:(NSURLRequest *)request
-                     needLogIn:(void (^)())login
-                      callback:(void (^)(NSString *url))callback
-                         error:(void (^)(NSString *errorMsg, NSError *error))error;
-
-- (BOOL)processRequestFor2ndVC:(NSURLRequest *)request
-                     needLogIn:(void (^)())login
-                      callback:(void (^)(NSString *title, LinkType linkType))callback
-                         error:(void (^)(NSString *errorMsg, NSError *error))error;
+- (BOOL)processRequest:(NSURLRequest *)request
+              callback:(BOOL(^)(LinkID linkID, NSString *url))callback;
 
 - (void)loginWithAccountName:(NSString *)name
                          pwd:(NSString *)pwd
                      success:(void (^)(NSString *token))success
                      failure:(void (^)(NSString *errorMsg, NSError *error))failure;
+
+
+- (void)registerForPushAccount:(NSString *)account
+                        device:(NSString *)device
+                         token:(NSString *)token
+                       success:(void (^)())success
+                       failure:(void (^)(NSString *errorMsg, NSError *error))failure;
 
 - (NSString *)createURLWithToken:(NSString *)token;
 

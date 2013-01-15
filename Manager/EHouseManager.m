@@ -80,116 +80,181 @@
     
     NSString *api = DEVELOPMENT_MODE ? API_DEVLOPMENT_URL : API_PRODUCTION_URL;
     self.myClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api]];
+    api = DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL;
+    self.myClient2 = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api]];
     
     self.linkInfo = @[
         @{
-            KEY_id: @(LinkTypeMyMsg),
+            KEY_id: @(LinkIDHome),
+            KEY_name:@"首頁",
+            KEY_url: DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL,
+            KEY_urlType: @(URLTypeFull),
+            KEY_inSideMenu: @(NO),
+        },
+        @{
+            KEY_id: @(LinkIDMemberArea),
+            KEY_name:@"我的專區",
+            KEY_url:@"/Account/login",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(NO),
+        },
+        @{
+            KEY_id: @(LinkIDLogin),
+            KEY_name:@"登入",
+            KEY_url:@"/Account/Login",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(NO),
+        },
+        @{
+            KEY_id: @(LinkIDMyMsg),
             KEY_name:@"我的訊息",
             KEY_image:@"my_msg_icon.png",
-            KEY_url:@"MyMSG/MyMSGSet",
+            KEY_url:@"/MyMSG/MyMSGSet",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeSubscribeMsg),
+            KEY_id: @(LinkIDSubscribeMsg),
             KEY_name:@"訊息訂閱",
             KEY_image:@"order_msg_icon.png",
-            KEY_url:@"Subscribe/SubscribeSet",
+            KEY_url:@"/Subscribe/SubscribeSet",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeMyBookmark),
+            KEY_id: @(LinkIDMyBookmark),
             KEY_name:@"我的收藏",
             KEY_image:@"my_favorite_icon.png",
-            KEY_url:@"favorite",
+            KEY_url:@"/favorite",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeManageLabel),
+            KEY_id: @(LinkIDManageLabel),
             KEY_name:@"標簽管理",
             KEY_image:@"tag_setting_icon.png",
-            KEY_url:@"Label",
+            KEY_url:@"/Label",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeSetting),
+            KEY_id: @(LinkIDSetting),
             KEY_name:@"設定",
             KEY_image:@"setting_icon.png",
-            KEY_url:@"Set",
+            KEY_url:@"/Set",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeExpense),
+            KEY_id: @(LinkIDExpense),
             KEY_name:@"費用統計",
             KEY_image:@"cost_statistics_icon.png",
-            KEY_url:@"Expense",
+            KEY_url:@"/Expense",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeMemeberPublicMsg),
+            KEY_id: @(LinkIDMemeberPublicMsg),
             KEY_name:@"公眾訊息",
             KEY_image:@"public_msg_icon.png",
-            KEY_url:@"PubMSG",
+            KEY_url:@"/PubMSG",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeImportSchedule),
+            KEY_id: @(LinkIDImportSchedule),
             KEY_name:@"匯入行事曆",
             KEY_image:@"import_schedule_icon.png",
-            KEY_url:@"Schedule",
+            KEY_url:@"/Schedule",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeFacebook),
+            KEY_id: @(LinkIDFacebook),
             KEY_name:@"粉絲團",
             KEY_image:@"fb_fans_icon.png",
-            KEY_url:@"Schedule",
+            KEY_url:@"/Schedule",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypePublicMsg),
+            KEY_id: @(LinkIDPublicMsg),
             KEY_name:@"公眾訊息",
             KEY_image:@"public_msg_icon.png",
-            KEY_url:@"PubMSG",
+            KEY_url:@"/PubMSG",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeRanking),
+            KEY_id: @(LinkIDRanking),
             KEY_name:@"排行榜",
             KEY_image:@"ranking_icon.png",
-            KEY_url:@"RankStat/Collection",
+            KEY_url:@"/RankStat/Collection",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeConstellation),
+            KEY_id: @(LinkIDConstellation),
             KEY_name:@"星座服務",
             KEY_image:@"constellation_service_icon.png",
-            KEY_url:@"Constellation",
+            KEY_url:@"/Constellation",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeWeather),
+            KEY_id: @(LinkIDWeather),
             KEY_name:@"天氣服務",
             KEY_image:@"weather_service_icon.png",
-            KEY_url:@"Weather",
+            KEY_url:@"/Weather",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeHelp),
+            KEY_id: @(LinkIDHelp),
             KEY_name:@"新手上路",
             KEY_image:@"helper_icon.png",
-            KEY_url:@"Help",
+            KEY_url:@"/Help",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeRegister),
+            KEY_id: @(LinkIDRegister),
             KEY_name:@"註冊會員",
             KEY_image:@"register_icon.png",
-            KEY_url:@"Registry.aspx",
+            KEY_url:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw",
             KEY_urlFull:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw",
             KEY_urlSpecial: @(YES),
+            KEY_urlType: @(URLTypeFull),
+            KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkTypeForgetPwd),
+            KEY_id: @(LinkIDForgetPwd),
             KEY_name:@"忘記密碼",
             KEY_image:@"forget_password_icon.png",
-            KEY_url:@"SendPasswordMail.aspx",
+            KEY_url:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw",
             KEY_urlFull:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw",
             KEY_urlSpecial: @(YES),
+            KEY_urlType: @(URLTypeFull),
+            KEY_inSideMenu: @(YES),
         },
     ];
     
+    // construct the lookup table for link id
     NSMutableDictionary *typeInfo = [NSMutableDictionary dictionary];
     for(NSDictionary *info in self.linkInfo)
     {
         [typeInfo setObject:info forKey:info[KEY_id]];
     }
     self.linkInfoLookupType = typeInfo;
+    
+    // construct the side menu links array
+    NSMutableArray *links = [NSMutableArray array];
+    for(NSDictionary *info in self.linkInfo)
+    {
+        if([info[KEY_inSideMenu] boolValue])
+           [links addObject:info];
+    }
+    self.sideMenuLinks = links;
     
 }
 
@@ -245,12 +310,42 @@
 
 #pragma mark - info related
 
+- (NSDictionary *)getLinkInfoWithURL:(NSURL *)url
+{
+    NSLog(@"absoluteString: %@", url.absoluteString);
+    NSLog(@"baseURL: %@", url.baseURL.absoluteString);
+    NSLog(@"fragment: %@", url.fragment);
+    NSLog(@"host: %@", url.host);
+    NSLog(@"lastPathComponent: %@", url.lastPathComponent);
+    NSLog(@"parameterString: %@", url.parameterString);
+    NSLog(@"path: %@", url.path);
+    NSLog(@"pathComponents: %@", [url.pathComponents description]);
+    NSLog(@"pathExtension: %@", url.pathExtension);
+    NSLog(@"query: %@", url.query);
+    NSLog(@"relativePath: %@", url.relativePath);
+    NSLog(@"relativeString: %@", url.relativeString);
+    NSLog(@"resourceSpecifier: %@", url.baseURL.resourceSpecifier);
+    
+    
+    for(NSDictionary *info in self.linkInfo)
+    {
+        BOOL test1 = [url.absoluteString isEqualToString:info[KEY_url]];
+        BOOL test2 = [url.relativePath isEqualToString:info[KEY_url]];
+        
+        if(test1 || test2)
+            return info;
+    }
+    
+    return nil;
+}
+
+
 - (NSDictionary *)getLinkInfoWithLastComponent:(NSString *)component
 {
     for(NSDictionary *info in self.linkInfo)
     {
         NSString *last = [[info[KEY_url] componentsSeparatedByString:@"/"] lastObject];
-        if([last caseInsensitiveCompare:component] == NSOrderedSame)
+        if(last && [last caseInsensitiveCompare:component] == NSOrderedSame)
             return info;
     }
     
@@ -259,7 +354,7 @@
 
 - (NSString *)getFullURLforLinkType:(NSNumber *)linkType
 {
-    NSString *url = nil;
+    NSString *urlString = nil;
     
     NSDictionary *info = self.linkInfoLookupType[linkType];
     
@@ -267,102 +362,51 @@
     {
         if(info[KEY_urlSpecial] && [info[KEY_urlSpecial] boolValue] == YES)
         {
-            url = info[KEY_urlFull];
+            urlString = info[KEY_urlFull];
         }
         else
         {
-            if(DEVELOPMENT_MODE == YES)
-            {
-                url = [NSString stringWithFormat:@"%@/%@", DEVLOPMENT_URL, info[KEY_url]];
-            }
-            else
-            {
-                url = [NSString stringWithFormat:@"%@/%@", PRODUCTION_URL, info[KEY_url]];
-            }
+            NSURL *baseURL = [NSURL URLWithString:info[KEY_url]
+                                    relativeToURL:[NSURL URLWithString:DEVELOPMENT_MODE? DEVELOPMENT_URL : PRODUCTION_URL]];
+            
+            urlString = baseURL.absoluteString;
         }
     }
     
-    return url;
+    return urlString;
 }
 
 #pragma mark - main methods
 
-- (BOOL)processRequestFor1stVC:(NSURLRequest *)request
-                     needLogIn:(void (^)())login
-                      callback:(void (^)(NSString *url))callback
-                         error:(void (^)(NSString *errorMsg, NSError *error))error
+- (BOOL)processRequest:(NSURLRequest *)request
+              callback:(BOOL(^)(LinkID linkID, NSString *url))callback
 {
     NSString *last = [[request URL] lastPathComponent];
     
     // deal with hash (why is it even in the URL?)
-    if([request.URL.absoluteString componentsSeparatedByString:@"#"].count > 0)
+    if([request.URL.absoluteString componentsSeparatedByString:@"#"].count > 1)
     {
         last = [[request.URL.absoluteString componentsSeparatedByString:@"/"] lastObject];
     }
     
-    if([last caseInsensitiveCompare:@"login"] == NSOrderedSame)
+    LinkID linkID = LinkIDUnknown;
+    NSString *url = request.URL.absoluteString;
+    BOOL shouldLoad = YES;
+    
+    NSDictionary *link = [self getLinkInfoWithURL:request.URL];
+    if(link)
     {
-        if(login)
-            login();
-        
-        return NO;
+        linkID = [link[KEY_id] intValue];
+        url = [self getFullURLforLinkType:link[KEY_id]];
     }
-    else
-    {
-        NSDictionary *link = [self getLinkInfoWithLastComponent:last];
-        
-        if(link)
-        {
-            if(callback)
-                callback([self getFullURLforLinkType:link[KEY_id]]);
-            
-            return NO;
-        }
-        else
-        {
-            if(error)
-                error(@"找不到此URL", nil);
-            
-            return YES;
-        }
-    }
+    
+    if(callback)
+        shouldLoad = callback(linkID, url);
+    
+    return shouldLoad;
 }
 
-- (BOOL)processRequestFor2ndVC:(NSURLRequest *)request
-                     needLogIn:(void (^)())login
-                      callback:(void (^)(NSString *title, LinkType linkType))callback
-                         error:(void (^)(NSString *errorMsg, NSError *error))error
-{
-    NSString *last = [[request URL] lastPathComponent];
-    
-    if([last caseInsensitiveCompare:@"login"] == NSOrderedSame)
-    {
-        if(login)
-            login();
-        
-        return NO;
-    }
-    else
-    {
-        NSDictionary *link = [self getLinkInfoWithLastComponent:last];
-        
-        if(link)
-        {
-            if(callback)
-                callback(link[KEY_name], [link[KEY_id] intValue]);
-        }
-        else
-        {
-            if(error)
-                error(@"找不到此URL", nil);
-        }
-        
-        if([link[KEY_id] intValue] == LinkTypeImportSchedule)
-            return NO;
-        
-        return YES;
-    }
-}
+#pragma mark - backend api related
 
 - (void)loginWithAccountName:(NSString *)name
                          pwd:(NSString *)pwd
@@ -375,6 +419,7 @@
         @"client": @"wa",
     };
     
+    self.myClient.parameterEncoding = AFFormURLParameterEncoding;
     [self.myClient getPath:@"UserLoginMobile"
                 parameters:param
                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -400,8 +445,7 @@
                            return;
                        }
                        
-                       if(success)
-                           success(self.userInfo.token);
+                       [self notifyWebLoginToken:self.userInfo.token success:success failure:failure];
                        
                    }
                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -412,10 +456,61 @@
                    }];
 }
 
+- (void)notifyWebLoginToken:(NSString *)token
+                    success:(void (^)(NSString *token))success
+                    failure:(void (^)(NSString *errorMsg, NSError *error))failure
+{
+    NSDictionary *param = @{
+        @"token": token,
+    };
+    
+    [self.myClient2 getPath:@"Account/loginByToken"
+                 parameters:param
+                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"告訴web使用者已登入成功!");
+                        if(success)
+                            success(token);
+                    }
+                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"告訴web使用者已登入失敗: %@", error.description);
+                        if(failure)
+                            failure(@"連線失敗", error);
+                    }];
+}
+
+- (void)registerForPushAccount:(NSString *)account
+                        device:(NSString *)device
+                         token:(NSString *)token
+                       success:(void (^)())success
+                       failure:(void (^)(NSString *errorMsg, NSError *error))failure
+{
+    NSDictionary *param = @{
+        @"account": account,
+        @"device": device,
+        @"token": token,
+    };
+    
+    self.myClient.parameterEncoding = AFJSONParameterEncoding;
+    [self.myClient2 putPath:@"api/tokenBooking"
+                 parameters:param
+                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"register for push successful!");
+                        if(success)
+                            success();
+                    }
+                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"register for push failure: %@", error.description);
+                        if(failure)
+                            failure(@"register for push failed", error);
+                    }];
+}
+
+#pragma mark - helper
+
 - (NSString *)createURLWithToken:(NSString *)token
 {
     NSString *url = [NSString stringWithFormat:@"%@/Account/loginByToken?token=%@",
-                     DEVELOPMENT_MODE ? DEVLOPMENT_URL : PRODUCTION_URL,
+                     DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL,
                      token];
     
     return url;

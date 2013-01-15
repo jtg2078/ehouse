@@ -44,6 +44,26 @@
     // -------------------- view --------------------
     
     self.scrillView.contentSize = CGSizeMake(320, 461);
+    [self.scrillView addSubview:self.myContentView];
+    
+    if([self is4inchScreen])
+    {
+        int adjust = 416 + 88 - 461;
+        self.myContentView.frame = CGRectMake(0, 0, 320, 461 + adjust);
+        self.scrillView.contentSize = CGSizeMake(320, 461 + adjust);
+        
+        UIImage *bgImage = [[UIImage imageNamed:@"schedule-Bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(460, 0, 0, 0)];
+        self.bgImageView.image = bgImage;
+    }
+    
+    self.allMsgBtn.selected = [self loadSelectStateForTag:self.allMsgBtn.tag];
+    self.partialMsgBtn.selected = [self loadSelectStateForTag:self.partialMsgBtn.tag];
+    self.paymentMsgBtn.selected = [self loadSelectStateForTag:self.paymentMsgBtn.tag];
+    self.importantMsgBtn.selected = [self loadSelectStateForTag:self.importantMsgBtn.tag];
+    self.holidayBtn.selected = [self loadSelectStateForTag:self.holidayBtn.tag];
+    self.favoriteBtn.selected = [self loadSelectStateForTag:self.favoriteBtn.tag];
+    self.customBtn.selected = [self loadSelectStateForTag:self.customBtn.tag];
+    self.autoImportBtn.selected = [self loadSelectStateForTag:self.autoImportBtn.tag];
     
     // -------------------- other --------------------
     
@@ -72,6 +92,8 @@
     [self setCustomBtn:nil];
     [self setAutoImportBtn:nil];
     [self setImportButton:nil];
+    [self setBgImageView:nil];
+    [self setMyContentView:nil];
     [super viewDidUnload];
 }
 
@@ -81,6 +103,8 @@
 {
     UIButton *btn = (UIButton *)sender;
     btn.selected = !btn.selected;
+    
+    [self saveSelectStateForTag:btn.tag selected:btn.selected];
 }
 
 - (IBAction)importButtonPressed:(id)sender
@@ -109,6 +133,27 @@
     }];
     
 	[self.reader getMessagesAsynchronous:self.strToken];
+}
+
+#pragma mark - helper
+
+- (void)saveSelectStateForTag:(int)tag selected:(BOOL)selected
+{
+    NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
+    NSString *key = [NSString stringWithFormat:@"scheduleOption-%d", tag];
+    [df setObject:@(selected) forKey:key];
+    [df synchronize];
+}
+
+- (BOOL)loadSelectStateForTag:(int)tag
+{
+    NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
+    NSString *key = [NSString stringWithFormat:@"scheduleOption-%d", tag];
+    NSNumber *selected = [df objectForKey:key];
+    if(selected)
+        return [selected boolValue];
+    
+    return NO;
 }
 
 #pragma mark - tool bar interaction

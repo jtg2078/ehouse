@@ -70,20 +70,40 @@
    
     NSLog(@"%@",[request URL]);
     
-    BOOL ret = [self.appManager processRequestFor2ndVC:request
-                                             needLogIn:^{
-                                                 [self showLogInViewController];}
-                                              callback:^(NSString *title, LinkType linkType) {
-                                                  self.title = title;
-                                                  if (linkType == LinkTypeImportSchedule) {
-                                                      ScheduleViewController *svc = [[ScheduleViewController alloc] init];
-                                                      [self.navigationController pushViewController:svc animated:YES];
-                                                  }
+    BOOL ret = [self.appManager processRequest:request
+                                      callback:^BOOL(LinkID linkID, NSString *url) {
+                                          
+                                          BOOL shouldLoad = YES;
+                                          
+                                          switch (linkID) {
+                                              case LinkIDHome:
+                                              {
+                                                  shouldLoad = NO;
+                                                  [self.navigationController popViewControllerAnimated:YES];
+                                                  break;
                                               }
-                                                 error:^(NSString *errorMsg, NSError *error) {
-                                                     NSLog(@"%@", errorMsg);
-                                                 }];
-    return ret;
+                                              case LinkIDLogin:
+                                              {
+                                                  shouldLoad = NO;
+                                                  [self showLogInViewController];
+                                                  break;
+                                              }
+                                              case LinkIDImportSchedule:
+                                              {
+                                                  shouldLoad = YES;
+                                                  ScheduleViewController *svc = [[ScheduleViewController alloc] init];
+                                                  [self.navigationController pushViewController:svc animated:YES];
+                                                  break;
+                                              }
+                                              default:
+                                              {
+                                                  break;
+                                              }
+                                          }
+                                          
+                                          return shouldLoad;
+                                      }];
+     return ret;
 }
 
 - (void)didReceiveMemoryWarning

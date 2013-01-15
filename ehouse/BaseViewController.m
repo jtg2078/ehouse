@@ -38,4 +38,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - utility methods
+
+- (BOOL)is4inchScreen
+{
+    return [[UIScreen mainScreen ] bounds].size.height >= 568.0f;
+}
+
 @end

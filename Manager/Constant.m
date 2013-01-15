@@ -14,6 +14,8 @@ NSString * const KEY_image = @"image";
 NSString * const KEY_url = @"url";
 NSString * const KEY_urlSpecial = @"urlSpecial";
 NSString * const KEY_urlFull = @"urlFull";
+NSString * const KEY_urlType = @"urlType";
+NSString * const KEY_inSideMenu = @"inSideMenu";
 
 NSString * const KEY_accountname = @"accountname";
 NSString * const KEY_accountpwd = @"accountpwd";
@@ -34,10 +36,12 @@ NSString * const KEY_PanelSetting = @"PanelSetting";
 NSString * const KEY_IsDisplayNickname = @"IsDisplayNickname";
 NSString * const KEY_IsGetG2E = @"IsGetG2E";
 
+NSString * const KEY_pushToken = @"pushToken";
+
 BOOL const DEVELOPMENT_MODE = YES;
 
-NSString * const DEVLOPMENT_URL = @"http://emsgmobile.test.demo2.miniasp.com.tw";
-NSString * const PRODUCTION_URL = @"http://emsgmobile.test.demo2.miniasp.com.tw";
+NSString * const DEVELOPMENT_URL = @"http://emsgmobile.test.demo2.miniasp.com.tw/";
+NSString * const PRODUCTION_URL = @"http://emsgmobile.test.demo2.miniasp.com.tw/";
 
 NSString * const API_DEVLOPMENT_URL = @"http://msg4.miniasp.com.tw/WSProxy/Emsg4Services.asmx";
 NSString * const API_PRODUCTION_URL = @"https://msg.nat.gov.tw/WSProxy/Emsg4Services.asmx";

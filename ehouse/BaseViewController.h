@@ -19,4 +19,6 @@
 @property (nonatomic, weak) EHouseManager *appManager;
 @property (nonatomic, weak) AppDelegate *appDelegate;
 
+- (BOOL)is4inchScreen;
+
 @end
