@@ -70,83 +70,20 @@
    
     NSLog(@"%@",[request URL]);
     
-    BOOL ret = [self.appManager processRequest:request
-                                 forController:self
-                                     needLogIn:^{
-                                         [self showLogInViewController]; }
-                                      callback:^(BOOL canLoad, BOOL callSecondVC, NSString *title) {}
-                                         error:^(NSString *errorMsg, NSError *error) {}];
-    
+    BOOL ret = [self.appManager processRequestFor2ndVC:request
+                                             needLogIn:^{
+                                                 [self showLogInViewController];}
+                                              callback:^(NSString *title, LinkType linkType) {
+                                                  self.title = title;
+                                                  if (linkType == LinkTypeImportSchedule) {
+                                                      ScheduleViewController *svc = [[ScheduleViewController alloc] init];
+                                                      [self.navigationController pushViewController:svc animated:YES];
+                                                  }
+                                              }
+                                                 error:^(NSString *errorMsg, NSError *error) {
+                                                     NSLog(@"%@", errorMsg);
+                                                 }];
     return ret;
-    
-    /*
-    [self.appManager processRequest:request forController:self
-                          needLogIn:^{
-        [SVProgressHUD showErrorWithStatus:@"need login!"];
-    } callback:^(BOOL canLoad, BOOL callSecondVC, NSString *title) {
-        [SVProgressHUD showSuccessWithStatus:title];
-    } error:^(NSString *errorMsg, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:errorMsg];
-    }];
-     
-         return YES;
-     */
-    
-
-    
-    /*
-    if ([[[request URL] lastPathComponent] isEqualToString:@"login"]) {
-        self.navTopText2.title=@"我的e管家";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"PubMSG"]) {
-        self.navTopText2.title=@"公眾訊息";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"Collection"]) {
-        self.navTopText2.title=@"排行榜";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"Constellation"]) {
-        self.navTopText2.title=@"星座";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"Weather"]) {
-        self.navTopText2.title=@"天氣服務";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"Help"]) {
-        self.navTopText2.title=@"新手上路";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"MyPubMSGRead"]) {
-        self.navTopText2.title=@"我的公眾訊息";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"MyMSGSet"]) {
-        self.navTopText2.title=@"我的訊息";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"Manage"]) {
-        self.navTopText2.title=@"訊息管理";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"SubscribeSet"]) {
-        self.navTopText2.title=@"訊息訂閱";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"SubscribeMgt"]) {
-        self.navTopText2.title=@"訂閱管理";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"favorite"]) {
-        self.navTopText2.title=@"我的收藏";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"Label"]) {
-        self.navTopText2.title=@"標簽管理";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"Set"]) {
-        self.navTopText2.title=@"設定";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"Expense"]) {
-        self.navTopText2.title=@"費用統計";
-    }
-    if ([[[request URL] lastPathComponent] isEqualToString:@"Schedule"]) {
-        self.navTopText2.title=@"匯入行事曆";
-    }
-     
-
-    return YES;
-     */
 }
 
 - (void)didReceiveMemoryWarning

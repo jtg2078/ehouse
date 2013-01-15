@@ -50,10 +50,17 @@
     self.myScrollView.contentSize = self.myContentView.bounds.size;
     [self.myScrollView addSubview:self.myContentView];
     
+    self.nameTextField.text = self.appManager.accoutName;
+    self.pwdTextField.text = self.appManager.accoutPwd;
+    self.rememberNameButton.selected = self.nameTextField.text.length > 0;
+    self.rememberPwdButton.selected = self.pwdTextField.text.length > 0;
+    self.autoLogInButton.selected = [self.appManager.autoLogin boolValue];
+    
+    
     if(DEVELOPMENT_MODE)
     {
-        self.nameTextField.text = @"a25339306";
-        self.pwdTextField.text = @"a19841019";
+        //self.nameTextField.text = @"a25339306";
+        //self.pwdTextField.text = @"a19841019";
     }
 }
 

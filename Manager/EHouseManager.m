@@ -170,15 +170,17 @@
             KEY_id: @(LinkTypeRegister),
             KEY_name:@"註冊會員",
             KEY_image:@"register_icon.png",
-            KEY_url:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw",
-            KEY_urlFixed: @(YES),
+            KEY_url:@"Registry.aspx",
+            KEY_urlFull:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw",
+            KEY_urlSpecial: @(YES),
         },
         @{
             KEY_id: @(LinkTypeForgetPwd),
             KEY_name:@"忘記密碼",
             KEY_image:@"forget_password_icon.png",
-            KEY_url:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw",
-            KEY_urlFixed: @(YES),
+            KEY_url:@"SendPasswordMail.aspx",
+            KEY_urlFull:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw",
+            KEY_urlSpecial: @(YES),
         },
     ];
     
@@ -248,7 +250,7 @@
     for(NSDictionary *info in self.linkInfo)
     {
         NSString *last = [[info[KEY_url] componentsSeparatedByString:@"/"] lastObject];
-        if([last isEqualToString:component] == YES)
+        if([last caseInsensitiveCompare:component] == NSOrderedSame)
             return info;
     }
     
@@ -263,9 +265,9 @@
     
     if(info)
     {
-        if(info[KEY_urlFixed] && [info[KEY_urlFixed] boolValue] == YES)
+        if(info[KEY_urlSpecial] && [info[KEY_urlSpecial] boolValue] == YES)
         {
-            url = info[KEY_url];
+            url = info[KEY_urlFull];
         }
         else
         {
@@ -285,47 +287,81 @@
 
 #pragma mark - main methods
 
-- (BOOL)processRequest:(NSURLRequest *)request
-         forController:(id)controller
-             needLogIn:(void (^)())login
-              callback:(void (^)(BOOL canLoad, BOOL callSecondVC, NSString *title))callback
-                 error:(void (^)(NSString *errorMsg, NSError *error))error
+- (BOOL)processRequestFor1stVC:(NSURLRequest *)request
+                     needLogIn:(void (^)())login
+                      callback:(void (^)(NSString *url))callback
+                         error:(void (^)(NSString *errorMsg, NSError *error))error
 {
-    if([controller isKindOfClass:[SecondViewController class]])
+    NSString *last = [[request URL] lastPathComponent];
+    
+    // deal with hash (why is it even in the URL?)
+    if([request.URL.absoluteString componentsSeparatedByString:@"#"].count > 0)
     {
-        NSString *last = [[request URL] lastPathComponent];
+        last = [[request.URL.absoluteString componentsSeparatedByString:@"/"] lastObject];
+    }
+    
+    if([last caseInsensitiveCompare:@"login"] == NSOrderedSame)
+    {
+        if(login)
+            login();
         
-        if([[last lowercaseString] isEqualToString:@"login"] == YES)
+        return NO;
+    }
+    else
+    {
+        NSDictionary *link = [self getLinkInfoWithLastComponent:last];
+        
+        if(link)
         {
-            if(login)
-                login();
+            if(callback)
+                callback([self getFullURLforLinkType:link[KEY_id]]);
             
             return NO;
         }
         else
         {
-            NSDictionary *link = [self getLinkInfoWithLastComponent:last];
-            
-            if(link)
-            {
-                if(callback)
-                    callback(YES, NO, link[KEY_name]);
-            }
-            else
-            {
-                if(error)
-                   error(@"找不到此URL", nil);
-            }
+            if(error)
+                error(@"找不到此URL", nil);
             
             return YES;
         }
     }
-    else if([controller isKindOfClass:[RootViewController class]])
-    {
-        
-    }
+}
+
+- (BOOL)processRequestFor2ndVC:(NSURLRequest *)request
+                     needLogIn:(void (^)())login
+                      callback:(void (^)(NSString *title, LinkType linkType))callback
+                         error:(void (^)(NSString *errorMsg, NSError *error))error
+{
+    NSString *last = [[request URL] lastPathComponent];
     
-    return YES;
+    if([last caseInsensitiveCompare:@"login"] == NSOrderedSame)
+    {
+        if(login)
+            login();
+        
+        return NO;
+    }
+    else
+    {
+        NSDictionary *link = [self getLinkInfoWithLastComponent:last];
+        
+        if(link)
+        {
+            if(callback)
+                callback(link[KEY_name], [link[KEY_id] intValue]);
+        }
+        else
+        {
+            if(error)
+                error(@"找不到此URL", nil);
+        }
+        
+        if([link[KEY_id] intValue] == LinkTypeImportSchedule)
+            return NO;
+        
+        return YES;
+    }
 }
 
 - (void)loginWithAccountName:(NSString *)name

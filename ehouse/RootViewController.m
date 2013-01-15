@@ -43,7 +43,7 @@
 {
     [super viewDidLoad];
     
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://emsgmobile.test.demo2.miniasp.com.tw"]]];
+    [self reload];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -54,38 +54,19 @@
     NSString *urlStr=[[request URL] description];
     NSLog(@"%@",urlStr);
     
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/PubMSG"]) {
-        SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
-        [self.navigationController pushViewController:docView animated:YES];
-        return NO;
-    }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/Account/login"]) {
-        LogInViewController *logInView=[[LogInViewController alloc] init];
-        [self.navigationController pushViewController:logInView animated:YES];
-        return NO;
-    }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/RankStat/Collection"]) {
-        SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
-        [self.navigationController pushViewController:docView animated:YES];
-        return NO;
-    }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/Constellation"]) {
-        SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
-        [self.navigationController pushViewController:docView animated:YES];
-        return NO;
-    }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/Weather"]) {
-        SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
-        [self.navigationController pushViewController:docView animated:YES];
-        return NO;
-    }
-    if ([urlStr isEqualToString:@"http://emsgmobile.test.demo2.miniasp.com.tw/#/Help"]) {
-        SecondViewController *docView=[[SecondViewController alloc] initWithUrl:urlStr];
-        [self.navigationController pushViewController:docView animated:YES];
-        return NO;
-    }
+    BOOL ret = [self.appManager processRequestFor1stVC:request
+                                             needLogIn:^{
+                                                 // hack to get around this weird page
+                                                 [self reload];
+                                                 [self showLogInViewController];}
+                                              callback:^(NSString *url){
+                                                  // hack to get around this weird page
+                                                  [self reload];
+                                                  SecondViewController *docView=[[SecondViewController alloc] initWithUrl:url];
+                                                  [self.navigationController pushViewController:docView animated:YES];}
+                                                 error:nil];
     
-    return YES;
+    return ret;
 }
 
 #pragma mark - user interaction
@@ -111,6 +92,19 @@
     {
         [self.viewDeckController closeLeftViewAnimated:YES];
     }
+}
+
+#pragma mark - helper
+
+- (void)reload
+{
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://emsgmobile.test.demo2.miniasp.com.tw"]]];
+}
+
+- (void)showLogInViewController
+{
+    LogInViewController *lvc = [[LogInViewController alloc] init];
+    [self presentModalViewController:lvc animated:YES];
 }
 
 

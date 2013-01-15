@@ -12,7 +12,8 @@ NSString * const KEY_id = @"id";
 NSString * const KEY_name = @"name";
 NSString * const KEY_image = @"image";
 NSString * const KEY_url = @"url";
-NSString * const KEY_urlFixed = @"urlFixed";
+NSString * const KEY_urlSpecial = @"urlSpecial";
+NSString * const KEY_urlFull = @"urlFull";
 
 NSString * const KEY_accountname = @"accountname";
 NSString * const KEY_accountpwd = @"accountpwd";

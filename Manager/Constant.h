@@ -12,7 +12,8 @@ extern NSString * const KEY_id;
 extern NSString * const KEY_name;
 extern NSString * const KEY_image;
 extern NSString * const KEY_url;
-extern NSString * const KEY_urlFixed;
+extern NSString * const KEY_urlSpecial;
+extern NSString * const KEY_urlFull;
 
 extern NSString * const KEY_accountname;
 extern NSString * const KEY_accountpwd;

@@ -65,11 +65,15 @@ typedef enum{
 
 - (NSString *)getFullURLforLinkType:(NSNumber *)linkType;
 
-- (BOOL)processRequest:(NSURLRequest *)request
-         forController:(id)controller
-             needLogIn:(void (^)())login
-              callback:(void (^)(BOOL canLoad, BOOL callSecondVC, NSString *title))callback
-                 error:(void (^)(NSString *errorMsg, NSError *error))error;
+- (BOOL)processRequestFor1stVC:(NSURLRequest *)request
+                     needLogIn:(void (^)())login
+                      callback:(void (^)(NSString *url))callback
+                         error:(void (^)(NSString *errorMsg, NSError *error))error;
+
+- (BOOL)processRequestFor2ndVC:(NSURLRequest *)request
+                     needLogIn:(void (^)())login
+                      callback:(void (^)(NSString *title, LinkType linkType))callback
+                         error:(void (^)(NSString *errorMsg, NSError *error))error;
 
 - (void)loginWithAccountName:(NSString *)name
                          pwd:(NSString *)pwd
