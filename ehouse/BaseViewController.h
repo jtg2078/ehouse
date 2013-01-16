@@ -18,6 +18,8 @@
 
 @property (nonatomic, weak) EHouseManager *appManager;
 @property (nonatomic, weak) AppDelegate *appDelegate;
+@property (nonatomic, weak) NSNotificationCenter *notifCenter;
+@property (nonatomic, weak) NSUserDefaults *userDefaults;
 
 - (BOOL)is4inchScreen;
 

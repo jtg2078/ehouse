@@ -24,6 +24,7 @@
 
 @synthesize token = _token;
 @synthesize displayNickname = _displayNickname;
+@synthesize nickname = _nickname;
 
 - (NSString *)token
 {
@@ -38,11 +39,21 @@
 - (NSNumber *)displayNickname
 {
     if (_displayNickname == nil) {
-        NSString *value = [[[self rootElement] elementForName:KEY_Token] stringValue];
+        NSString *value = [[[self rootElement] elementForName:KEY_IsDisplayNickname] stringValue];
         if(value)
-            _displayNickname = @([value boolValue]);
+            _displayNickname = @([value isEqualToString:@"true"]);
     }
     return _displayNickname;
+}
+
+- (NSString *)nickname
+{
+    if (_nickname == nil) {
+        NSString *value = [[[self rootElement] elementForName:KEY_NickName] stringValue];
+        if(value)
+            _nickname = value;
+    }
+    return _nickname;
 }
 
 - (NSString *)valueForKey:(NSString *)key
@@ -87,9 +98,10 @@
         @{
             KEY_id: @(LinkIDHome),
             KEY_name:@"首頁",
+            KEY_image:@"home_icon.png",
             KEY_url: DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL,
             KEY_urlType: @(URLTypeFull),
-            KEY_inSideMenu: @(NO),
+            KEY_inSideMenu: @(YES),
         },
         @{
             KEY_id: @(LinkIDMemberArea),
@@ -352,7 +364,13 @@
     return nil;
 }
 
-- (NSString *)getFullURLforLinkType:(NSNumber *)linkType
+- (NSDictionary *)getLinkInfoLinkID:(LinkID)linkID
+{
+    NSDictionary *info = self.linkInfoLookupType[@(linkID)];
+    return info;
+}
+
+- (NSString *)getFullURLforLinkID:(NSNumber *)linkType
 {
     NSString *urlString = nil;
     
@@ -397,7 +415,7 @@
     if(link)
     {
         linkID = [link[KEY_id] intValue];
-        url = [self getFullURLforLinkType:link[KEY_id]];
+        url = [self getFullURLforLinkID:link[KEY_id]];
     }
     
     if(callback)
@@ -407,6 +425,27 @@
 }
 
 #pragma mark - backend api related
+
+- (void)logout:(void (^)(NSString *msg, NSError *error))callback
+{
+    self.userInfo = nil;
+    
+    [self.myClient2 getPath:@"logout"
+                 parameters:nil
+                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        
+                        [self setAccoutName:nil];
+                        [self setAccoutPwd:nil];
+                        [self setAutoLogin:@(NO)];
+                        
+                        if(callback)
+                            callback(@"已登出", nil);
+                    }
+                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        if(callback)
+                            callback(@"登出連線失敗", error);
+                    } ];
+}
 
 - (void)loginWithAccountName:(NSString *)name
                          pwd:(NSString *)pwd

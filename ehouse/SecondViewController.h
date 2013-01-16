@@ -11,15 +11,13 @@
 
 @interface SecondViewController : BaseViewController<UIWebViewDelegate>
 {
-    NSString *myUrl;
-    NSString *page;
+    
 }
 
 @property (strong, nonatomic) IBOutlet UIWebView *myWebView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *navTopText2;
 
 @property (strong, nonatomic) NSString *myUrl;
-@property (strong, nonatomic) NSString *page;
 
 - (id)initWithUrl:(NSString *)url;
 

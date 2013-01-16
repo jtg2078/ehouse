@@ -149,7 +149,8 @@
 
 - (void)reload
 {
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://emsgmobile.test.demo2.miniasp.com.tw"]]];
+    NSString *url = DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL;
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
 - (void)showLogInViewController
@@ -157,6 +158,5 @@
     LogInViewController *lvc = [[LogInViewController alloc] init];
     [self presentModalViewController:lvc animated:YES];
 }
-
 
 @end

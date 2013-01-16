@@ -30,6 +30,8 @@
     
     self.appManager = [EHouseManager sharedInstance];
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.notifCenter = [NSNotificationCenter defaultCenter];
+    self.userDefaults = [NSUserDefaults standardUserDefaults];
 }
 
 - (void)didReceiveMemoryWarning

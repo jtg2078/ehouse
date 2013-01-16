@@ -38,11 +38,13 @@
     SideMenuViewController *smvc = [[SideMenuViewController alloc] init];
     UINavigationController *nav_smvc = [[UINavigationController alloc ] initWithRootViewController:smvc];
     nav_smvc.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    nav_smvc.navigationBarHidden = YES;
     
     // view deck (root view)
     IIViewDeckController *ivdc = [[IIViewDeckController alloc] initWithCenterViewController:nav_rvc
                                                                          leftViewController:nav_smvc];
     
+    ivdc.delegate = self;
     self.window.rootViewController = ivdc;
     
     // ---------------------------------------------------------
@@ -208,6 +210,23 @@
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
 {
     NSLog(@"Error in registration. Error: %@", err);
+}
+
+#pragma mark - IIViewDeckControllerDelegate
+
+- (void)viewDeckController:(IIViewDeckController*)viewDeckController
+           didOpenViewSide:(IIViewDeckSide)viewDeckSide
+                  animated:(BOOL)animated
+{
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    if(viewDeckSide == IIViewDeckLeftSide)
+    {
+        [center postNotificationName:NOTIF_LEFT_SIDE_OPENED object:self];
+    }
+    else if(viewDeckSide == IIViewDeckLeftSide)
+    {
+        [center postNotificationName:NOTIF_LEFT_SIDE_OPENED object:self];
+    }
 }
 
 @end

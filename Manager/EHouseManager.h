@@ -49,6 +49,7 @@ typedef enum{
 
 @property (readonly, nonatomic, strong) NSString *token;
 @property (readonly, nonatomic, strong) NSNumber *displayNickname;
+@property (readonly, nonatomic, strong) NSString *nickname;
 
 - (NSString *)valueForKey:(NSString *)key;
 
@@ -73,7 +74,8 @@ typedef enum{
 
 + (EHouseManager *)sharedInstance;
 
-- (NSString *)getFullURLforLinkType:(NSNumber *)linkType;
+- (NSDictionary *)getLinkInfoLinkID:(LinkID)linkID;
+- (NSString *)getFullURLforLinkID:(NSNumber *)linkType;
 
 - (BOOL)processRequest:(NSURLRequest *)request
               callback:(BOOL(^)(LinkID linkID, NSString *url))callback;
@@ -83,6 +85,7 @@ typedef enum{
                      success:(void (^)(NSString *token))success
                      failure:(void (^)(NSString *errorMsg, NSError *error))failure;
 
+- (void)logout:(void (^)(NSString *msg, NSError *error))callback;
 
 - (void)registerForPushAccount:(NSString *)account
                         device:(NSString *)device

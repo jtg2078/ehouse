@@ -40,8 +40,12 @@ NSString * const KEY_pushToken = @"pushToken";
 
 BOOL const DEVELOPMENT_MODE = YES;
 
-NSString * const DEVELOPMENT_URL = @"http://emsgmobile.test.demo2.miniasp.com.tw/";
-NSString * const PRODUCTION_URL = @"http://emsgmobile.test.demo2.miniasp.com.tw/";
+NSString * const DEVELOPMENT_URL = @"http://emsgmobile2013.test.demo2.miniasp.com.tw/";
+NSString * const PRODUCTION_URL = @"http://emsgmobile2013.test.demo2.miniasp.com.tw/";
 
 NSString * const API_DEVLOPMENT_URL = @"http://msg4.miniasp.com.tw/WSProxy/Emsg4Services.asmx";
 NSString * const API_PRODUCTION_URL = @"https://msg.nat.gov.tw/WSProxy/Emsg4Services.asmx";
+
+NSString * const NOTIF_LEFT_SIDE_OPENED = @"NOTIF_LEFT_SIDE_OPENED";
+
+

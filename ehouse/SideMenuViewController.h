@@ -15,5 +15,10 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (strong, nonatomic) IBOutlet UIView *myHeaderView;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+
+- (IBAction)loginButtonPressed:(id)sender;
 
 @end

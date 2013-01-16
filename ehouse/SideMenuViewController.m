@@ -10,6 +10,7 @@
 #import "RootViewController.h"
 #import "SecondViewController.h"
 #import "IIViewDeckController.h"
+#import "LogInViewController.h"
 
 @interface SideMenuViewController ()
 
@@ -35,13 +36,65 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    // -------------------- notif --------------------
+    
+    [self.notifCenter addObserver:self
+                         selector:@selector(handleLeftViewOpened:)
+                             name:NOTIF_LEFT_SIDE_OPENED
+                           object:nil];
+    
+    // -------------------- view --------------------
+    
     self.title = @"我的專區";
+    
+    [self refreshState];
+    
+    // -------------------- header view --------------------
+    
+    self.myTableView.tableHeaderView = self.myHeaderView;
 }
 
 - (void)viewDidUnload
 {
     [self setMyTableView:nil];
+    [self setMyHeaderView:nil];
+    [self setUserNameLabel:nil];
+    [self setLoginButton:nil];
     [super viewDidUnload];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self refreshState];
+}
+
+#pragma mark - helper
+
+- (void)refreshState
+{
+    if(self.appManager.userInfo)
+    {
+        if(self.appManager.userInfo.displayNickname.boolValue == YES)
+            self.userNameLabel.text = self.appManager.userInfo.nickname;
+        else
+            self.userNameLabel.text = @"已登入";
+        
+        [self.loginButton setTitle:@"登出" forState:UIControlStateNormal];
+    }
+    else
+    {
+        self.userNameLabel.text = @"尚未登入";
+        
+        [self.loginButton setTitle:@"登入" forState:UIControlStateNormal];
+    }
+}
+
+- (void)showLogInViewController
+{
+    LogInViewController *lvc = [[LogInViewController alloc] init];
+    [self presentModalViewController:lvc animated:YES];
 }
 
 #pragma mark - Table view data source
@@ -74,7 +127,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *info = self.appManager.sideMenuLinks[indexPath.row];
-    NSString *url = [self.appManager getFullURLforLinkType:info[KEY_id]];
+    NSString *url = [self.appManager getFullURLforLinkID:info[KEY_id]];
     
     SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
     [self.viewDeckController.navigationController pushViewController:sec animated:YES];
@@ -111,6 +164,34 @@
                 [sec loadURL:url];
             }
         }];
+    }
+}
+
+#pragma mark - notif
+
+- (void)handleLeftViewOpened:(NSNotification *)notif
+{
+    [self refreshState];
+}
+
+#pragma mark - user interaction
+
+- (IBAction)loginButtonPressed:(id)sender
+{
+    if(self.appManager.userInfo)
+    {
+        [self.appManager logout:^(NSString *msg, NSError *error) {
+            if(error == nil)
+                [SVProgressHUD showSuccessWithStatus:msg];
+            else
+                [SVProgressHUD showErrorWithStatus:msg];
+            
+            [self refreshState];
+        }];
+    }
+    else
+    {
+        [self showLogInViewController];
     }
 }
 
