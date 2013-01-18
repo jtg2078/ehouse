@@ -512,12 +512,16 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
 - (BOOL)processRequest:(NSURLRequest *)request
               callback:(BOOL(^)(LinkID linkID, NSString *url))callback
 {
-    NSString *last = [[request URL] lastPathComponent];
+    NSString *last = nil;
     
     // deal with hash (why is it even in the URL?)
     if([request.URL.absoluteString componentsSeparatedByString:@"#"].count > 1)
     {
         last = [[request.URL.absoluteString componentsSeparatedByString:@"/"] lastObject];
+    }
+    else
+    {
+        last = request.URL.lastPathComponent;
     }
     
     LinkID linkID = LinkIDUnknown;

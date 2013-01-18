@@ -60,8 +60,8 @@
     
     if(DEVELOPMENT_MODE)
     {
-        self.nameTextField.text = @"a25339306";
-        self.pwdTextField.text = @"a19841019";
+        //self.nameTextField.text = @"a25339306";
+        //self.pwdTextField.text = @"a19841019";
     }
 }
 

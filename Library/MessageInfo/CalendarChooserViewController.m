@@ -20,13 +20,8 @@
 
 - (id)initWithStyle:(UITableViewStyle)style {
 
-	if (self == [super initWithStyle:style]) {
-		
-		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-		
+	if (self = [super initWithStyle:style]) {		
 		self.title = @"請選擇行事曆";
-		
-		
 	}
 	return self;
 }
