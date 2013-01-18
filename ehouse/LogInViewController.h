@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
+
 @interface LogInViewController : BaseViewController <UITextFieldDelegate>
 {
-    
+
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *returnBarButton;
@@ -38,5 +39,7 @@
 
 - (IBAction)logInButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
+- (IBAction)loginId:(id)sender;
+- (IBAction)forgetPassword:(id)sender;
 
 @end

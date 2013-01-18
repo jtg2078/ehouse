@@ -37,6 +37,7 @@
     return self;
 }
 
+
 #pragma mark - view lifecycle
 
 - (void)viewDidLoad
@@ -118,6 +119,7 @@
                                           return shouldLoad;
                                       }];
     return ret;
+    
 }
 
 #pragma mark - user interaction

@@ -18,6 +18,7 @@
 
 @implementation SecondViewController
 
+
 #pragma mark - memory management
 
 - (void)didReceiveMemoryWarning
@@ -47,6 +48,9 @@
     return self;
 }
 
+
+
+
 #pragma mark - view lifecycle
 
 - (void)viewDidLoad
@@ -62,8 +66,11 @@
 
 - (IBAction)homeBack2:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
-}
+    if ([_myWebView canGoBack]) {
+        [_myWebView goBack];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }}
 
 - (IBAction)UrlItem:(id)sender
 {
@@ -76,6 +83,7 @@
         [self.viewDeckController closeLeftViewAnimated:YES];
     }
 }
+
 
 #pragma mark - UIWebViewDelegate
 
