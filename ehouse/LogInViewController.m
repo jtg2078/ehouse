@@ -10,6 +10,7 @@
 #import "IIViewDeckController.h"
 #import "RootViewController.h"
 #import "SecondViewController.h"
+#import "AppDelegate.h"
 
 @interface LogInViewController ()
 
@@ -191,7 +192,8 @@
                                       [SVProgressHUD showSuccessWithStatus:@"登入成功"];
                                       self.logInButton.enabled = YES;
                                       
-                                      IIViewDeckController *viewDeck = (IIViewDeckController *)self.appDelegate.window.rootViewController;
+                                      AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                                      IIViewDeckController *viewDeck = (IIViewDeckController *)appDelegate.window.rootViewController;
                                       UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
                                       if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
                                           SecondViewController *svc = (SecondViewController *)nav.topViewController;
@@ -217,11 +219,10 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)loginId:(id)sender {
-    
-    
-    
-    IIViewDeckController *viewDeck = (IIViewDeckController *)self.appDelegate.window.rootViewController;
+- (IBAction)loginId:(id)sender
+{    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    IIViewDeckController *viewDeck = (IIViewDeckController *)appDelegate.window.rootViewController;
     UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
     if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
         SecondViewController *svc = (SecondViewController *)nav.topViewController;
@@ -235,12 +236,12 @@
     }
     
     [self dismissModalViewControllerAnimated:YES];
-    
-    
 }
 
-- (IBAction)forgetPassword:(id)sender {
-    IIViewDeckController *viewDeck = (IIViewDeckController *)self.appDelegate.window.rootViewController;
+- (IBAction)forgetPassword:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    IIViewDeckController *viewDeck = (IIViewDeckController *)appDelegate.window.rootViewController;
     UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
     if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
         SecondViewController *svc = (SecondViewController *)nav.topViewController;
@@ -255,6 +256,6 @@
     
     [self dismissModalViewControllerAnimated:YES];
 
-    }
+}
 
 @end

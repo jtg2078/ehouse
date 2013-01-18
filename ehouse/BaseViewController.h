@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "SVProgressHUD.h"
-#import "AppDelegate.h"
 #import "EHouseManager.h"
 
 @interface BaseViewController : UIViewController
@@ -17,7 +16,6 @@
 }
 
 @property (nonatomic, weak) EHouseManager *appManager;
-@property (nonatomic, weak) AppDelegate *appDelegate;
 @property (nonatomic, weak) NSNotificationCenter *notifCenter;
 @property (nonatomic, weak) NSUserDefaults *userDefaults;
 

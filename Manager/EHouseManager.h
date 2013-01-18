@@ -14,6 +14,14 @@
 #import "DDXMLElement.h"
 #import "DDXMLElementAdditions.h"
 
+#import "MessageReader.h"
+#import "MessageReaderDelegate.h"
+#import "MessageImporter.h"
+#import "MessageImporterDelegate.h"
+
+#import "CalendarChooserViewController.h"
+#import "CalendarChooserDelegate.h"
+
 typedef enum{
     LinkIDUnknown = 0,
     LinkIDHome,
@@ -50,14 +58,16 @@ typedef enum{
 @property (readonly, nonatomic, strong) NSString *token;
 @property (readonly, nonatomic, strong) NSNumber *displayNickname;
 @property (readonly, nonatomic, strong) NSString *nickname;
+@property (readonly, nonatomic, strong) NSString *userName;
 
 - (NSString *)valueForKey:(NSString *)key;
 
 @end
 
-@interface EHouseManager : NSObject
+@interface EHouseManager : NSObject <MessageReaderDelegate, MessageImporterDelegate, CalendarChooserDelegate, UIAlertViewDelegate>
 {
-    
+    BOOL bIsReadyToDownload;
+	BOOL bIsReadyToInsert;
 }
 
 @property (nonatomic, strong) NSArray *linkInfo;
@@ -92,6 +102,24 @@ typedef enum{
                          token:(NSString *)token
                        success:(void (^)())success
                        failure:(void (^)(NSString *errorMsg, NSError *error))failure;
+
+- (void)downloadMessagesForTypePersonal:(BOOL)personal
+                                payment:(BOOL)payment
+                              important:(BOOL)important
+                               vacation:(BOOL)vacation
+                               favorite:(BOOL)favorite
+                              customize:(BOOL)customize
+                                  token:(NSString *)token
+                                success:(void (^)(NSArray * messageInfo, int availableToImportCount))success
+                                failure:(void (^)(NSString *errorMsg, NSError *error))failure;
+
+- (void)importMessages:(NSArray *)messages
+            toCalendar:(EKCalendar *)calendar
+              progress:(void (^)(int current, int total))progress
+               success:(void (^)(int messageCount))success
+               failure:(void (^)(NSString *errorMsg, NSError *error))failure;
+
+- (void)peformAutoImport;
 
 - (NSString *)createURLWithToken:(NSString *)token;
 

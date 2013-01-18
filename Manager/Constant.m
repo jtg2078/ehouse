@@ -38,7 +38,17 @@ NSString * const KEY_IsGetG2E = @"IsGetG2E";
 
 NSString * const KEY_pushToken = @"pushToken";
 
+NSString * const KEY_AUTO_IMPORT = @"userDefaultAutoImport";
+
 BOOL const DEVELOPMENT_MODE = YES;
+
+NSString * const KEY_IMPORT_all = @"allMsg";
+NSString * const KEY_IMPORT_payment = @"paymentMsg";
+NSString * const KEY_IMPORT_important = @"importantMsg";
+NSString * const KEY_IMPORT_holiday = @"holidayMsg";
+NSString * const KEY_IMPORT_favorite = @"favoriteMsg";
+NSString * const KEY_IMPORT_custom = @"customMsg";
+NSString * const KEY_IMPORT_CAL = @"importCal";
 
 NSString * const DEVELOPMENT_URL = @"http://emsgmobile2013.test.demo2.miniasp.com.tw/";
 NSString * const PRODUCTION_URL = @"http://emsgmobile2013.test.demo2.miniasp.com.tw/";

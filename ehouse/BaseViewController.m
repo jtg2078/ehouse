@@ -7,9 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "AppDelegate.h"
 
 @interface BaseViewController ()
-
+@property (nonatomic, weak) AppDelegate *appDelegate;
 @end
 
 @implementation BaseViewController

@@ -8,6 +8,7 @@
 
 #import "CalendarChooserViewController.h"
 #import "CalendarTableViewCellController.h"
+#import "SVProgressHUD.h"
 
 @implementation CalendarChooserViewController
 @synthesize currentSelection;
@@ -45,6 +46,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
+    {
+        [SVProgressHUD showWithStatus:@"準備中"];
+        [eventStore requestAccessToEntityType:EKEntityTypeEvent
+                                   completion:^(BOOL granted, NSError *error) {
+                                       if(granted && error == nil)
+                                       {
+                                           [SVProgressHUD dismiss];
+                                           [self.tableView reloadData];
+                                       }
+                                       else
+                                           [SVProgressHUD showErrorWithStatus:@"讀取行事曆失敗"];
+                                   }];
+    }
+    
 }
 
 

@@ -9,7 +9,10 @@
 #import "EHouseManager.h"
 #import "RootViewController.h"
 #import "SecondViewController.h"
+#import <EventKit/EventKit.h>
 
+
+// -------------------- UserInfo implementation --------------------
 
 @implementation UserInfo
 
@@ -25,6 +28,7 @@
 @synthesize token = _token;
 @synthesize displayNickname = _displayNickname;
 @synthesize nickname = _nickname;
+@synthesize userName = _userName;
 
 - (NSString *)token
 {
@@ -46,6 +50,17 @@
     return _displayNickname;
 }
 
+- (NSString *)userName
+{
+    if (_userName == nil) {
+        NSString *value = [[[self rootElement] elementForName:KEY_UserName] stringValue];
+        if(value)
+            _userName = value;
+    }
+    return _userName;
+    
+}
+
 - (NSString *)nickname
 {
     if (_nickname == nil) {
@@ -63,9 +78,29 @@
 
 @end
 
+// -------------------- EHouseManager implementation --------------------
+
+typedef void (^DownloadMessagesSuccessBlock)(NSArray * messageInfo, int availableToImportCount);
+typedef void (^DownloadMessagesFailureBlock)(NSString *errorMsg, NSError *error);
+typedef void (^ImportMessagesProgressBlock)(int current, int total);
+typedef void (^ImportMessagesSuccessBlock)(int messageCount);
+typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
+
 @interface EHouseManager()
+
 @property (nonatomic, weak) NSUserDefaults *userDefault;
 @property (nonatomic, strong) NSDictionary *linkInfoLookupType;
+
+@property (nonatomic, strong) MessageReader *reader;
+@property (nonatomic, strong) MessageImporter *importer;
+
+@property (readwrite, nonatomic, copy) DownloadMessagesSuccessBlock downloadMessagesSuccess;
+@property (readwrite, nonatomic, copy) DownloadMessagesFailureBlock downloadMessagesFailure;
+
+@property (readwrite, nonatomic, copy) ImportMessagesProgressBlock importMessagesProgress;
+@property (readwrite, nonatomic, copy) ImportMessagesSuccessBlock importMessagesSuccess;
+@property (readwrite, nonatomic, copy) ImportMessagesFailureBlock importMessagesFailure;
+
 @end
 
 @implementation EHouseManager
@@ -93,6 +128,15 @@
     self.myClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api]];
     api = DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL;
     self.myClient2 = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api]];
+    
+    bIsReadyToDownload = YES;
+	bIsReadyToInsert = YES;
+    
+    self.reader = [[MessageReader alloc] init];
+    self.reader.delegate = self;
+    
+    self.importer = [[MessageImporter alloc] init];
+    self.importer.delegate = self;
     
     self.linkInfo = @[
         @{
@@ -393,6 +437,67 @@
     return urlString;
 }
 
+#pragma mark - task
+
+- (void)peformAutoImport
+{
+    [self downloadMessagesForTypePersonal:[self.userDefault boolForKey:KEY_IMPORT_all]
+                                  payment:[self.userDefault boolForKey:KEY_IMPORT_payment]
+                                important:[self.userDefault boolForKey:KEY_IMPORT_important]
+                                 vacation:[self.userDefault boolForKey:KEY_IMPORT_holiday]
+                                 favorite:[self.userDefault boolForKey:KEY_IMPORT_favorite]
+                                customize:[self.userDefault boolForKey:KEY_IMPORT_custom]
+                                    token:self.userInfo.token
+                                  success:^(NSArray *messageInfo, int availableToImportCount) {
+                                      
+                                      if(messageInfo.count && availableToImportCount && [self.userDefault stringForKey:KEY_IMPORT_CAL])
+                                      {
+                                          EKEventStore *eventStore = [[EKEventStore alloc] init];
+                                          
+                                          if([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
+                                          {
+                                              [eventStore requestAccessToEntityType:EKEntityTypeEvent
+                                                                         completion:^(BOOL granted, NSError *error) {
+                                                                             EKCalendar *calendar = [eventStore calendarWithIdentifier:[self.userDefault stringForKey:KEY_IMPORT_CAL]];
+                                                                             if(calendar)
+                                                                             {
+                                                                                 [self importMessages:messageInfo
+                                                                                           toCalendar:calendar
+                                                                                             progress:nil
+                                                                                              success:^(int messageCount) {
+                                                                                                  NSLog(@"auto import event successful: %d", messageCount);
+                                                                                              }
+                                                                                              failure:^(NSString *errorMsg, NSError *error) {
+                                                                                                  NSLog(@"auto import event failed: %@", errorMsg);
+                                                                                              }];
+                                                                             }
+                                                                         }];
+                                          }
+                                          else
+                                          {
+                                              EKCalendar *calendar = [eventStore calendarWithIdentifier:[self.userDefault stringForKey:KEY_IMPORT_CAL]];
+                                              if(calendar)
+                                              {
+                                                  [self importMessages:messageInfo
+                                                            toCalendar:calendar
+                                                              progress:nil
+                                                               success:^(int messageCount) {
+                                                                   NSLog(@"auto import event successful: %d", messageCount);
+                                                               }
+                                                               failure:^(NSString *errorMsg, NSError *error) {
+                                                                   NSLog(@"auto import event failed: %@", errorMsg);
+                                                               }];
+                                              }
+                                              
+                                          }
+
+                                      }
+                                  }
+                                  failure:^(NSString *errorMsg, NSError *error) {
+                                      NSLog(@"auto import download msg failed: %@", errorMsg);
+                                  }];
+}
+
 #pragma mark - main methods
 
 - (BOOL)processRequest:(NSURLRequest *)request
@@ -541,6 +646,141 @@
                         if(failure)
                             failure(@"register for push failed", error);
                     }];
+}
+
+- (void)downloadMessagesForTypePersonal:(BOOL)personal
+                                payment:(BOOL)payment
+                              important:(BOOL)important
+                               vacation:(BOOL)vacation
+                               favorite:(BOOL)favorite
+                              customize:(BOOL)customize
+                                  token:(NSString *)token
+                                success:(void (^)(NSArray * messageInfo, int availableToImportCount))success
+                                failure:(void (^)(NSString *errorMsg, NSError *error))failure
+{
+    if(self.reader == nil)
+    {
+        self.reader = [[MessageReader alloc] init];
+        self.reader.delegate = self;
+    }
+    
+    if(bIsReadyToDownload)
+    {
+        bIsReadyToDownload = NO;
+        
+        self.reader.bImportPersonalMessage = personal;
+        self.reader.bImportPaymentMessage = payment;
+        self.reader.bImportImportantMessage = important;
+        self.reader.bImportVacationMessage = vacation;
+        self.reader.bImportFavoriteMessage = favorite;
+        self.reader.bImportCustomizeMessage = customize;
+        
+        self.downloadMessagesSuccess = success;
+        self.downloadMessagesFailure = failure;
+        
+        [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            if(self.downloadMessagesFailure)
+                self.downloadMessagesFailure(@"下載訊息遇時", nil);
+        }];
+        
+        [self.reader getMessagesAsynchronous:token];
+    }
+    else
+    {
+        if(self.downloadMessagesFailure)
+            self.downloadMessagesFailure(@"正在下載訊息", nil);
+    }
+}
+
+- (void)importMessages:(NSArray *)messages
+            toCalendar:(EKCalendar *)calendar
+              progress:(void (^)(int current, int total))progress
+               success:(void (^)(int messageCount))success
+               failure:(void (^)(NSString *errorMsg, NSError *error))failure
+{
+    if(self.importer == nil)
+    {
+        self.importer = [[MessageImporter alloc] init];
+        self.importer.delegate = self;
+    }
+    
+    if(bIsReadyToInsert)
+    {
+        bIsReadyToInsert = NO;
+        
+        self.importMessagesProgress = progress;
+        self.importMessagesSuccess = success;
+        self.importMessagesFailure = failure;
+        
+        [self.importer beginImportAsynchronous:messages
+                                  intoCalendar:calendar];
+    }
+    else
+    {
+        if(failure)
+            failure(@"匯入訊息正在進行中", nil);
+    }
+}
+
+#pragma mark - MessageReader Delegates
+
+- (void)messageReader:(MessageReader *)sender didFinishReading:(NSArray *)messageInfo
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        bIsReadyToDownload = YES;
+        int availableToImportCount = [self.importer messagesAvailableImportCount:messageInfo];
+        
+        if(self.downloadMessagesSuccess)
+            self.downloadMessagesSuccess(messageInfo, availableToImportCount);
+    });
+}
+
+- (void)messageReaderDidFailedReading:(MessageReader *)sender
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        bIsReadyToDownload = YES;
+        
+        if(self.downloadMessagesFailure)
+            self.downloadMessagesFailure(@"無法取得訊息，請稍候再試。", sender.error);
+    });
+}
+
+#pragma mark - MessageImporter Delegates
+
+- (void)messageImporter:(MessageImporter *)importer
+	  didReportProgress:(int)current
+				  outOf:(int)all
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if(self.importMessagesProgress)
+            self.importMessagesProgress(current, all);
+    });
+}
+
+- (void)messageImporterDidFinishImport:(MessageImporter *)importer
+                         messagesCount:(NSInteger)count
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        bIsReadyToInsert = YES;
+        
+        if(self.importMessagesSuccess)
+            self.importMessagesSuccess(count);
+    });
+}
+
+- (void)messageImporterDidFailedImport:(MessageImporter *)importer
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        bIsReadyToInsert = YES;
+        
+        if(self.importMessagesFailure)
+            self.importMessagesFailure(@"發生了未知的問題，請稍候再試。", importer.error);
+    });
 }
 
 #pragma mark - helper

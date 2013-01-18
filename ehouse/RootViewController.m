@@ -10,7 +10,8 @@
 #import "SecondViewController.h"
 #import "IIViewDeckController.h"
 #import "LogInViewController.h"
-#import "ScheduleViewController.h"
+#import "AppDelegate.h"
+
 
 @interface RootViewController ()
 
@@ -74,6 +75,11 @@
                                                                                       failure:^(NSString *errorMsg, NSError *error) {
                                                                                           NSLog(@"推播的api 註冊失敗: %@", errorMsg);
                                                                                       }];
+                                                      
+                                                      if([self.userDefaults boolForKey:KEY_AUTO_IMPORT])
+                                                      {
+                                                          [self.appManager peformAutoImport];
+                                                      }
                                                   }
                                               }
                                               failure:^(NSString *errorMsg, NSError *error) {

@@ -38,6 +38,15 @@ extern NSString * const KEY_IsGetG2E;
 
 extern NSString * const KEY_pushToken;
 
+extern NSString * const KEY_AUTO_IMPORT;
+extern NSString * const KEY_IMPORT_all;
+extern NSString * const KEY_IMPORT_payment;
+extern NSString * const KEY_IMPORT_important;
+extern NSString * const KEY_IMPORT_holiday;
+extern NSString * const KEY_IMPORT_favorite;
+extern NSString * const KEY_IMPORT_custom;
+extern NSString * const KEY_IMPORT_CAL;
+
 extern BOOL const DEVELOPMENT_MODE;
 
 extern NSString * const DEVELOPMENT_URL;

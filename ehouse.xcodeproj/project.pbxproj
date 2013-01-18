@@ -408,16 +408,16 @@
 		9673419916A4E3FE00E89839 /* MessageInfo */ = {
 			isa = PBXGroup;
 			children = (
-				967341B216A5224D00E89839 /* CalendarTableViewCell.xib */,
-				967341B316A5224D00E89839 /* CalendarChooserViewController.m */,
-				967341B416A5224D00E89839 /* CalendarTableViewCellController.m */,
-				967341B516A5224D00E89839 /* CalendarTableViewCellController.h */,
-				967341B616A5224D00E89839 /* CalendarChooserViewController.h */,
 				967341B716A5224D00E89839 /* CalendarChooserDelegate.h */,
-				967341AC16A5221900E89839 /* CustomizeMessageParser.m */,
-				967341AD16A5221900E89839 /* FavoriteMessageParser.m */,
+				967341B616A5224D00E89839 /* CalendarChooserViewController.h */,
+				967341B316A5224D00E89839 /* CalendarChooserViewController.m */,
+				967341B216A5224D00E89839 /* CalendarTableViewCell.xib */,
+				967341B516A5224D00E89839 /* CalendarTableViewCellController.h */,
+				967341B416A5224D00E89839 /* CalendarTableViewCellController.m */,
 				967341AE16A5221900E89839 /* CustomizeMessageParser.h */,
+				967341AC16A5221900E89839 /* CustomizeMessageParser.m */,
 				967341AF16A5221900E89839 /* FavoriteMessageParser.h */,
+				967341AD16A5221900E89839 /* FavoriteMessageParser.m */,
 				9673419A16A4E3FE00E89839 /* MessageImporter.h */,
 				9673419B16A4E3FE00E89839 /* MessageImporter.m */,
 				9673419C16A4E3FE00E89839 /* MessageImporterDelegate.h */,

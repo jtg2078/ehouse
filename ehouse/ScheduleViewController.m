@@ -13,7 +13,7 @@
 
 
 @interface ScheduleViewController ()
-
+@property (nonatomic, strong) NSArray *messages;
 @end
 
 @implementation ScheduleViewController
@@ -29,13 +29,27 @@
 
 #pragma mark - init
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self setup];
     }
     return self;
+}
+
+- (void)setup
+{
+    
 }
 
 #pragma mark - view lifecycle
@@ -69,14 +83,6 @@
     self.autoImportBtn.selected = [self loadSelectStateForTag:self.autoImportBtn.tag];
     
     // -------------------- other --------------------
-    
-    self.reader = [[MessageReader alloc] init];
-    self.reader.delegate = self;
-    
-    self.importer = [[MessageImporter alloc] init];
-    self.importer.delegate = self;
-    
-    self.strToken = self.appManager.userInfo.token;
     
     self.ccvc = [[CalendarChooserViewController alloc] initWithStyle:UITableViewStyleGrouped];
     self.ccvc.delegate = self;
@@ -112,30 +118,83 @@
 
 - (IBAction)importButtonPressed:(id)sender
 {
-    self.reader.bImportPersonalMessage = self.allMsgBtn.selected;
-    self.reader.bImportPaymentMessage = self.paymentMsgBtn.selected;
-    self.reader.bImportImportantMessage = self.importantMsgBtn.selected;
-    self.reader.bImportVacationMessage = self.holidayBtn.selected;
-    self.reader.bImportFavoriteMessage = self.favoriteBtn.selected;
-    self.reader.bImportCustomizeMessage = self.customBtn.selected;
+    // save the auto import setting
+    [self.userDefaults setBool:self.autoImportBtn.selected forKey:KEY_AUTO_IMPORT];
+    [self.userDefaults synchronize];
     
-    if (!self.reader.bImportPersonalMessage &&
-        !self.reader.bImportPaymentMessage &&
-        !self.reader.bImportImportantMessage &&
-        !self.reader.bImportVacationMessage &&
-        !self.reader.bImportFavoriteMessage &&
-        !self.reader.bImportCustomizeMessage)
+    if (!self.allMsgBtn.selected &&
+        !self.paymentMsgBtn.selected &&
+        !self.importantMsgBtn.selected &&
+        !self.holidayBtn.selected &&
+        !self.favoriteBtn.selected &&
+        !self.customBtn.selected)
         return;
     
     [self lockScreen];
     
-    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        [self releaseProgressedScreen];
-        bIsReadyToInsert = NO;
-        self.calendarToInsert = nil;
-    }];
-    
-	[self.reader getMessagesAsynchronous:self.strToken];
+    [self.appManager downloadMessagesForTypePersonal:self.allMsgBtn.selected
+                                             payment:self.paymentMsgBtn.selected
+                                           important:self.importantMsgBtn.selected
+                                            vacation:self.holidayBtn.selected
+                                            favorite:self.favoriteBtn.selected
+                                           customize:self.customBtn.selected
+                                               token:self.appManager.userInfo.token
+                                             success:^(NSArray *messageInfo, int availableToImportCount) {
+                                                 
+                                                 [self releaseScreen];
+                                                 
+                                                 if (messageInfo == nil || [messageInfo count] == 0)
+                                                 {
+                                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"無新訊息"
+                                                                                                     message:@"目前沒有新訊息。"
+                                                                                                    delegate:self
+                                                                                           cancelButtonTitle:@"好"
+                                                                                           otherButtonTitles:nil];
+                                                     bIsMessageImportCompletedAlert = YES;
+                                                     [alert show];
+                                                 }
+                                                 else
+                                                 {
+                                                     if (availableToImportCount > 0)
+                                                     {
+                                                         self.messages = messageInfo;
+                                                         
+                                                         NSString *strMessage = [NSString stringWithFormat:@"共有 %d 筆新訊息", availableToImportCount];
+                                                         
+                                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strMessage
+                                                                                                         message:@"若要將訊息匯入行事曆，請按[確認]"
+                                                                                                        delegate:self
+                                                                                               cancelButtonTitle:@"取消"
+                                                                                               otherButtonTitles:@"確認", nil];
+                                                         bIsMessageCountAlert = YES;
+                                                         [alert show];
+                                                     }
+                                                     else
+                                                     {
+                                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"無新訊息"
+                                                                                                         message:@"目前沒有新訊息。"
+                                                                                                        delegate:self
+                                                                                               cancelButtonTitle:@"好"
+                                                                                               otherButtonTitles:nil];
+                                                         bIsMessageImportCompletedAlert = YES;
+                                                         [alert show];
+                                                     }
+                                                 }
+                                             }
+                                             failure:^(NSString *errorMsg, NSError *error) {
+                                                 
+                                                 [self releaseScreen];
+                                                 
+                                                 
+                                                 NSLog(@"%@", [error description]);
+                                                 
+                                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                                                     message:@"無法取得訊息，請稍候再試。"
+                                                                                                    delegate:self 
+                                                                                           cancelButtonTitle:@"確定" 
+                                                                                           otherButtonTitles:nil];
+                                                 [alertView show];
+                                             }];
 }
 
 #pragma mark - helper
@@ -210,66 +269,6 @@
     [SVProgressHUD dismiss];
 }
 
-#pragma mark - MessageReader Delegates
-
-- (void)messageReader:(MessageReader *)sender didFinishReading:(NSArray *)messageInfo
-{
-	[self releaseScreen];
-	bMessageReaderIsReading = NO;
-	
-	if (nil == messageInfo || [messageInfo count] == 0)
-    {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"無新訊息"
-														 message:@"目前沒有新訊息。"
-														delegate:self
-											   cancelButtonTitle:@"好"
-											   otherButtonTitles:nil];
-		bIsMessageImportCompletedAlert = YES;
-		[alert show];
-		return;
-	}
-	
-	self.messages = messageInfo;
-	
-	int messageCount = [self.importer messagesAvailableImportCount:messageInfo];
-	NSString *strMessage = [NSString stringWithFormat:@"共有 %d 筆新訊息", messageCount];
-	if (messageCount > 0)
-    {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strMessage
-														 message:@"若要將訊息匯入行事曆，請按[確認]"
-														delegate:self
-											   cancelButtonTitle:@"取消"
-											   otherButtonTitles:@"確認", nil];
-		bIsMessageCountAlert = YES;
-		[alert show];
-	}
-	else
-    {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"無新訊息"
-                                                         message:@"目前沒有新訊息。"
-                                                        delegate:self
-                                               cancelButtonTitle:@"好"
-                                               otherButtonTitles:nil];
-		bIsMessageImportCompletedAlert = YES;
-		[alert show];
-	}
-}
-
-- (void)messageReaderDidFailedReading:(MessageReader *)sender {
-	
-	[self releaseScreen];
-	bMessageReaderIsReading = NO;
-	
-	NSLog(@"%@", [sender.error description]);
-	
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                         message:@"無法取得訊息，請稍候再試。"
-                                                        delegate:self 
-                                               cancelButtonTitle:@"確定" 
-                                               otherButtonTitles:nil];
-	[alertView show];
-}
-
 #pragma mark - UIAlertView Delegates
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -298,77 +297,53 @@
 
 - (void)calendarChooserDidFinishChooseWithCalendar:(EKCalendar *)calendar
 {
-	if (nil == calendar)
+	if (calendar == nil || self.messages == nil)
     {
 		[self dismissModalViewControllerAnimated:YES];
-        
-		bIsReadyToInsert = NO;
-		return;
 	}
-	
-	bIsReadyToInsert = YES;
-	self.calendarToInsert = calendar;
-	[self dismissModalViewControllerAnimated:YES];
-    
-    if (bIsReadyToInsert)
+    else
     {
-		bIsReadyToInsert = NO;
-		[self lockProgressedScreen:0.0];
-		[self.importer beginImportAsynchronous:self.messages
-                                  intoCalendar:self.calendarToInsert];
-		return;
-	}
-}
-
-#pragma mark - MessageImporter Delegates
-
-- (void)messageImporter:(MessageImporter *)importer
-	  didReportProgress:(int)current
-				  outOf:(int)all
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.userDefaults setBool:self.allMsgBtn.selected forKey:KEY_IMPORT_all];
+        [self.userDefaults setBool:self.paymentMsgBtn.selected forKey:KEY_IMPORT_payment];
+        [self.userDefaults setBool:self.importantMsgBtn.selected forKey:KEY_IMPORT_important];
+        [self.userDefaults setBool:self.holidayBtn.selected forKey:KEY_IMPORT_holiday];
+        [self.userDefaults setBool:self.favoriteBtn.selected forKey:KEY_IMPORT_favorite];
+        [self.userDefaults setBool:self.customBtn.selected forKey:KEY_IMPORT_custom];
+        [self.userDefaults setObject:calendar.calendarIdentifier forKey:KEY_IMPORT_CAL];
         
-        float percentage = (float)current/(float)all;
-        [self lockProgressedScreen:percentage];
-    });
-}
-
-- (void)messageImporterDidFinishImport:(MessageImporter *)importer
-                         messagesCount:(NSInteger)count
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissModalViewControllerAnimated:YES];
+        [self lockProgressedScreen:0.0];
         
-        [self releaseProgressedScreen];
-        bIsReadyToInsert = NO;
-        self.calendarToInsert = nil;
-        
-        NSString *strMessage = [NSString stringWithFormat:@"%d 筆新訊息已匯入行事曆，詳細內容可至手機行事曆查看。", count];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"訊息已匯入"
-                                                        message:strMessage
-                                                       delegate:self
-                                              cancelButtonTitle:@"好"
-                                              otherButtonTitles:nil];
-        bIsMessageImportCompletedAlert = YES;
-        [alert show];
-        
-    });
-}
-
-- (void)messageImporterDidFailedImport:(MessageImporter *)importer
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [self releaseProgressedScreen];
-        bIsReadyToInsert = NO;
-        self.calendarToInsert = nil;
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"發生了未知的問題，請稍候再試。"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"確定"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    });
+        [self.appManager importMessages:self.messages
+                             toCalendar:calendar
+                               progress:^(int current, int total) {
+                                   float percentage = (float)current/(float)total;
+                                   if(current != total)
+                                       [self lockProgressedScreen:percentage];
+                               }
+                                success:^(int messageCount) {
+                                    [self releaseProgressedScreen];
+                                    
+                                    NSString *strMessage = [NSString stringWithFormat:@"%d 筆新訊息已匯入行事曆，詳細內容可至手機行事曆查看。", messageCount];
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"訊息已匯入"
+                                                                                    message:strMessage
+                                                                                   delegate:self
+                                                                          cancelButtonTitle:@"好"
+                                                                          otherButtonTitles:nil];
+                                    bIsMessageImportCompletedAlert = YES;
+                                    [alert show];
+                                }
+                                failure:^(NSString *errorMsg, NSError *error) {
+                                    [self releaseProgressedScreen];
+                                    
+                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                                                        message:@"發生了未知的問題，請稍候再試。"
+                                                                                       delegate:self
+                                                                              cancelButtonTitle:@"確定"
+                                                                              otherButtonTitles:nil];
+                                    [alertView show];
+                                }];
+    }
 }
 
 @end
