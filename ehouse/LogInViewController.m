@@ -217,4 +217,44 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (IBAction)loginId:(id)sender {
+    
+    
+    
+    IIViewDeckController *viewDeck = (IIViewDeckController *)self.appDelegate.window.rootViewController;
+    UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
+    if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
+        SecondViewController *svc = (SecondViewController *)nav.topViewController;
+        [svc loadURL:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw"];
+    }
+    else if ([nav.topViewController isKindOfClass:[RootViewController class]])
+    {
+        RootViewController *rvc = (RootViewController *)nav.topViewController;
+        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw"];
+        [rvc.navigationController pushViewController:svc animated:NO];
+    }
+    
+    [self dismissModalViewControllerAnimated:YES];
+    
+    
+}
+
+- (IBAction)forgetPassword:(id)sender {
+    IIViewDeckController *viewDeck = (IIViewDeckController *)self.appDelegate.window.rootViewController;
+    UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
+    if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
+        SecondViewController *svc = (SecondViewController *)nav.topViewController;
+        [svc loadURL:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw"];
+    }
+    else if ([nav.topViewController isKindOfClass:[RootViewController class]])
+    {
+        RootViewController *rvc = (RootViewController *)nav.topViewController;
+        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw"];
+        [rvc.navigationController pushViewController:svc animated:NO];
+    }
+    
+    [self dismissModalViewControllerAnimated:YES];
+
+    }
+
 @end

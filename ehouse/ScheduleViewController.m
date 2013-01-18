@@ -8,6 +8,9 @@
 
 #import "ScheduleViewController.h"
 #import "IIViewDeckController.h"
+#import "SecondViewController.h"
+#import "RootViewController.h"
+
 
 @interface ScheduleViewController ()
 
@@ -172,8 +175,14 @@
 
 - (IBAction)backHome:(id)sender
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile2013.test.demo2.miniasp.com.tw/User"];
+    NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    [vcs insertObject:sec atIndex:[vcs count]-1];
+    
+    [self.navigationController setViewControllers:vcs animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 #pragma mark - Screen Lock
 
