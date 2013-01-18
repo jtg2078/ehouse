@@ -26,26 +26,29 @@
 		
 		self.title = @"請選擇行事曆";
 		
-		UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-		self.navigationItem.leftBarButtonItem = cancelButton;
-		[cancelButton release];
 		
-		UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-		self.navigationItem.rightBarButtonItem = doneButton;
-		[doneButton release];
-		
-		self.navigationItem.rightBarButtonItem.enabled = NO;
-		
-		calendars = [[NSMutableArray alloc] init];
-		eventStore = [[EKEventStore alloc] init];
-		currentSelection = nil;
 	}
 	return self;
 }
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    [cancelButton release];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    [doneButton release];
+    
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    
+    calendars = [[NSMutableArray alloc] init];
+    eventStore = [[EKEventStore alloc] init];
+    currentSelection = nil;
     
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
     {

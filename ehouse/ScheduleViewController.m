@@ -310,6 +310,7 @@
         [self.userDefaults setBool:self.favoriteBtn.selected forKey:KEY_IMPORT_favorite];
         [self.userDefaults setBool:self.customBtn.selected forKey:KEY_IMPORT_custom];
         [self.userDefaults setObject:calendar.calendarIdentifier forKey:KEY_IMPORT_CAL];
+        [self.userDefaults synchronize];
         
         [self dismissModalViewControllerAnimated:YES];
         [self lockProgressedScreen:0.0];
