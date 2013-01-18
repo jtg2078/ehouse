@@ -79,7 +79,7 @@
         if(self.appManager.userInfo.displayNickname.boolValue == YES)
             self.userNameLabel.text = self.appManager.userInfo.nickname;
         else
-            self.userNameLabel.text = @"已登入";
+            self.userNameLabel.text = [self.appManager.userInfo valueForKey:KEY_UserName];
         
         [self.loginButton setTitle:@"登出" forState:UIControlStateNormal];
     }
@@ -111,7 +111,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
-        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:179/255.0];
     }
     
     // Configure the cell...

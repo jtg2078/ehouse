@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42E5657A16A942520085FC04 /* login-but.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5657816A942520085FC04 /* login-but.png */; };
+		42E5657B16A942520085FC04 /* login-but@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5657916A942520085FC04 /* login-but@2x.png */; };
+		42E5657E16A958CD0085FC04 /* constellation_service_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5657D16A958CD0085FC04 /* constellation_service_icon.png */; };
 		9665BB26169F1CA000CE1448 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9665BB25169F1CA000CE1448 /* UIKit.framework */; };
 		9665BB28169F1CA000CE1448 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9665BB27169F1CA000CE1448 /* Foundation.framework */; };
 		9665BB2A169F1CA000CE1448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9665BB29169F1CA000CE1448 /* CoreGraphics.framework */; };
@@ -55,7 +58,6 @@
 		969E6C7316A024AE00F485E3 /* checkBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969E6C4316A024AE00F485E3 /* checkBox@2x.png */; };
 		969E6C7416A024AE00F485E3 /* checkBoxOk.png in Resources */ = {isa = PBXBuildFile; fileRef = 969E6C4416A024AE00F485E3 /* checkBoxOk.png */; };
 		969E6C7516A024AE00F485E3 /* checkBoxOk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 969E6C4516A024AE00F485E3 /* checkBoxOk@2x.png */; };
-		969E6C7616A024AE00F485E3 /* constellation_service_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 969E6C4616A024AE00F485E3 /* constellation_service_icon.png */; };
 		969E6C7716A024AE00F485E3 /* cost_statistics_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 969E6C4716A024AE00F485E3 /* cost_statistics_icon.png */; };
 		969E6C7816A024AE00F485E3 /* fb_fans_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 969E6C4816A024AE00F485E3 /* fb_fans_icon.png */; };
 		969E6C7916A024AE00F485E3 /* forget_password_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 969E6C4916A024AE00F485E3 /* forget_password_icon.png */; };
@@ -125,6 +127,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42E5657816A942520085FC04 /* login-but.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-but.png"; sourceTree = "<group>"; };
+		42E5657916A942520085FC04 /* login-but@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-but@2x.png"; sourceTree = "<group>"; };
+		42E5657D16A958CD0085FC04 /* constellation_service_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = constellation_service_icon.png; sourceTree = "<group>"; };
 		9665BB21169F1CA000CE1448 /* ehouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ehouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9665BB25169F1CA000CE1448 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9665BB27169F1CA000CE1448 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -203,7 +208,6 @@
 		969E6C4316A024AE00F485E3 /* checkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBox@2x.png"; sourceTree = "<group>"; };
 		969E6C4416A024AE00F485E3 /* checkBoxOk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBoxOk.png; sourceTree = "<group>"; };
 		969E6C4516A024AE00F485E3 /* checkBoxOk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBoxOk@2x.png"; sourceTree = "<group>"; };
-		969E6C4616A024AE00F485E3 /* constellation_service_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = constellation_service_icon.png; sourceTree = "<group>"; };
 		969E6C4716A024AE00F485E3 /* cost_statistics_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cost_statistics_icon.png; sourceTree = "<group>"; };
 		969E6C4816A024AE00F485E3 /* fb_fans_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb_fans_icon.png; sourceTree = "<group>"; };
 		969E6C4916A024AE00F485E3 /* forget_password_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forget_password_icon.png; sourceTree = "<group>"; };
@@ -489,6 +493,9 @@
 		969E6C3916A024AE00F485E3 /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				42E5657D16A958CD0085FC04 /* constellation_service_icon.png */,
+				42E5657816A942520085FC04 /* login-but.png */,
+				42E5657916A942520085FC04 /* login-but@2x.png */,
 				969E6C3A16A024AE00F485E3 /* back-image.png */,
 				969E6C3B16A024AE00F485E3 /* back-image@2x.png */,
 				969E6C3C16A024AE00F485E3 /* back.png */,
@@ -501,7 +508,6 @@
 				969E6C4316A024AE00F485E3 /* checkBox@2x.png */,
 				969E6C4416A024AE00F485E3 /* checkBoxOk.png */,
 				969E6C4516A024AE00F485E3 /* checkBoxOk@2x.png */,
-				969E6C4616A024AE00F485E3 /* constellation_service_icon.png */,
 				969E6C4716A024AE00F485E3 /* cost_statistics_icon.png */,
 				969E6C4816A024AE00F485E3 /* fb_fans_icon.png */,
 				969E6C4916A024AE00F485E3 /* forget_password_icon.png */,
@@ -703,7 +709,6 @@
 				969E6C7316A024AE00F485E3 /* checkBox@2x.png in Resources */,
 				969E6C7416A024AE00F485E3 /* checkBoxOk.png in Resources */,
 				969E6C7516A024AE00F485E3 /* checkBoxOk@2x.png in Resources */,
-				969E6C7616A024AE00F485E3 /* constellation_service_icon.png in Resources */,
 				969E6C7716A024AE00F485E3 /* cost_statistics_icon.png in Resources */,
 				969E6C7816A024AE00F485E3 /* fb_fans_icon.png in Resources */,
 				969E6C7916A024AE00F485E3 /* forget_password_icon.png in Resources */,
@@ -744,6 +749,9 @@
 				969E6CDB16A043CD00F485E3 /* Icon@2x.png in Resources */,
 				96B9ABAA16A42396001DAF24 /* SVProgressHUD.bundle in Resources */,
 				967341B816A5224D00E89839 /* CalendarTableViewCell.xib in Resources */,
+				42E5657A16A942520085FC04 /* login-but.png in Resources */,
+				42E5657B16A942520085FC04 /* login-but@2x.png in Resources */,
+				42E5657E16A958CD0085FC04 /* constellation_service_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
