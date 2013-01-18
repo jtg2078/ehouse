@@ -73,7 +73,8 @@
 
 - (NSString *)valueForKey:(NSString *)key
 {
-    return [[[self rootElement] elementForName:KEY_Token] stringValue];
+    NSString *value = [[[self rootElement] elementForName:key] stringValue];
+    return value;
 }
 
 @end
@@ -161,6 +162,14 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
             KEY_urlType: @(URLTypeRelative),
             KEY_inSideMenu: @(NO),
         },
+        @{
+            KEY_id: @(LinkIdUser),
+            KEY_name:@"我的專區",
+            KEY_url:@"/User",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(NO),
+            },
+
         @{
             KEY_id: @(LinkIDMyMsg),
             KEY_name:@"我的訊息",

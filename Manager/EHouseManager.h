@@ -43,6 +43,7 @@ typedef enum{
     LinkIDHelp,
     LinkIDRegister,
     LinkIDForgetPwd,
+    LinkIdUser
 }LinkID;
 
 typedef enum{
