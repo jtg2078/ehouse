@@ -351,7 +351,6 @@
     return nil;
 }
 
-
 - (NSDictionary *)getLinkInfoWithLastComponent:(NSString *)component
 {
     for(NSDictionary *info in self.linkInfo)
