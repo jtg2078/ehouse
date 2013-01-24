@@ -25,7 +25,6 @@
 typedef enum{
     LinkIDUnknown = 0,
     LinkIDHome,
-    LinkIDMemberArea,
     LinkIDLogin,
     LinkIDMyMsg,
     LinkIDSubscribeMsg,

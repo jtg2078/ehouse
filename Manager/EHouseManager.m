@@ -149,13 +149,6 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
             KEY_inSideMenu: @(YES),
         },
         @{
-            KEY_id: @(LinkIDMemberArea),
-            KEY_name:@"我的專區",
-            KEY_url:@"/Account/login",
-            KEY_urlType: @(URLTypeRelative),
-            KEY_inSideMenu: @(NO),
-        },
-        @{
             KEY_id: @(LinkIDLogin),
             KEY_name:@"登入",
             KEY_url:@"/Account/Login",
@@ -394,8 +387,8 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
     
     for(NSDictionary *info in self.linkInfo)
     {
-        BOOL test1 = [url.absoluteString isEqualToString:info[KEY_url]];
-        BOOL test2 = [url.relativePath isEqualToString:info[KEY_url]];
+        BOOL test1 = [url.absoluteString localizedCaseInsensitiveCompare:info[KEY_url]] == NSOrderedSame;
+        BOOL test2 = [url.relativePath localizedCaseInsensitiveCompare:info[KEY_url]] == NSOrderedSame;
         
         if(test1 || test2)
             return info;
@@ -409,7 +402,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
     for(NSDictionary *info in self.linkInfo)
     {
         NSString *last = [[info[KEY_url] componentsSeparatedByString:@"/"] lastObject];
-        if(last && [last caseInsensitiveCompare:component] == NSOrderedSame)
+        if(last && [last localizedCaseInsensitiveCompare:component] == NSOrderedSame)
             return info;
     }
     

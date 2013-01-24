@@ -111,10 +111,8 @@
                                                   shouldLoad = YES;
                                                   break;
                                               }
-                                              case LinkIDMemberArea:
                                               case LinkIDLogin:
                                               {
-                                                
                                                   [self showLogInViewController];
                                                   break;
                                               }
