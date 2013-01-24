@@ -20,4 +20,6 @@
 - (IBAction)homeBack:(id)sender;
 - (IBAction)UrlItem:(id)sender;
 
+- (void)reload;
+
 @end

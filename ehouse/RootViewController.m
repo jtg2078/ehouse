@@ -80,6 +80,7 @@
                                                   {
                                                       [self.appManager peformAutoImport];
                                                   }
+                                                  [self reload];
                                               }
                                               failure:^(NSString *errorMsg, NSError *error) {
                                                   [SVProgressHUD showErrorWithStatus:@"登入失敗"];

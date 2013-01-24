@@ -156,6 +156,12 @@
 {
     UIButton *button = (UIButton *)sender;
     button.selected = !button.selected;
+    
+    if(button == self.autoLogInButton)
+    {
+        self.rememberNameButton.selected = YES;
+        self.rememberPwdButton.selected = YES;
+    }
 }
 
 - (IBAction)logInButtonPressed:(id)sender
@@ -205,6 +211,8 @@
                                           SecondViewController *svc = [[SecondViewController alloc] initWithUrl:[self.appManager createURLWithToken:token]];
                                           [rvc.navigationController pushViewController:svc animated:NO];
                                       }
+                                      
+                                      [appDelegate.homeViewController reload];
                                        
                                       [self dismissModalViewControllerAnimated:YES];
                                   }

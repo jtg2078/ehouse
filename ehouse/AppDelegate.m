@@ -43,7 +43,7 @@
     // view deck (root view)
     IIViewDeckController *ivdc = [[IIViewDeckController alloc] initWithCenterViewController:nav_rvc
                                                                          leftViewController:nav_smvc];
-    
+    _homeViewController = rvc;
     ivdc.delegate = self;
     self.window.rootViewController = ivdc;
     
