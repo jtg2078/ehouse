@@ -286,8 +286,8 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
             KEY_id: @(LinkIDRegister),
             KEY_name:@"註冊會員",
             KEY_image:@"register_icon.png",
-            KEY_url:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw",
-            KEY_urlFull:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw",
+            KEY_url:@"http://www.cp.gov.tw/portal/person/initial/Registry.aspx",
+            KEY_urlFull:@"http://www.cp.gov.tw/portal/person/initial/Registry.aspx",
             KEY_urlSpecial: @(YES),
             KEY_urlType: @(URLTypeFull),
             KEY_inSideMenu: @(YES),
@@ -296,8 +296,8 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
             KEY_id: @(LinkIDForgetPwd),
             KEY_name:@"忘記密碼",
             KEY_image:@"forget_password_icon.png",
-            KEY_url:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw",
-            KEY_urlFull:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw",
+            KEY_url:@"http://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx",
+            KEY_urlFull:@"http://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx",
             KEY_urlSpecial: @(YES),
             KEY_urlType: @(URLTypeFull),
             KEY_inSideMenu: @(YES),
@@ -624,8 +624,9 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                  parameters:param
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         NSLog(@"告訴web使用者已登入成功!");
-                        if(success)
+                        if(success){
                             success(token);
+                        }
                     }
                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"告訴web使用者已登入失敗: %@", error.description);

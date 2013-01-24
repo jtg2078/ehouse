@@ -18,6 +18,7 @@
 
 @implementation LogInViewController
 
+
 #pragma mark - memory management
 
 - (void)didReceiveMemoryWarning
@@ -56,7 +57,7 @@
     self.rememberNameButton.selected = self.nameTextField.text.length > 0;
     self.rememberPwdButton.selected = self.pwdTextField.text.length > 0;
     self.autoLogInButton.selected = [self.appManager.autoLogin boolValue];
-    
+        
     
     if(DEVELOPMENT_MODE)
     {
@@ -149,6 +150,14 @@
 
 - (IBAction)returnButtonPressed:(id)sender
 {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    IIViewDeckController *viewDeck = (IIViewDeckController *)appDelegate.window.rootViewController;
+    UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
+    if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
+        SecondViewController *svc = (SecondViewController *)nav.topViewController;
+        [svc.navigationController popToRootViewControllerAnimated:NO];
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -220,11 +229,21 @@
                                       [SVProgressHUD showErrorWithStatus:errorMsg];
                                       self.logInButton.enabled = YES;
                                   }];
+    
 }
 
 - (IBAction)cancelButtonPressed:(id)sender
 {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    IIViewDeckController *viewDeck = (IIViewDeckController *)appDelegate.window.rootViewController;
+    UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
+    if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
+        SecondViewController *svc = (SecondViewController *)nav.topViewController;
+        [svc.navigationController popToRootViewControllerAnimated:NO];
+    }
+        
     [self dismissModalViewControllerAnimated:YES];
+
 }
 
 - (IBAction)loginId:(id)sender
@@ -234,16 +253,9 @@
     UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
     if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
         SecondViewController *svc = (SecondViewController *)nav.topViewController;
-        [svc loadURL:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw"];
-    }
-    else if ([nav.topViewController isKindOfClass:[RootViewController class]])
-    {
-        RootViewController *rvc = (RootViewController *)nav.topViewController;
-        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:@"https://www.cp.gov.tw/portal/person/initial/Registry.aspx?returnUrl=http://msg.nat.gov.tw"];
-        [rvc.navigationController pushViewController:svc animated:NO];
+        [svc loadURL:@"http://www.cp.gov.tw/portal/person/initial/Registry.aspx"];
     }
     
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)forgetPassword:(id)sender
@@ -253,17 +265,19 @@
     UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
     if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
         SecondViewController *svc = (SecondViewController *)nav.topViewController;
-        [svc loadURL:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw"];
+        [svc loadURL:@"http://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx"];
     }
     else if ([nav.topViewController isKindOfClass:[RootViewController class]])
     {
         RootViewController *rvc = (RootViewController *)nav.topViewController;
-        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:@"https://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx?returnUrl=http://msg.nat.gov.tw"];
+        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:@"http://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx"];
         [rvc.navigationController pushViewController:svc animated:NO];
     }
     
     [self dismissModalViewControllerAnimated:YES];
 
 }
+
+
 
 @end

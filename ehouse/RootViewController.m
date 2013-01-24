@@ -46,7 +46,9 @@
     [super viewDidLoad];
     
     [self reload];
+    
 }
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -88,6 +90,7 @@
             }
         }
     });
+    [self.webView reload];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -111,6 +114,7 @@
                                               case LinkIDMemberArea:
                                               case LinkIDLogin:
                                               {
+                                                
                                                   [self showLogInViewController];
                                                   break;
                                               }
@@ -124,7 +128,10 @@
                                           
                                           return shouldLoad;
                                       }];
+    
     return ret;
+    
+    
     
 }
 
