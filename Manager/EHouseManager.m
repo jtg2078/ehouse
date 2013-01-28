@@ -640,7 +640,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
         @"token": token,
     };
     
-    self.myClient.parameterEncoding = AFJSONParameterEncoding;
+    self.myClient2.parameterEncoding = AFJSONParameterEncoding;
     [self.myClient2 putPath:@"api/tokenBooking"
                  parameters:param
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
