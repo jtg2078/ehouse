@@ -645,6 +645,19 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                  parameters:param
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         NSLog(@"register for push successful!");
+                        /*
+                         NSError *error = nil;
+                         NSString *abc = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                        DDXMLDocument *ret = [[DDXMLDocument alloc] initWithXMLString:abc
+                                                                              options:0
+                                                                                error:&error];
+                        NSString *value = [[[ret rootElement] elementForName:@"isSuccess"] stringValue];
+                        if(value && [value isEqualToString:@"True"])
+                        {
+                            
+                        }
+                         */
+                        
                         if(success)
                             success();
                     }

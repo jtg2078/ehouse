@@ -11,6 +11,11 @@
 #import "SideMenuViewController.h"
 #import "IIViewDeckController.h"
 
+
+@interface AppDelegate ()
+@property (nonatomic, retain) NSString *remoteNotifMsg;
+@end
+
 @implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -25,6 +30,14 @@
     // -------------------- push notification --------------------
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
+    NSDictionary *payload = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    NSDictionary *aps = [payload objectForKey:@"aps"];
+    NSLog(@"launchOptions: %@", payload);
+    if(aps && [[aps objectForKey:@"alert"] isKindOfClass:[NSString class]] == YES)
+    {
+        self.remoteNotifMsg = [aps objectForKey:@"alert"];
+    }
     
     // -------------------- root view controller --------------------
     
@@ -76,6 +89,12 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
+    if(self.remoteNotifMsg.length)
+    {
+        [self showPushMsg];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -181,6 +200,20 @@
 
 #pragma mark - push notification related
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSDictionary *aps = [userInfo objectForKey:@"aps"];
+    if([[aps objectForKey:@"alert"] isKindOfClass:[NSString class]] == YES)
+        self.remoteNotifMsg = [aps objectForKey:@"alert"];
+    
+    NSLog(@"didReceiveRemoteNotification: %@", userInfo);
+    
+    if(application.applicationState == UIApplicationStateActive && self.remoteNotifMsg.length)
+    {
+        [self showPushMsg];
+    }
+}
+
 - (NSString *)hexString:(NSData *)from
 {
     if(!from)
@@ -229,6 +262,19 @@
     {
         [center postNotificationName:NOTIF_LEFT_SIDE_OPENED object:self];
     }
+}
+
+#pragma mark - my addition
+
+- (void)showPushMsg
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"推播訊息"
+                                                    message:self.remoteNotifMsg
+                                                   delegate:self
+                                          cancelButtonTitle:@"確定"
+                                          otherButtonTitles:nil];
+    [alert show];
+    self.remoteNotifMsg = nil;
 }
 
 @end
