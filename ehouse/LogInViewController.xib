@@ -112,7 +112,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="41820299">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="243713673">
@@ -513,7 +513,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 416}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="243713673"/>
 				<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
 					<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>

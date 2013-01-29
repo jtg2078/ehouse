@@ -10,7 +10,7 @@
 #import "IIViewDeckController.h"
 #import "SecondViewController.h"
 #import "RootViewController.h"
-
+#import "AppDelegate.h"
 
 @interface ScheduleViewController ()
 @property (nonatomic, strong) NSArray *messages;
@@ -56,6 +56,7 @@
 
 - (void)viewDidLoad
 {
+    [SVProgressHUD dismiss];
     [super viewDidLoad];
     
     // -------------------- view --------------------
@@ -236,10 +237,11 @@
 {
     SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile2013.test.demo2.miniasp.com.tw/User"];
     NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-    [vcs insertObject:sec atIndex:[vcs count]-1];
-    
+    [vcs insertObject:sec atIndex:[vcs count]-1];    
     [self.navigationController setViewControllers:vcs animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
+    
+     
 }
 
 

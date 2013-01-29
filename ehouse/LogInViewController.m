@@ -11,6 +11,7 @@
 #import "RootViewController.h"
 #import "SecondViewController.h"
 #import "AppDelegate.h"
+#import "ScheduleViewController.h"
 
 @interface LogInViewController ()
 
@@ -44,7 +45,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [SVProgressHUD dismiss];
     // make the bg stretchable
     UIImage *bgImage = [[UIImage imageNamed:@"back-image.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(416, 0, 0, 0)];
     self.bgImageView.image = bgImage;
@@ -158,6 +159,12 @@
         [svc.navigationController popToRootViewControllerAnimated:NO];
     }
     
+    if([[nav topViewController] isKindOfClass:[ScheduleViewController class]])
+    {
+        SecondViewController *svc = (SecondViewController *)nav.topViewController;
+        [svc.navigationController popToRootViewControllerAnimated:NO];
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -241,7 +248,13 @@
         SecondViewController *svc = (SecondViewController *)nav.topViewController;
         [svc.navigationController popToRootViewControllerAnimated:NO];
     }
-        
+
+    if([[nav topViewController] isKindOfClass:[ScheduleViewController class]])
+    {
+        SecondViewController *svc = (SecondViewController *)nav.topViewController;
+        [svc.navigationController popToRootViewControllerAnimated:NO];
+    }
+
     [self dismissModalViewControllerAnimated:YES];
 
 }

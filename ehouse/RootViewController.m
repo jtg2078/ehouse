@@ -44,7 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [SVProgressHUD dismiss];
     [self reload];
     
 }
@@ -53,7 +53,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+    [SVProgressHUD dismiss];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if(self.appManager.autoLogin.boolValue == YES)
@@ -90,13 +90,14 @@
             }
         }
     });
-    [self.webView reload];
+    
 }
 
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    
     NSString *urlStr=[[request URL] description];
     NSLog(@"%@",urlStr);
     
@@ -132,6 +133,13 @@
     
     
 }
+
+
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    [SVProgressHUD dismiss];
+}
+
 
 #pragma mark - user interaction
 

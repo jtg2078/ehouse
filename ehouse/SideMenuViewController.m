@@ -11,6 +11,8 @@
 #import "SecondViewController.h"
 #import "IIViewDeckController.h"
 #import "LogInViewController.h"
+#import "ScheduleViewController.h"
+#import "AppDelegate.h"
 
 @interface SideMenuViewController ()
 
@@ -134,9 +136,22 @@
     
     BOOL useFirst = YES;
     
+    
     if(useFirst)
     {
         UINavigationController *nav = (UINavigationController *)self.viewDeckController.centerController;
+        if([[nav topViewController] isKindOfClass:[ScheduleViewController class]])
+        {     
+            if ([KEY_url isEqualToString:@"http://emsgmobile2013.test.demo2.miniasp.com.tw/"]) {
+                SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
+                [nav pushViewController:sec animated:NO];
+                                
+                
+            }else{
+                SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
+                [nav pushViewController:sec animated:NO];
+            }
+        }
         if([[nav topViewController] isKindOfClass:[RootViewController class]])
         {
             SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
@@ -147,12 +162,20 @@
             SecondViewController *sec = (SecondViewController *)[nav topViewController];
             [sec loadURL:url];
         }
+        
+        if ([KEY_url isEqualToString:@"http://emsgmobile2013.test.demo2.miniasp.com.tw/"]) {
+            
+            
+            [nav.navigationController popToRootViewControllerAnimated:YES];
+        }
+
         [self.viewDeckController closeLeftViewAnimated:YES];
     }
     else
     {
         [self.viewDeckController closeLeftViewBouncing:^(IIViewDeckController *controller) {
             UINavigationController *nav = (UINavigationController *)controller.centerController;
+            
             if([[nav topViewController] isKindOfClass:[RootViewController class]])
             {
                 SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];

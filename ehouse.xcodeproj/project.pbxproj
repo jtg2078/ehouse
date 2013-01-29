@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		421A1ACB16B6688100AF5449 /* my_score_ios.png in Resources */ = {isa = PBXBuildFile; fileRef = 421A1ACA16B6688100AF5449 /* my_score_ios.png */; };
 		42E5657A16A942520085FC04 /* login-but.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5657816A942520085FC04 /* login-but.png */; };
 		42E5657B16A942520085FC04 /* login-but@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5657916A942520085FC04 /* login-but@2x.png */; };
 		42E5657E16A958CD0085FC04 /* constellation_service_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5657D16A958CD0085FC04 /* constellation_service_icon.png */; };
@@ -128,6 +129,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		421A1ACA16B6688100AF5449 /* my_score_ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_score_ios.png; sourceTree = "<group>"; };
 		42E5657816A942520085FC04 /* login-but.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-but.png"; sourceTree = "<group>"; };
 		42E5657916A942520085FC04 /* login-but@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-but@2x.png"; sourceTree = "<group>"; };
 		42E5657D16A958CD0085FC04 /* constellation_service_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = constellation_service_icon.png; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 		969E6C3916A024AE00F485E3 /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				421A1ACA16B6688100AF5449 /* my_score_ios.png */,
 				42E5658316A9761D0085FC04 /* btn_bg.png */,
 				42E5657D16A958CD0085FC04 /* constellation_service_icon.png */,
 				42E5657816A942520085FC04 /* login-but.png */,
@@ -756,6 +759,7 @@
 				42E5657B16A942520085FC04 /* login-but@2x.png in Resources */,
 				42E5657E16A958CD0085FC04 /* constellation_service_icon.png in Resources */,
 				42E5658416A9761D0085FC04 /* btn_bg.png in Resources */,
+				421A1ACB16B6688100AF5449 /* my_score_ios.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

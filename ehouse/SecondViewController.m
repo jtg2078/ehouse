@@ -92,6 +92,9 @@
 shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType
 {
+    
+    //[SVProgressHUD showWithStatus:@"Loading..."];
+    
     NSLog(@"shouldStartLoadWithRequest: %@",[request URL]);
     
     BOOL ret = [self.appManager processRequest:request
@@ -104,6 +107,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                                               {
                                                   shouldLoad = NO;
                                                   [self.navigationController popViewControllerAnimated:YES];
+                                                  [SVProgressHUD dismiss];
                                                   break;
                                               }
                                               case LinkIDLogin:
@@ -117,6 +121,8 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                                                   shouldLoad = YES;
                                                   ScheduleViewController *svc = [[ScheduleViewController alloc] init];
                                                   [self.navigationController pushViewController:svc animated:YES];
+                                                  //[self presentModalViewController:svc animated:YES];
+                                                  [SVProgressHUD dismiss];
                                                   break;
                                               }
                                               default:
@@ -131,7 +137,9 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
                                           return shouldLoad;
                                       }];
      return ret;
+    
 }
+
 
 #pragma mark - helper
 
@@ -145,5 +153,11 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     LogInViewController *lvc = [[LogInViewController alloc] init];
     [self presentModalViewController:lvc animated:YES];
 }
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+    [SVProgressHUD dismiss];
+}
+
+
 
 @end
