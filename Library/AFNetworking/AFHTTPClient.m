@@ -618,7 +618,13 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-	NSURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
+	//NSURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
+    
+    
+    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
+    [request setTimeoutInterval:20.0];
+    
+    
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
 }

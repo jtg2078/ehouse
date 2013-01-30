@@ -251,12 +251,20 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
             //KEY_urlFull:@"http://www.facebook.com/",
             KEY_urlType: @(URLTypeRelative),
             KEY_inSideMenu: @(NO),
-    },
+        },
         @{
             KEY_id: @(LinkIdIntegration),
             KEY_name:@"我的積分",
             KEY_image:@"my_score_ios.png",
             KEY_url:@"/MyScore/myScore",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(YES),
+        },
+        @{
+            KEY_id: @(LinkIdPublic),
+            KEY_name:@"e公務訊息",
+            KEY_image:@"e_public_icon.png",
+            KEY_url:@"/G2E",
             KEY_urlType: @(URLTypeRelative),
             KEY_inSideMenu: @(YES),
         },
@@ -594,6 +602,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
     };
     
     self.myClient.parameterEncoding = AFFormURLParameterEncoding;
+    
     [self.myClient getPath:@"UserLoginMobile"
                 parameters:param
                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -626,7 +635,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                        
                        if(failure)
                            failure(@"連線失敗", error);
-        
+                       
                    }];
 }
 

@@ -38,6 +38,7 @@ typedef enum{
     LinkIDFacebookFans,
     LinkIDFacebook,
     LinkIdIntegration,
+    LinkIdPublic,
     LinkIDPublicMsg,
     LinkIDRanking,
     LinkIDConstellation,

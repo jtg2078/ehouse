@@ -82,14 +82,15 @@
             self.userNameLabel.text = self.appManager.userInfo.nickname;
         else
             self.userNameLabel.text = self.appManager.userInfo.userName;
-
-        [self.loginButton setTitle:@"登出" forState:UIControlStateNormal];
+        [self.loginButton setTitle:@"登出" forState:UIControlStateNormal];        
+                
     }
     else
     {
-        self.userNameLabel.text = @"尚未登入";
-        
+        self.userNameLabel.text = @"尚未登入";        
         [self.loginButton setTitle:@"登入" forState:UIControlStateNormal];
+        
+        
     }
 }
 
@@ -206,10 +207,23 @@
         [self.appManager logout:^(NSString *msg, NSError *error) {
             if(error == nil)
                 [SVProgressHUD showSuccessWithStatus:msg];
-            else
-                [SVProgressHUD showErrorWithStatus:msg];
+            
+                UINavigationController *nav = (UINavigationController *)self.viewDeckController.centerController;
+                if([[nav topViewController] isKindOfClass:[RootViewController class]])
+                {
+                    SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile2013.test.demo2.miniasp.com.tw//MyMSG/MyMSGSet"];
+                    [nav pushViewController:sec animated:NO];
+                }
+                else if([[nav topViewController] isKindOfClass:[SecondViewController class]])
+                {
+                    SecondViewController *sec = (SecondViewController *)[nav topViewController];
+                    [sec loadURL:@"http://emsgmobile2013.test.demo2.miniasp.com.tw//MyMSG/MyMSGSet"];
+                }
+                else
+                    [SVProgressHUD showErrorWithStatus:msg];
             
             [self refreshState];
+            
         }];
     }
     else

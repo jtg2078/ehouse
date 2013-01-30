@@ -65,6 +65,10 @@
                                                   pwd:self.appManager.accoutPwd
                                               success:^(NSString *token) {
                                                   [SVProgressHUD showSuccessWithStatus:@"登入成功"];
+                                                  
+                                                  SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile2013.test.demo2.miniasp.com.tw//MyMSG/MyMSGSet"];
+                                                  [self.navigationController pushViewController:sec animated:YES];
+                                                  
                                                   NSString *pushToken = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_pushToken];
                                                   if(pushToken)
                                                   {
@@ -134,10 +138,12 @@
     
 }
 
-
+-(void)webViewDidStartLoad:(UIWebView *)webView{
+    
+}
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
 }
 
 

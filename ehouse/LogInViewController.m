@@ -233,7 +233,8 @@
                                       [self dismissModalViewControllerAnimated:YES];
                                   }
                                   failure:^(NSString *errorMsg, NSError *error) {
-                                      [SVProgressHUD showErrorWithStatus:errorMsg];
+                                      //[SVProgressHUD showErrorWithStatus:errorMsg];
+                                      [SVProgressHUD showErrorWithStatus:@"登入失敗"];
                                       self.logInButton.enabled = YES;
                                   }];
     
@@ -254,7 +255,7 @@
         SecondViewController *svc = (SecondViewController *)nav.topViewController;
         [svc.navigationController popToRootViewControllerAnimated:NO];
     }
-
+    [SVProgressHUD dismiss];
     [self dismissModalViewControllerAnimated:YES];
 
 }
@@ -268,6 +269,15 @@
         SecondViewController *svc = (SecondViewController *)nav.topViewController;
         [svc loadURL:@"http://www.cp.gov.tw/portal/person/initial/Registry.aspx"];
     }
+    else if ([nav.topViewController isKindOfClass:[RootViewController class]])
+    {
+        RootViewController *rvc = (RootViewController *)nav.topViewController;
+        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:@"http://www.cp.gov.tw/portal/person/initial/Registry.aspx"];
+        [rvc.navigationController pushViewController:svc animated:NO];
+    }
+    
+    [self dismissModalViewControllerAnimated:YES];
+            
     
 }
 

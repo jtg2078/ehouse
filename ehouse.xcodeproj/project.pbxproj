@@ -12,6 +12,7 @@
 		42E5657B16A942520085FC04 /* login-but@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5657916A942520085FC04 /* login-but@2x.png */; };
 		42E5657E16A958CD0085FC04 /* constellation_service_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5657D16A958CD0085FC04 /* constellation_service_icon.png */; };
 		42E5658416A9761D0085FC04 /* btn_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5658316A9761D0085FC04 /* btn_bg.png */; };
+		42E7934216B9362C007FCCD9 /* e_public_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E7934116B9362C007FCCD9 /* e_public_icon.png */; };
 		9665BB26169F1CA000CE1448 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9665BB25169F1CA000CE1448 /* UIKit.framework */; };
 		9665BB28169F1CA000CE1448 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9665BB27169F1CA000CE1448 /* Foundation.framework */; };
 		9665BB2A169F1CA000CE1448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9665BB29169F1CA000CE1448 /* CoreGraphics.framework */; };
@@ -134,6 +135,7 @@
 		42E5657916A942520085FC04 /* login-but@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-but@2x.png"; sourceTree = "<group>"; };
 		42E5657D16A958CD0085FC04 /* constellation_service_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = constellation_service_icon.png; sourceTree = "<group>"; };
 		42E5658316A9761D0085FC04 /* btn_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_bg.png; sourceTree = "<group>"; };
+		42E7934116B9362C007FCCD9 /* e_public_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = e_public_icon.png; sourceTree = "<group>"; };
 		9665BB21169F1CA000CE1448 /* ehouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ehouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9665BB25169F1CA000CE1448 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9665BB27169F1CA000CE1448 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -497,6 +499,7 @@
 		969E6C3916A024AE00F485E3 /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				42E7934116B9362C007FCCD9 /* e_public_icon.png */,
 				421A1ACA16B6688100AF5449 /* my_score_ios.png */,
 				42E5658316A9761D0085FC04 /* btn_bg.png */,
 				42E5657D16A958CD0085FC04 /* constellation_service_icon.png */,
@@ -760,6 +763,7 @@
 				42E5657E16A958CD0085FC04 /* constellation_service_icon.png in Resources */,
 				42E5658416A9761D0085FC04 /* btn_bg.png in Resources */,
 				421A1ACB16B6688100AF5449 /* my_score_ios.png in Resources */,
+				42E7934216B9362C007FCCD9 /* e_public_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,8 +894,8 @@
 		9665BB45169F1CA000CE1448 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Tzuhsuan Ling (8SNW79FULR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ehouse/ehouse-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
@@ -899,7 +903,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5B13A95-8A48-4EF5-B1CE-518F66CC7806";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -907,8 +912,8 @@
 		9665BB46169F1CA000CE1448 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Tzuhsuan Ling (8SNW79FULR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ehouse/ehouse-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
@@ -916,7 +921,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5B13A95-8A48-4EF5-B1CE-518F66CC7806";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
