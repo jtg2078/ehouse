@@ -66,7 +66,10 @@
                                               success:^(NSString *token) {
                                                   [SVProgressHUD showSuccessWithStatus:@"登入成功"];
                                                   
-                                                  SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile2013.test.demo2.miniasp.com.tw//MyMSG/MyMSGSet"];
+                                                  //NSDictionary *linkInfo = [self.appManager getLinkInfoLinkID:LinkIDMyMsg];
+                                                  NSString *fullURL = [self.appManager getFullURLforLinkID:@(LinkIDMyMsg)];
+                                                  SecondViewController *sec = [[SecondViewController alloc] initWithUrl:fullURL];
+                                                  
                                                   [self.navigationController pushViewController:sec animated:YES];
                                                   
                                                   NSString *pushToken = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_pushToken];

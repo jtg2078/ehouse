@@ -265,14 +265,16 @@
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     IIViewDeckController *viewDeck = (IIViewDeckController *)appDelegate.window.rootViewController;
     UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
+    NSString *fullurlregister = [self.appManager getFullURLforLinkID:@(LinkIDRegister)];
     if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
         SecondViewController *svc = (SecondViewController *)nav.topViewController;
-        [svc loadURL:@"http://www.cp.gov.tw/portal/person/initial/Registry.aspx"];
+        [svc loadURL:fullurlregister];
     }
     else if ([nav.topViewController isKindOfClass:[RootViewController class]])
     {
+        NSString *fullurlregister = [self.appManager getFullURLforLinkID:@(LinkIDRegister)];
         RootViewController *rvc = (RootViewController *)nav.topViewController;
-        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:@"http://www.cp.gov.tw/portal/person/initial/Registry.aspx"];
+        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:fullurlregister];
         [rvc.navigationController pushViewController:svc animated:NO];
     }
     
@@ -287,13 +289,15 @@
     IIViewDeckController *viewDeck = (IIViewDeckController *)appDelegate.window.rootViewController;
     UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
     if([nav.topViewController isKindOfClass:[SecondViewController class]]) {
+        NSString *fullurlforgetpwd = [self.appManager getFullURLforLinkID:@(LinkIDForgetPwd)];
         SecondViewController *svc = (SecondViewController *)nav.topViewController;
-        [svc loadURL:@"http://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx"];
+        [svc loadURL:fullurlforgetpwd];
     }
     else if ([nav.topViewController isKindOfClass:[RootViewController class]])
     {
         RootViewController *rvc = (RootViewController *)nav.topViewController;
-        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:@"http://www.cp.gov.tw/portal/Person/Initial/SendPasswordMail.aspx"];
+        NSString *fullurlforgetpwd = [self.appManager getFullURLforLinkID:@(LinkIDForgetPwd)];
+        SecondViewController *svc = [[SecondViewController alloc] initWithUrl:fullurlforgetpwd];
         [rvc.navigationController pushViewController:svc animated:NO];
     }
     
