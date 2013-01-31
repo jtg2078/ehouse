@@ -148,6 +148,14 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
+- (void)webViewGoBack
+{
+    if ([self.myWebView canGoBack])
+    {
+        [self.myWebView goBack];
+    }
+}
+
 - (void)showLogInViewController
 {
     LogInViewController *lvc = [[LogInViewController alloc] init];

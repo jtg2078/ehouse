@@ -139,26 +139,60 @@
 {
     NSDictionary *info = self.appManager.sideMenuLinks[indexPath.row];
     NSString *url = [self.appManager getFullURLforLinkID:info[KEY_id]];
+    UINavigationController *nav = (UINavigationController *)self.viewDeckController.centerController;
+
+    if([info[KEY_id]intValue] == LinkIDHome)
+    {
+        [nav popToRootViewControllerAnimated:NO];
+    }
+    else
+    {
+        if([[nav topViewController] isKindOfClass:[RootViewController class]])
+        {
+            SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
+            [nav pushViewController:sec animated:NO];
+        }
+        else if([[nav topViewController] isKindOfClass:[SecondViewController class]])
+        {
+            SecondViewController *sec = (SecondViewController *)[nav topViewController];
+            [sec loadURL:url];
+        }
+        else if([[nav topViewController] isKindOfClass:[ScheduleViewController class]])
+        {
+            [nav popViewControllerAnimated:NO];
+            
+            if([[nav topViewController] isKindOfClass:[RootViewController class]])
+            {
+                SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
+                [nav pushViewController:sec animated:NO];
+            }
+            else if([[nav topViewController] isKindOfClass:[SecondViewController class]])
+            {
+                SecondViewController *sec = (SecondViewController *)[nav topViewController];
+                [sec loadURL:url];
+            }
+        }
+    }
     
-    SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
-    [self.viewDeckController.navigationController pushViewController:sec animated:YES];
+    [self.viewDeckController closeLeftViewAnimated:YES];
     
-    BOOL useFirst = YES;
-    
-    
+    /*
     if(useFirst)
     {
         UINavigationController *nav = (UINavigationController *)self.viewDeckController.centerController;
         if([[nav topViewController] isKindOfClass:[ScheduleViewController class]])
-        {     
-            if ([KEY_url isEqualToString:@"http://emsgmobile2013.test.demo2.miniasp.com.tw/"]) {
+        {
+            [nav popViewControllerAnimated:NO];
+            
+            if([[nav topViewController] isKindOfClass:[RootViewController class]])
+            {
                 SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
                 [nav pushViewController:sec animated:NO];
-                                
-                
-            }else{
-                SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
-                [nav pushViewController:sec animated:NO];
+            }
+            else if([[nav topViewController] isKindOfClass:[SecondViewController class]])
+            {
+                SecondViewController *sec = (SecondViewController *)[nav topViewController];
+                [sec loadURL:url];
             }
         }
         if([[nav topViewController] isKindOfClass:[RootViewController class]])
@@ -182,21 +216,9 @@
     }
     else
     {
-        [self.viewDeckController closeLeftViewBouncing:^(IIViewDeckController *controller) {
-            UINavigationController *nav = (UINavigationController *)controller.centerController;
-            
-            if([[nav topViewController] isKindOfClass:[RootViewController class]])
-            {
-                SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
-                [nav pushViewController:sec animated:NO];
-            }
-            else if([[nav topViewController] isKindOfClass:[SecondViewController class]])
-            {
-                SecondViewController *sec = (SecondViewController *)[nav topViewController];
-                [sec loadURL:url];
-            }
-        }];
+        
     }
+     */
 }
 
 #pragma mark - notif

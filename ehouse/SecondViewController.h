@@ -27,5 +27,6 @@
 
 
 - (void)loadURL:(NSString *)url;
+- (void)webViewGoBack;
 
 @end
