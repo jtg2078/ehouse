@@ -235,8 +235,8 @@
 
 - (IBAction)backHome:(id)sender
 {
+    /*
     [self.navigationController popViewControllerAnimated:NO];
-    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     IIViewDeckController *viewDeck = (IIViewDeckController *)appDelegate.window.rootViewController;
     UINavigationController *nav = (UINavigationController *)viewDeck.centerController;
@@ -246,14 +246,15 @@
         SecondViewController *sec = (SecondViewController *)[nav topViewController];
         [sec webViewGoBack];
     }
+    */
     
     
-    
-    //SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile2013.test.demo2.miniasp.com.tw/User"];
-    //NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-    //[vcs insertObject:sec atIndex:[vcs count]-1];
-    //[self.navigationController setViewControllers:vcs animated:YES];
-    //[self.navigationController popViewControllerAnimated:YES];
+    NSString *fullurl = [self.appManager getFullURLforLinkID:@(LinkIdUser)];
+    SecondViewController *sec = [[SecondViewController alloc] initWithUrl:fullurl];
+    NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    [vcs insertObject:sec atIndex:[vcs count]-1];
+    [self.navigationController setViewControllers:vcs animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

@@ -95,8 +95,9 @@
         UINavigationController *nav = (UINavigationController *)self.viewDeckController.centerController;
          if([[nav topViewController] isKindOfClass:[SecondViewController class]])
          {
+         NSString *fullurl = [self.appManager getFullURLforLinkID:@(LinkIDHome)];
          SecondViewController *sec = (SecondViewController *)[nav topViewController];
-         [sec loadURL:@"http://emsgmobile2013.test.demo2.miniasp.com.tw"];
+         [sec loadURL:fullurl];
          }
         
     }
