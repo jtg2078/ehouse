@@ -49,7 +49,9 @@
     
     self.title = @"我的專區";
     
-    [self refreshState];
+    //[self refreshState];
+    self.userNameLabel.text = @"尚未登入";
+    [self.loginButton setTitle:@"登入" forState:UIControlStateNormal];
     
     // -------------------- header view --------------------
     
@@ -76,12 +78,13 @@
 
 - (void)refreshState
 {
+
     if(self.appManager.userInfo)
     {
-        if(self.appManager.userInfo.displayNickname.boolValue == YES)
-            self.userNameLabel.text = self.appManager.userInfo.nickname;
+    if(self.appManager.userInfo.displayNickname.boolValue == YES)
+        self.userNameLabel.text = self.appManager.userInfo.nickname;
         else
-            self.userNameLabel.text = self.appManager.userInfo.userName;
+        self.userNameLabel.text = self.appManager.userInfo.userName;
         [self.loginButton setTitle:@"登出" forState:UIControlStateNormal];        
                 
     }
@@ -89,7 +92,12 @@
     {
         self.userNameLabel.text = @"尚未登入";        
         [self.loginButton setTitle:@"登入" forState:UIControlStateNormal];
-        
+        UINavigationController *nav = (UINavigationController *)self.viewDeckController.centerController;
+         if([[nav topViewController] isKindOfClass:[SecondViewController class]])
+         {
+         SecondViewController *sec = (SecondViewController *)[nav topViewController];
+         [sec loadURL:@"http://emsgmobile2013.test.demo2.miniasp.com.tw"];
+         }
         
     }
 }
@@ -195,7 +203,7 @@
 
 - (void)handleLeftViewOpened:(NSNotification *)notif
 {
-    [self refreshState];
+    //[self refreshState];
 }
 
 #pragma mark - user interaction
@@ -204,11 +212,12 @@
 {
     if(self.appManager.userInfo)
     {
+        
         [self.appManager logout:^(NSString *msg, NSError *error) {
             if(error == nil)
                 [SVProgressHUD showSuccessWithStatus:msg];
             
-                UINavigationController *nav = (UINavigationController *)self.viewDeckController.centerController;
+                /*UINavigationController *nav = (UINavigationController *)self.viewDeckController.centerController;
                 if([[nav topViewController] isKindOfClass:[RootViewController class]])
                 {
                     SecondViewController *sec = [[SecondViewController alloc] initWithUrl:@"http://emsgmobile2013.test.demo2.miniasp.com.tw//MyMSG/MyMSGSet"];
@@ -218,7 +227,8 @@
                 {
                     SecondViewController *sec = (SecondViewController *)[nav topViewController];
                     [sec loadURL:@"http://emsgmobile2013.test.demo2.miniasp.com.tw//MyMSG/MyMSGSet"];
-                }
+                }*/
+            
                 else
                     [SVProgressHUD showErrorWithStatus:msg];
             

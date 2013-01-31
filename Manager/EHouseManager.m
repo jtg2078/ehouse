@@ -594,7 +594,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                          pwd:(NSString *)pwd
                      success:(void (^)(NSString *token))success
                      failure:(void (^)(NSString *errorMsg, NSError *error))failure
-{
+   {
     NSDictionary *param = @{
         @"account": name,
         @"password": pwd,
