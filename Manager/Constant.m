@@ -50,7 +50,6 @@ NSString * const KEY_IMPORT_favorite = @"favoriteMsg";
 NSString * const KEY_IMPORT_custom = @"customMsg";
 NSString * const KEY_IMPORT_CAL = @"importCal";
 
-NSString * const DEVELOPMENT_URL = @"http://emsgmobile.miniasp.com.tw/";
 NSString * const PRODUCTION_URL = @"http://emsgmobile.miniasp.com.tw/";
 
 NSString * const API_DEVLOPMENT_URL = @"http://msg4.miniasp.com.tw/WSProxy/Emsg4Services.asmx";

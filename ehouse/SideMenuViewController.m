@@ -33,6 +33,7 @@
 
 #pragma mark - view lifecycle
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,18 +53,21 @@
     //[self refreshState];
     self.userNameLabel.text = @"尚未登入";
     [self.loginButton setTitle:@"登入" forState:UIControlStateNormal];
-    
     // -------------------- header view --------------------
     
     self.myTableView.tableHeaderView = self.myHeaderView;
+    self.myTableView.tableFooterView = self.copyrightView;
 }
 
 - (void)viewDidUnload
 {
+    self.userNameLabel.text = @"尚未登入";
+    [self.loginButton setTitle:@"登入" forState:UIControlStateNormal];
     [self setMyTableView:nil];
     [self setMyHeaderView:nil];
     [self setUserNameLabel:nil];
     [self setLoginButton:nil];
+    [self setCopyrightView:nil];
     [super viewDidUnload];
 }
 
@@ -92,6 +96,7 @@
     {
         self.userNameLabel.text = @"尚未登入";        
         [self.loginButton setTitle:@"登入" forState:UIControlStateNormal];
+        
         UINavigationController *nav = (UINavigationController *)self.viewDeckController.centerController;
          if([[nav topViewController] isKindOfClass:[SecondViewController class]])
          {
@@ -171,6 +176,8 @@
             {
                 SecondViewController *sec = (SecondViewController *)[nav topViewController];
                 [sec loadURL:url];
+                //SecondViewController *sec = [[SecondViewController alloc] initWithUrl:url];
+                //[nav pushViewController:sec animated:NO];
             }
         }
     }

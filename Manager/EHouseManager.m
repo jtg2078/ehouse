@@ -253,6 +253,38 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
             KEY_inSideMenu: @(NO),
         },
         @{
+            KEY_id: @(LinkIDPlurk),
+            KEY_name:@"Plurk",
+            KEY_image:@"fb_fans_icon.png",
+            KEY_url:@"/m/t",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(NO),
+        },
+        @{
+            KEY_id: @(LinkIDBookMark),
+            KEY_name:@"BookMark",
+            KEY_image:@"fb_fans_icon.png",
+            KEY_url:@"/add",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(NO),
+        },
+        @{
+            KEY_id: @(LinkIdTwitter),
+            KEY_name:@"Twitter",
+            KEY_image:@"fb_fans_icon.png",
+            KEY_url:@"/intent/session",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(NO),
+        },
+        @{
+            KEY_id: @(LinkIDMicrosoft),
+            KEY_name:@"Microsoft",
+            KEY_image:@"fb_fans_icon.png",
+            KEY_url:@"/login.srf",
+            KEY_urlType: @(URLTypeRelative),
+            KEY_inSideMenu: @(NO),
+            },
+        @{
             KEY_id: @(LinkIdIntegration),
             KEY_name:@"我的積分",
             KEY_image:@"my_score_ios.png",
@@ -577,8 +609,8 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                  parameters:nil
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         
-                        [self setAccoutName:nil];
-                        [self setAccoutPwd:nil];
+                        //[self setAccoutName:nil];
+                        //[self setAccoutPwd:nil];
                         [self setAutoLogin:@(NO)];
                         
                         if(callback)
@@ -679,6 +711,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                  parameters:param
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         NSLog(@"register for push successful!");
+                        
                         /*
                          NSError *error = nil;
                          NSString *abc = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -689,8 +722,8 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                         if(value && [value isEqualToString:@"True"])
                         {
                             
-                        }
-                         */
+                        }*/
+                         
                         
                         if(success)
                             success();
