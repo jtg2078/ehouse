@@ -52,7 +52,7 @@ extern BOOL const DEVELOPMENT_MODE;
 extern NSString * const DEVELOPMENT_URL;
 extern NSString * const PRODUCTION_URL;
 
-extern NSString * const API_DEVLOPMENT_URL;
+extern NSString * const API_DEVELOPMENT_URL;
 extern NSString * const API_PRODUCTION_URL;
 
 extern NSString * const NOTIF_LEFT_SIDE_OPENED;

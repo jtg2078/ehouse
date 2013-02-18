@@ -40,7 +40,7 @@ NSString * const KEY_pushToken = @"pushToken";
 
 NSString * const KEY_AUTO_IMPORT = @"userDefaultAutoImport";
 
-BOOL const DEVELOPMENT_MODE = YES;
+BOOL const DEVELOPMENT_MODE = NO;
 
 NSString * const KEY_IMPORT_all = @"allMsg";
 NSString * const KEY_IMPORT_payment = @"paymentMsg";
@@ -51,10 +51,9 @@ NSString * const KEY_IMPORT_custom = @"customMsg";
 NSString * const KEY_IMPORT_CAL = @"importCal";
 
 NSString * const DEVELOPMENT_URL = @"http://emsgmobile.miniasp.com.tw/";
-NSString * const PRODUCTION_URL = @"http://emsgmobile.miniasp.com.tw/";
+NSString * const PRODUCTION_URL = @"http://pda4.msg.nat.gov.tw/";
 
-NSString * const API_DEVLOPMENT_URL = @"http://msg4.miniasp.com.tw/WSProxy/Emsg4Services.asmx";
-//NSString * const API_DEVLOPMENT_URL = @"https://msg.nat.gov.tw/WSProxy/Emsg4Services.asmx";
+NSString * const API_DEVELOPMENT_URL = @"http://msg4.miniasp.com.tw/WSProxy/Emsg4Services.asmx";
 NSString * const API_PRODUCTION_URL = @"https://msg.nat.gov.tw/WSProxy/Emsg4Services.asmx";
 
 NSString * const NOTIF_LEFT_SIDE_OPENED = @"NOTIF_LEFT_SIDE_OPENED";

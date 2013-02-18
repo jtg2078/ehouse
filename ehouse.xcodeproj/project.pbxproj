@@ -13,6 +13,7 @@
 		42E5657E16A958CD0085FC04 /* constellation_service_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5657D16A958CD0085FC04 /* constellation_service_icon.png */; };
 		42E5658416A9761D0085FC04 /* btn_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E5658316A9761D0085FC04 /* btn_bg.png */; };
 		42E7934216B9362C007FCCD9 /* e_public_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E7934116B9362C007FCCD9 /* e_public_icon.png */; };
+		9609CF7A16C4D1B600D98376 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9609CF7916C4D1B600D98376 /* Crashlytics.framework */; };
 		9665BB26169F1CA000CE1448 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9665BB25169F1CA000CE1448 /* UIKit.framework */; };
 		9665BB28169F1CA000CE1448 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9665BB27169F1CA000CE1448 /* Foundation.framework */; };
 		9665BB2A169F1CA000CE1448 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9665BB29169F1CA000CE1448 /* CoreGraphics.framework */; };
@@ -136,6 +137,7 @@
 		42E5657D16A958CD0085FC04 /* constellation_service_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = constellation_service_icon.png; sourceTree = "<group>"; };
 		42E5658316A9761D0085FC04 /* btn_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_bg.png; sourceTree = "<group>"; };
 		42E7934116B9362C007FCCD9 /* e_public_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = e_public_icon.png; sourceTree = "<group>"; };
+		9609CF7916C4D1B600D98376 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		9665BB21169F1CA000CE1448 /* ehouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ehouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9665BB25169F1CA000CE1448 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9665BB27169F1CA000CE1448 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -326,6 +328,7 @@
 				9665BB28169F1CA000CE1448 /* Foundation.framework in Frameworks */,
 				9665BB2A169F1CA000CE1448 /* CoreGraphics.framework in Frameworks */,
 				9665BB2C169F1CA000CE1448 /* CoreData.framework in Frameworks */,
+				9609CF7A16C4D1B600D98376 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +360,7 @@
 		9665BB24169F1CA000CE1448 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9609CF7916C4D1B600D98376 /* Crashlytics.framework */,
 				967341D716A523DE00E89839 /* CFNetwork.framework */,
 				9665BB2B169F1CA000CE1448 /* CoreData.framework */,
 				9665BB29169F1CA000CE1448 /* CoreGraphics.framework */,
@@ -661,6 +665,7 @@
 				9665BB1D169F1C9F00CE1448 /* Sources */,
 				9665BB1E169F1C9F00CE1448 /* Frameworks */,
 				9665BB1F169F1C9F00CE1448 /* Resources */,
+				9609CF7816C4D17200D98376 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -769,6 +774,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9609CF7816C4D17200D98376 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 452147fc8d1c8cb765cd470abaf87564448ce28a";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9665BB1D169F1C9F00CE1448 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -846,6 +867,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -876,6 +898,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -894,17 +917,24 @@
 		9665BB45169F1CA000CE1448 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Tzuhsuan Ling (8SNW79FULR)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ehouse/ehouse-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					_AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_,
+				);
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "ehouse/ehouse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5B13A95-8A48-4EF5-B1CE-518F66CC7806";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -912,17 +942,21 @@
 		9665BB46169F1CA000CE1448 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Research, Development and Evaluation Commission, Executive Yuan";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ehouse/ehouse-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = _AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "ehouse/ehouse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9EC14AB5-CECF-449B-8B9A-9EB8F5E66A1A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

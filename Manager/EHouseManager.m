@@ -125,7 +125,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
     self.accoutPwd = [self.userDefault stringForKey:KEY_accountpwd];
     self.autoLogin = [self.userDefault objectForKey:KEY_autoLogin];
     
-    NSString *api = DEVELOPMENT_MODE ? API_DEVLOPMENT_URL : API_PRODUCTION_URL;
+    NSString *api = DEVELOPMENT_MODE ? API_DEVELOPMENT_URL : API_PRODUCTION_URL;
     self.myClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api]];
     api = DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL;
     self.myClient2 = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api]];
@@ -463,7 +463,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
         else
         {
             NSURL *baseURL = [NSURL URLWithString:info[KEY_url]
-                                    relativeToURL:[NSURL URLWithString:DEVELOPMENT_MODE? DEVELOPMENT_URL : PRODUCTION_URL]];
+                                    relativeToURL:[NSURL URLWithString: DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL]];
             
             urlString = baseURL.absoluteString;
         }
