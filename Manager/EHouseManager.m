@@ -125,7 +125,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
     self.accoutPwd = [self.userDefault stringForKey:KEY_accountpwd];
     self.autoLogin = [self.userDefault objectForKey:KEY_autoLogin];
     
-    NSString *api = DEVELOPMENT_MODE ? API_DEVLOPMENT_URL : API_PRODUCTION_URL;
+    NSString *api = DEVELOPMENT_MODE ? API_DEVELOPMENT_URL : API_PRODUCTION_URL;
     self.myClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api]];
     api = DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL;
     self.myClient2 = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:api]];
@@ -188,7 +188,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
         },
         @{
             KEY_id: @(LinkIDManageLabel),
-            KEY_name:@"標簽管理",
+            KEY_name:@"標籤管理",
             KEY_image:@"tag_setting_icon.png",
             KEY_url:@"/Label",
             KEY_urlType: @(URLTypeRelative),
@@ -252,38 +252,6 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
             KEY_urlType: @(URLTypeRelative),
             KEY_inSideMenu: @(NO),
         },
-        @{
-            KEY_id: @(LinkIDPlurk),
-            KEY_name:@"Plurk",
-            KEY_image:@"fb_fans_icon.png",
-            KEY_url:@"/m/t",
-            KEY_urlType: @(URLTypeRelative),
-            KEY_inSideMenu: @(NO),
-        },
-        @{
-            KEY_id: @(LinkIDBookMark),
-            KEY_name:@"BookMark",
-            KEY_image:@"fb_fans_icon.png",
-            KEY_url:@"/add",
-            KEY_urlType: @(URLTypeRelative),
-            KEY_inSideMenu: @(NO),
-        },
-        @{
-            KEY_id: @(LinkIdTwitter),
-            KEY_name:@"Twitter",
-            KEY_image:@"fb_fans_icon.png",
-            KEY_url:@"/intent/session",
-            KEY_urlType: @(URLTypeRelative),
-            KEY_inSideMenu: @(NO),
-        },
-        @{
-            KEY_id: @(LinkIDMicrosoft),
-            KEY_name:@"Microsoft",
-            KEY_image:@"fb_fans_icon.png",
-            KEY_url:@"/login.srf",
-            KEY_urlType: @(URLTypeRelative),
-            KEY_inSideMenu: @(NO),
-            },
         @{
             KEY_id: @(LinkIdIntegration),
             KEY_name:@"我的積分",
@@ -495,7 +463,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
         else
         {
             NSURL *baseURL = [NSURL URLWithString:info[KEY_url]
-                                    relativeToURL:[NSURL URLWithString:DEVELOPMENT_MODE? DEVELOPMENT_URL : PRODUCTION_URL]];
+                                    relativeToURL:[NSURL URLWithString: DEVELOPMENT_MODE ? DEVELOPMENT_URL : PRODUCTION_URL]];
             
             urlString = baseURL.absoluteString;
         }
@@ -609,8 +577,8 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                  parameters:nil
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         
-                        //[self setAccoutName:nil];
-                        //[self setAccoutPwd:nil];
+                        [self setAccoutName:nil];
+                        [self setAccoutPwd:nil];
                         [self setAutoLogin:@(NO)];
                         
                         if(callback)
@@ -711,7 +679,6 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                  parameters:param
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         NSLog(@"register for push successful!");
-                        
                         /*
                          NSError *error = nil;
                          NSString *abc = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -722,8 +689,8 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                         if(value && [value isEqualToString:@"True"])
                         {
                             
-                        }*/
-                         
+                        }
+                         */
                         
                         if(success)
                             success();

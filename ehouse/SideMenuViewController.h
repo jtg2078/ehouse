@@ -18,7 +18,6 @@
 @property (strong, nonatomic) IBOutlet UIView *myHeaderView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (strong, nonatomic) IBOutlet UIView *copyrightView;
 
 - (IBAction)loginButtonPressed:(id)sender;
 

@@ -228,16 +228,15 @@
                                           [rvc.navigationController pushViewController:svc animated:NO];
                                       }
                                       
-                                      
                                       [appDelegate.homeViewController reload];
                                        
                                       [self dismissModalViewControllerAnimated:YES];
-                                      }
-                                        failure:^(NSString *errorMsg, NSError *error) {
-                                            //[SVProgressHUD showErrorWithStatus:errorMsg];
-                                            [SVProgressHUD showErrorWithStatus:@"登入失敗"];
-                                            self.logInButton.enabled = YES;
-                                      }];
+                                  }
+                                  failure:^(NSString *errorMsg, NSError *error) {
+                                      //[SVProgressHUD showErrorWithStatus:errorMsg];
+                                      [SVProgressHUD showErrorWithStatus:@"登入失敗"];
+                                      self.logInButton.enabled = YES;
+                                  }];
     
 }
 

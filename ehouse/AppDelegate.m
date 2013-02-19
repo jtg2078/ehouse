@@ -10,6 +10,7 @@
 #import "RootViewController.h"
 #import "SideMenuViewController.h"
 #import "IIViewDeckController.h"
+#import <Crashlytics/Crashlytics.h>
 
 
 @interface AppDelegate ()
@@ -26,6 +27,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    // -------------------- Crashlytics --------------------
+    
+    [Crashlytics startWithAPIKey:@"452147fc8d1c8cb765cd470abaf87564448ce28a"];
     
     // -------------------- push notification --------------------
     
