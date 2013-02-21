@@ -56,6 +56,7 @@
     // -------------------- header view --------------------
     
     self.myTableView.tableHeaderView = self.myHeaderView;
+     self.myTableView.tableFooterView = self.copyrightView;
 }
 
 - (void)viewDidUnload

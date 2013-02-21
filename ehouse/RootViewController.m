@@ -106,7 +106,7 @@
 {
     
     NSString *urlStr=[[request URL] description];
-    NSLog(@"%@",urlStr);
+    NSLog(@"123ss%@",urlStr);
     
     BOOL ret = [self.appManager processRequest:request
                                       callback:^BOOL(LinkID linkID, NSString *url) {
