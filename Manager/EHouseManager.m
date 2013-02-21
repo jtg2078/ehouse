@@ -558,7 +558,7 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
     if(link)
     {
         linkID = [link[KEY_id] intValue];
-        url = [self getFullURLforLinkID:link[KEY_id]];
+        //url = [self getFullURLforLinkID:link[KEY_id]];
     }
     
     if(callback)
