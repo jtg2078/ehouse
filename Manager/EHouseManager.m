@@ -268,14 +268,14 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
             KEY_urlType: @(URLTypeRelative),
             KEY_inSideMenu: @(YES),
         },
-        @{
+        /*@{
             KEY_id: @(LinkIDPublicMsg),
             KEY_name:@"公眾訊息",
             KEY_image:@"public_msg_icon.png",
             KEY_url:@"/PubMSG",
             KEY_urlType: @(URLTypeRelative),
             KEY_inSideMenu: @(YES),
-        },
+        },*/
         @{
             KEY_id: @(LinkIDRanking),
             KEY_name:@"排行榜",
