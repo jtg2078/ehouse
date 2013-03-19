@@ -97,7 +97,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType
 {
     
-    //[SVProgressHUD showWithStatus:@"Loading..."];
+    [SVProgressHUD showWithStatus:@"Loading..."];
     
     NSLog(@"shouldStartLoadWithRequest: %@",[request URL]);
     
@@ -169,7 +169,15 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     
     [SVProgressHUD dismiss];
 }
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;{
+    [SVProgressHUD dismiss];
+    if ([self.myWebView canGoBack])
+    {
+        [self.myWebView goBack];
+    }
 
+    
+}
 
 
 @end

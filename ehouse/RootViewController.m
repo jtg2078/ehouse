@@ -146,7 +146,7 @@
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-    //[SVProgressHUD dismiss];
+    [SVProgressHUD dismiss];
 }
 
 
