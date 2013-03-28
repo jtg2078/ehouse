@@ -47,6 +47,25 @@
     [SVProgressHUD dismiss];
     [self reload];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"regionCodeUpdated"
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      
+                                                      NSString *code = [note.userInfo objectForKey:@"code"];
+                                                      
+                                                      [self.appManager processRequest:self.webView.request callback:^BOOL(LinkID linkID, NSString *url) {
+                                                          
+                                                          if(linkID == LinkIDHome)
+                                                          {
+                                                              //run javascript code here
+                                                          }
+                                                          
+                                                          return YES;
+                                                      }];
+                                                      
+                                                  }];
+    
 }
 
 
