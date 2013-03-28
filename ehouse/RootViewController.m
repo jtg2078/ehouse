@@ -58,7 +58,7 @@
                                                           
                                                           if(linkID == LinkIDHome)
                                                           {
-                                                              NSString *function = [NSString stringWithFormat:@"updateMsg('%@'", code];
+                                                              NSString *function = [NSString stringWithFormat:@"updateMsg('%@');", code];
                                                               //run javascript code here
                                                               [self.webView stringByEvaluatingJavaScriptFromString:function];
                                                           }
