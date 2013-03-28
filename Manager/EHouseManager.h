@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 #import "Constant.h"
 #import "AFNetworking.h"
 
@@ -68,7 +69,7 @@ typedef enum{
 
 @end
 
-@interface EHouseManager : NSObject <MessageReaderDelegate, MessageImporterDelegate, CalendarChooserDelegate, UIAlertViewDelegate>
+@interface EHouseManager : NSObject <MessageReaderDelegate, MessageImporterDelegate, CalendarChooserDelegate, UIAlertViewDelegate , CLLocationManagerDelegate>
 {
     BOOL bIsReadyToDownload;
 	BOOL bIsReadyToInsert;
@@ -85,6 +86,8 @@ typedef enum{
 @property (nonatomic, strong) AFHTTPClient *myClient2;
 
 @property (nonatomic, strong) UserInfo *userInfo;
+
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 + (EHouseManager *)sharedInstance;
 
@@ -126,5 +129,10 @@ typedef enum{
 - (void)peformAutoImport;
 
 - (NSString *)createURLWithToken:(NSString *)token;
+
+// location related
+
+- (void)startLocationTracking;
+- (void)stopLocationTracking;
 
 @end

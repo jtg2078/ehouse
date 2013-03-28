@@ -128,6 +128,7 @@
 		96B9AC0016A4682B001DAF24 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABF716A4682B001DAF24 /* DDXMLDocument.m */; };
 		96B9AC0116A4682B001DAF24 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABF916A4682B001DAF24 /* DDXMLElement.m */; };
 		96B9AC0216A4682B001DAF24 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B9ABFB16A4682B001DAF24 /* DDXMLNode.m */; };
+		96FEDD9017043684008FED7E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96FEDD8F17043684008FED7E /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -309,6 +310,7 @@
 		96B9ABFA16A4682B001DAF24 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
 		96B9ABFB16A4682B001DAF24 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
 		96B9ABFD16A4682B001DAF24 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		96FEDD8F17043684008FED7E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +318,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96FEDD9017043684008FED7E /* CoreLocation.framework in Frameworks */,
 				967341DE16A5242B00E89839 /* libz.dylib in Frameworks */,
 				967341DB16A5241600E89839 /* EventKit.framework in Frameworks */,
 				967341DC16A5241600E89839 /* EventKitUI.framework in Frameworks */,
@@ -360,10 +363,11 @@
 		9665BB24169F1CA000CE1448 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9609CF7916C4D1B600D98376 /* Crashlytics.framework */,
 				967341D716A523DE00E89839 /* CFNetwork.framework */,
 				9665BB2B169F1CA000CE1448 /* CoreData.framework */,
 				9665BB29169F1CA000CE1448 /* CoreGraphics.framework */,
+				96FEDD8F17043684008FED7E /* CoreLocation.framework */,
+				9609CF7916C4D1B600D98376 /* Crashlytics.framework */,
 				967341D916A5241600E89839 /* EventKit.framework */,
 				967341DA16A5241600E89839 /* EventKitUI.framework */,
 				9665BB27169F1CA000CE1448 /* Foundation.framework */,

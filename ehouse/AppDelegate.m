@@ -81,7 +81,8 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    exit(0);
+    [[EHouseManager sharedInstance] stopLocationTracking];
+    //exit(0);
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -100,12 +101,16 @@
     {
         [self showPushMsg];
     }
+    
+    [[EHouseManager sharedInstance] startLocationTracking];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+    
+    [[EHouseManager sharedInstance] stopLocationTracking];
 }
 
 - (void)saveContext
