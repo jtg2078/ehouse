@@ -14,7 +14,7 @@
 
 
 @interface RootViewController ()
-
+@property (nonatomic, strong) NSString *regionCode;
 @end
 
 @implementation RootViewController
@@ -53,12 +53,13 @@
                                                   usingBlock:^(NSNotification *note) {
                                                       
                                                       NSString *code = [note.userInfo objectForKey:@"code"];
+                                                      self.regionCode = code;
                                                       
                                                       [self.appManager processRequest:self.webView.request callback:^BOOL(LinkID linkID, NSString *url) {
                                                           
                                                           if(linkID == LinkIDHome)
                                                           {
-                                                              NSString *function = [NSString stringWithFormat:@"updateMsg('%@');", code];
+                                                              NSString *function = [NSString stringWithFormat:@"getMSGByCity('%@');", code];
                                                               //run javascript code here
                                                               [self.webView stringByEvaluatingJavaScriptFromString:function];
                                                           }
@@ -168,6 +169,10 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     [SVProgressHUD dismiss];
+    
+    NSString *function = [NSString stringWithFormat:@"getMSGByCity('%@');", self.regionCode];
+    //run javascript code here
+    [self.webView stringByEvaluatingJavaScriptFromString:function];
 }
 
 
