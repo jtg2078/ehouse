@@ -96,6 +96,12 @@
 shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType
 {
+    if ([[[request URL] scheme] isEqualToString:@"https"])
+    {
+        [[UIApplication sharedApplication] openURL:[request URL]];
+        
+        return NO;
+    }
     
     [SVProgressHUD showWithStatus:@"Loading..."];
     

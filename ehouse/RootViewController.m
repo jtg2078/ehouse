@@ -126,6 +126,13 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    if ([[[request URL] scheme] isEqualToString:@"https"])
+    {
+        [[UIApplication sharedApplication] openURL:[request URL]];
+        
+        return NO;
+    }
+    
     
     NSString *urlStr=[[request URL] description];
     NSLog(@"123ss%@",urlStr);
