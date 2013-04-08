@@ -40,7 +40,7 @@ NSString * const KEY_pushToken = @"pushToken";
 
 NSString * const KEY_AUTO_IMPORT = @"userDefaultAutoImport";
 
-BOOL const DEVELOPMENT_MODE = YES;
+BOOL const DEVELOPMENT_MODE = NO;
 
 NSString * const KEY_IMPORT_all = @"allMsg";
 NSString * const KEY_IMPORT_payment = @"paymentMsg";

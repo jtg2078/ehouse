@@ -949,7 +949,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Tzuhsuan Ling (8SNW79FULR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Research, Development and Evaluation Commission, Executive Yuan";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -962,7 +962,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5B13A95-8A48-4EF5-B1CE-518F66CC7806";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9EC14AB5-CECF-449B-8B9A-9EB8F5E66A1A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
