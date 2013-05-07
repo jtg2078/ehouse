@@ -661,6 +661,20 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                         NSLog(@"告訴web使用者已登入成功!");
                         if(success){
                             success(token);
+                            
+                            NSString *pushToken = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_pushToken];
+                            if(pushToken)
+                            {
+                                [self registerForPushAccount:self.userInfo.token
+                                                      device:@"iphone"
+                                                       token:pushToken
+                                                     success:^{
+                                                         NSLog(@"推播的api 註冊成功");
+                                                     }
+                                                     failure:^(NSString *errorMsg, NSError *error) {
+                                                         NSLog(@"推播的api 註冊失敗: %@", errorMsg);
+                                                     }];
+                            }
                         }
                     }
                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -687,9 +701,9 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                  parameters:param
                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
                         NSLog(@"register for push successful!");
-                        /*
-                         NSError *error = nil;
-                         NSString *abc = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                        
+                        NSError *error = nil;
+                        NSString *abc = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
                         DDXMLDocument *ret = [[DDXMLDocument alloc] initWithXMLString:abc
                                                                               options:0
                                                                                 error:&error];
@@ -698,7 +712,9 @@ typedef void (^ImportMessagesFailureBlock)(NSString *errorMsg, NSError *error);
                         {
                             
                         }
-                         */
+                        
+                
+                         
                         
                         if(success)
                             success();

@@ -94,19 +94,6 @@
                                                   
                                                   [self.navigationController pushViewController:sec animated:YES];
                                                   
-                                                  NSString *pushToken = [[NSUserDefaults standardUserDefaults] stringForKey:KEY_pushToken];
-                                                  if(pushToken)
-                                                  {
-                                                      [self.appManager registerForPushAccount:self.appManager.userInfo.token
-                                                                                       device:@"iphone"
-                                                                                        token:pushToken
-                                                                                      success:^{
-                                                                                          NSLog(@"推播的api 註冊成功");
-                                                                                      }
-                                                                                      failure:^(NSString *errorMsg, NSError *error) {
-                                                                                          NSLog(@"推播的api 註冊失敗: %@", errorMsg);
-                                                                                      }];
-                                                  }
                                                   if([self.userDefaults boolForKey:KEY_AUTO_IMPORT])
                                                   {
                                                       [self.appManager peformAutoImport];
